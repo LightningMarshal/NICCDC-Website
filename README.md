@@ -1,4 +1,4 @@
 # NICCDC-Website
 This is a workspace for the NIATEC NICCDC Website
 
-Templates can be found in the templates folder
+Templates are denoted by the "template" in the file name. Please use these for style consistency.
