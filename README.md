@@ -8,4 +8,4 @@ See something that is wrong or have an idea for an improvement? Create an issue!
 ##Notes
 - Templates are denoted by the "template" in the file name. Please use these for style consistency.
 - Don't be afraid to ask for help
-- https://semver.org/
+- https://semver.org/ (Semantic Versioning)
