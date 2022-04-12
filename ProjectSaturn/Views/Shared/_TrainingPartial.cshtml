@@ -1,0 +1,50 @@
+﻿@model ProjectSaturn.Models.TrainingAwards;
+
+@*This contains all of the training forms*@
+<form asp-action="TrainingDetails" class="d-flex justify-content-around flex-wrap">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="col-12 col-lg-8 form-group d-flex flex-wrap">
+
+        <div class="form-padding col-12 col-md-9">
+            <label asp-for="Desc">Completed Certifications and Trainings</label>
+            <input name="Desc" asp-for="Desc" style="margin: 5px 0px 5px 0px" class="form-control" />
+            <span asp-validation-for="Desc" class="text-danger"></span>
+        </div>
+        <div class="form-padding col-12 col-md-3">
+            <label asp-for="Date">Date Recieved</label>
+            <input name="Date" asp-for="Date" type="month" class="form-control" />
+            <span asp-validation-for="Date" class="text-danger"></span>
+        </div>
+        <div class="form-padding align-right col-12">
+            <button class="betterbtn betterbtndefault">Add Cert</button>
+        </div>
+
+
+        <div class="form-padding col-12 col-md-9">
+            <label asp-for="Desc">Certifications and Trainings In Progress</label>
+            <input name="Desc" asp-for="Desc" style="margin: 5px 0px 5px 0px" class="form-control" />
+            <span asp-validation-for="Desc" class="text-danger"></span>
+        </div>
+        <div class="form-padding col-12 col-md-3">
+            <label asp-for="Date">Date Recieved</label>
+            <input name="Date" asp-for="Date" type="month" class="form-control" />
+            <span asp-validation-for="Date" class="text-danger"></span>
+        </div>
+        <div class="align-right col-12">
+            <button class="betterbtn betterbtndefault">Add Cert</button>
+        </div>
+    </div>
+</form>
+
+<div class="back-button">
+    <a asp-controller="Creator" asp-action="EducationDetails" class="betterbtn">&lt;&lt;&lt; Education</a>
+</div>
+
+<div class="next-button">
+    <a asp-controller="Creator" asp-action="ProfessionalDetails" class="betterbtn">Professional &gt;&gt;&gt;</a>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/InputTextArea.js"></script>
+<script src="~/js/FormSubmissionWList.js"></script>

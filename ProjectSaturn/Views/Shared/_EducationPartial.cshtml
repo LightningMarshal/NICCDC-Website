@@ -1,0 +1,68 @@
+﻿@model ProjectSaturn.Models.Education
+
+@*This is the main creation form that will create another education object*@
+<form asp-action="EducationDetails" class="d-flex justify-content-around flex-wrap">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="col-12 col-lg-8 form-group d-flex flex-wrap">
+
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="Name">Name of School</label>
+            <input name="Name" asp-for="Name" class="form-control" placeholder="Idaho State University"/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="GPA">GPA or Qualification</label>
+            <input name="GPA" asp-for="GPA" class="form-control" placeholder="4.0 / Title"/>
+            <span asp-validation-for="GPA" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="Location">School Location</label>
+            <input name="Location" asp-for="Location" class="form-control" placeholder="City, State"/>
+            <span asp-validation-for="Location" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-6">
+            <label asp-for="StartDate">Join Date</label>
+            <input name="StartDate" asp-for="StartDate" type="month"  class="form-control"/>
+            <span asp-validation-for="StartDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-6">
+            <label asp-for="EndDate">Graduation Date (or Predicted)</label>
+            <input name="EndDate" asp-for="EndDate" type="month" class="form-control" />
+            <span asp-validation-for="EndDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-12">
+            <label asp-for="SkillsGained">Skills Learned in School</label>
+            <div class="edu_fields_wrap">
+                @*Will be filled by add_field_button below*@
+            </div>
+            <div class="edu_fields_button">
+                <button class="add_field_button betterbtn betterbtndefault" value=".edu_fields_wrap">Add More Fields</button>
+            </div>
+            <span asp-validation-for="SkillsGained" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 form-padding d-flex">
+            <div class="col-1 ms-auto d-flex justify-content-end">
+                <button type="submit" value="PersonalDetails" class="betterbtn form_submit">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="back-button">
+    <a asp-controller="Creator" asp-action="PersonalDetails" class="betterbtn">&lt;&lt;&lt; Personal</a>
+</div>
+
+<div class="next-button">
+    <a asp-controller="Creator" asp-action="TrainingDetails" class="betterbtn">Trainings &gt;&gt;&gt;</a>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/DynamicTextAreaFields.js"></script>
+<script src="~/js/InputTextArea.js"></script>

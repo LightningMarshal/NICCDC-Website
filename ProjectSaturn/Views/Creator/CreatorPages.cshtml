@@ -1,0 +1,22 @@
+﻿@model ProjectSaturn.ViewModels.UserDataVM
+
+<link rel="stylesheet" href="~/css/WebStyles.css" />
+<h1 class="visually-hidden">Sidebar Functioning?</h1>
+
+@* The creator page has been broken into two parts for simplifying the field views *@
+
+<div class="row flex-xl-nowrap">
+    @* TODO: find elegant way to display on mobile (rm d-none and d-md-block once found) *@
+    <div class="d-none d-md-block col-md-2 col-xl-1" style="background-color:#DEDEDE; border-top-right-radius: 5px; border-bottom-right-radius:5px;">
+        <partial name="_LeftSideBar" />
+    </div>
+
+    <main class="col-md-10 col-xl-11" style="height: 85vh; position: relative;">
+        <h1 class="text-center">@ViewData["Title"]</h1>
+        <span name="error" class="text-center text-danger">@ViewData["Error"]</span>
+        <partial name="@ViewData["CreatorPartial"]" />
+    </main>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/FormSubmissionWList.js"></script>
