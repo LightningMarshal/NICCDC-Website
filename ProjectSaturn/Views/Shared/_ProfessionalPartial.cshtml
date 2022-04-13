@@ -38,11 +38,11 @@
 
         <div class="form-padding col-12 col-md-12">
             <label asp-for="SkillsGained">What Skills Were Learned In This Position</label>
-            <div class="prof_fields_wrap">
+            <div class="prof_fields_wrap flex-wrap">
                 @*Will be filled by add_field_button below*@
             </div>
             @*TODO: Make the edu_fields_button disappear when max fields is met*@
-            <div class="prof_fields_button">
+            <div class="fields_button">
                 <button class="add_field_button betterbtn betterbtndefault" value=".prof_fields_wrap">Add More Fields</button>
             </div>
             <span asp-validation-for="SkillsGained" class="text-danger"></span>

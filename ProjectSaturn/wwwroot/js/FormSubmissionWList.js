@@ -15,7 +15,6 @@
 $(document).ready(function () {
     $('form').submit(function (e) {
         e.preventDefault();
-        alert("Intercepted!");
 
         let genericinfo = $(this).serializeArray();
         let generic = {};
