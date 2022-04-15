@@ -2,19 +2,20 @@
 
 namespace ProjectSaturn.Models
 {
-    public class TrainingAwards //Training or Awards that the user has taken/recieved
+    public class Trainings //Awards that the user has recieved
     {
         public string Desc { get; set; }
         public DateTime? Date { get; set; }
+        public bool Completed { get; set; }
 
 
-
-        //Extra Constructor
+        //Awards Constructor
         [JsonConstructor]
-        public TrainingAwards(string Desc, DateTime? Date)
+        public Trainings(string Desc, DateTime? Date, bool Completed)
         {
             this.Desc = Desc;
             this.Date = Date;
+            this.Completed = Completed;
         }
     }
 }

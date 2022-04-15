@@ -8,3 +8,4 @@ GO
 GRANT EXECUTE ON dbo.DataAddPersonal TO iusr_qresume_editor
 GRANT EXECUTE ON dbo.DataAddEducational TO iusr_qresume_editor
 GRANT EXECUTE ON dbo.AddTempUser TO iusr_qresume_editor
+GRANT EXECUTE ON dbo.DataAddTraining TO iusr_qresume_editor

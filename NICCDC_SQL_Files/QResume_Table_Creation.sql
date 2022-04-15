@@ -33,8 +33,9 @@ CREATE TABLE dbo.DataEducation(
 CREATE TABLE dbo.DataTrainings(
 	UserID UNIQUEIDENTIFIER NOT NULL,
 	ID int IDENTITY(1,1) NOT NULL,
-	Training nvarchar(150) NOT NULL,
+	Training nvarchar(250) NOT NULL,
 	EarnDate datetime2 NOT NULL,
+	Completed bit NOT NULL
 );
 
 CREATE TABLE dbo.DataProfessional(

@@ -19,18 +19,31 @@ $(document).ready(function () {
         let genericinfo = $(this).serializeArray();
         let generic = {};
         var genericlist = [];
+        var modelobj = {};
+        var type = '';
 
         // Determines if element needs to be in a list
         genericinfo.forEach((value) => {
-            if (value.name != 'SkillsGained') {
-                generic[value.name] = value.value;
-            } else {
+            if (value.name == 'SkillsGained') { // Creates list of strings
+                type = 'SkillsGained';
                 genericlist.push(value.value);
+            } else if (value.name == 'TDesc') { // Creates list of JSON Training objects
+                type = 'strings';
+                modelobj['Desc'] = value.value;
+            } else if (value.name == 'TDate') {
+                type = 'strings';
+                modelobj['Date'] = value.value;
+            } else if (value.name == 'TCompleted') {
+                type = 'strings';
+                modelobj['Completed'] = value.value;
+                genericlist.push(JSON.stringify(modelobj));
+                modelobj = {};
+            } else {
+                generic[value.name] = value.value;
             }
         });
 
-        // TODO: code to allow the list to make a list through the value.name
-            if (genericlist[0] != null) { generic['SkillsGained'] = genericlist; }
+        if (genericlist[0] != null) { generic[type] = genericlist; }
 
         var url = e.currentTarget.action;
         $.ajax({
@@ -38,7 +51,6 @@ $(document).ready(function () {
             url: url,
             data: { jsonString: JSON.stringify(generic) },
         }).done(function (msg) {
-            // TODO: change this to re - render the targeted elements
             if (msg == "true") {
                 alert("Success! Your response has been recorded. Either add another response or continue to the next page.");
             } else if (msg == "false") {

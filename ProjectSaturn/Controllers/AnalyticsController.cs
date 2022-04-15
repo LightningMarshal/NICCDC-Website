@@ -6,7 +6,7 @@ namespace ProjectSaturn.Controllers
     {
         public IActionResult Analyze()
         {
-            // TODO : Add counters for Schools
+            // TODO : Add a view and code to give accurate applications
 
             return View();
         }

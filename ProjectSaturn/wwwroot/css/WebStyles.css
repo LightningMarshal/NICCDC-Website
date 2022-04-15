@@ -114,8 +114,6 @@
 
 
 /* Main menu option styles*/
-
-/* TODO: Fix these to allow the landing page to work correctly */
 .completely-centered-options {
     position: absolute;
     top: calc(35%);

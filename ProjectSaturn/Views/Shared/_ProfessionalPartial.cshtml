@@ -41,14 +41,12 @@
             <div class="prof_fields_wrap flex-wrap">
                 @*Will be filled by add_field_button below*@
             </div>
-            @*TODO: Make the edu_fields_button disappear when max fields is met*@
             <div class="fields_button">
                 <button class="add_field_button betterbtn betterbtndefault" value=".prof_fields_wrap">Add More Fields</button>
             </div>
             <span asp-validation-for="SkillsGained" class="text-danger"></span>
         </div>
 
-        @*TODO: add delete button for exsisting forms*@
         <div class="col-12 form-padding d-flex">
             <div class="col-1 ms-auto d-flex justify-content-end">
                 <button type="submit" value="PersonalDetails" class="betterbtn form_submit">Submit</button>

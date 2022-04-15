@@ -140,5 +140,33 @@ namespace ProjectSaturn.Service
             }
             return retID;
         }
+
+        public int AddTraining(Trainings training, Guid userID)
+        {
+            int retID = 0;
+            using (SqlConnection con = new(QEditor))
+            {
+                using SqlCommand cmd = new("DataAddTraining", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("UserID", userID);
+                cmd.Parameters.AddWithValue("Desc", training.Desc);
+                cmd.Parameters.AddWithValue("Date", training.Date);
+                cmd.Parameters.AddWithValue("Completed", training.Completed);
+
+                try
+                {
+                    cmd.Connection.Open();
+
+                    retID = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    cmd.Connection.Close();
+                }
+                catch (Exception e)
+                {
+                    ErrorLog.Msglist.Add(e.Message);
+                }
+            }
+            return retID;
+        }
     }
 }

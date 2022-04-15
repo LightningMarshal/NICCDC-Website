@@ -14,12 +14,12 @@ namespace ProjectSaturn.ViewModels
         public Professional Professional { get; set; }
 
         // Trainings within the Education section
-        public TrainingAwards Training { get; set; } 
+        public Trainings Training { get; set; } 
 
         // This is the Knowledge section
         public Knowledge Knowledge { get; set; }
 
         // This is the Awards section
-        public TrainingAwards Awards { get; set; }
+        public Awards Awards { get; set; }
     }
 }

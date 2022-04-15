@@ -17,7 +17,6 @@ namespace ProjectSaturn.Controllers
 
         public IActionResult PersonalDetails()
         {         
-            //TODO : Prefill Fields based on database
             ViewData["Title"] = "Personal";
             ViewData["CreatorPartial"] = "_PersonalPartial";
 
@@ -94,7 +93,7 @@ namespace ProjectSaturn.Controllers
         }
         
         [HttpPost]
-        public ActionResult EducationDetails(string jsonString)
+        public ActionResult EducationDetails(string jsonString) // This takes in the Education Data and stores it appropriately
         {
             var settings = new JsonSerializerSettings
             {
@@ -123,9 +122,54 @@ namespace ProjectSaturn.Controllers
         }
 
         [HttpPost]
-        public IActionResult TrainingDetails(string jsonString)
+        public ActionResult TrainingDetails(string jsonString) // This takes in the Training Data and stores it appropriately
         {
-            return RedirectToAction("Creator", "Creator");
+            var settings = new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+            };
+
+            GenericList TrainingList = JsonConvert.DeserializeObject<GenericList>(jsonString, settings); // Deserialize to a list of jsonstrings
+            int lengthTrainingList = TrainingList.strings.Count;
+            int correctEntry = 0;
+
+            List<Trainings> destraininglist = new();
+            foreach (string trainingString in TrainingList.strings)
+            {
+                Trainings training = JsonConvert.DeserializeObject<Trainings>(trainingString, settings); // Deserialize the jsonstrings within the list and add to a non-serialized list
+                destraininglist.Add(training);
+            }
+
+            foreach (Trainings training in destraininglist) // Verify the data is correctly formatted
+            {
+                if (training.Desc == "" || training.Date == null)
+                {
+                    return Json("required");
+                }
+                correctEntry++;
+            }
+
+            Guid currentUser = new(HttpContext.Request.Cookies["user"]); // Get the current user
+
+            int successfullEntry = 0;
+            if (lengthTrainingList == correctEntry && destraininglist[0] != null) // Store the data
+            {
+                foreach (Trainings training in destraininglist)
+                {
+                    int id = _dal.AddTraining(training, currentUser);
+                    if (id > 0)
+                    {
+                        successfullEntry++;
+                    }
+                }
+                if (successfullEntry == lengthTrainingList)
+                {
+                    return Json("true");
+                }
+                return Json("false");
+            }
+            //TODO : Make changes to the training details
+            return Json("false");
         }
 
         [HttpPost]

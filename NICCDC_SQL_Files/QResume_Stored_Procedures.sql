@@ -69,3 +69,23 @@ BEGIN
 
 END
 GO
+
+
+
+CREATE PROCEDURE dbo.DataAddTraining
+
+@UserID uniqueidentifier,
+@Desc nvarchar(250),
+@Date datetime2(7),
+@Completed bit
+
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	INSERT INTO dbo.DataTrainings(UserID,Training,EarnDate,Completed)
+	OUTPUT inserted.ID
+	VALUES(@UserID, @Desc, @Date, @Completed)
+
+END
+GO

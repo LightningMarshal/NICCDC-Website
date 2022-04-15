@@ -1,4 +1,4 @@
-﻿@model ProjectSaturn.Models.TrainingAwards;
+﻿@model ProjectSaturn.Models.Trainings;
 
 @*This contains all of the training forms*@
 <form asp-action="TrainingDetails" class="d-flex justify-content-around flex-wrap">
@@ -6,34 +6,21 @@
 
     <div class="col-12 col-lg-8 form-group d-flex flex-wrap">
 
-        <div class="form-padding col-12 col-md-9">
-            <label asp-for="Desc">Completed Certifications and Trainings</label>
-            <input name="Desc" asp-for="Desc" style="margin: 5px 0px 5px 0px" class="form-control" />
-            <span asp-validation-for="Desc" class="text-danger"></span>
-        </div>
-        <div class="form-padding col-12 col-md-3">
-            <label asp-for="Date">Date Recieved</label>
-            <input name="Date" asp-for="Date" type="month" class="form-control" />
-            <span asp-validation-for="Date" class="text-danger"></span>
-        </div>
-        <div class="form-padding align-right col-12">
-            <button class="betterbtn betterbtndefault">Add Cert</button>
+        <div class="form-padding col-12 col-md-12">
+            <div class="training_fields_wrap">
+                @*Will be filled by add_field_button below*@
+            </div>
+            <div class="fields_button">
+                <button class="add_field_button betterbtn betterbtndefault" value=".training_fields_wrap" data-type="Trainings">Add More Fields</button>
+            </div>
         </div>
 
+        <div class="col-12 form-padding d-flex">
+            <div class="col-1 ms-auto d-flex justify-content-end">
+                <button type="submit" value="TrainingDetails" class="betterbtn form_submit">Submit</button>
+            </div>
+        </div>
 
-        <div class="form-padding col-12 col-md-9">
-            <label asp-for="Desc">Certifications and Trainings In Progress</label>
-            <input name="Desc" asp-for="Desc" style="margin: 5px 0px 5px 0px" class="form-control" />
-            <span asp-validation-for="Desc" class="text-danger"></span>
-        </div>
-        <div class="form-padding col-12 col-md-3">
-            <label asp-for="Date">Date Recieved</label>
-            <input name="Date" asp-for="Date" type="month" class="form-control" />
-            <span asp-validation-for="Date" class="text-danger"></span>
-        </div>
-        <div class="align-right col-12">
-            <button class="betterbtn betterbtndefault">Add Cert</button>
-        </div>
     </div>
 </form>
 
@@ -46,5 +33,5 @@
 </div>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/DynamicTextAreaFields.js"></script>
 <script src="~/js/InputTextArea.js"></script>
-<script src="~/js/FormSubmissionWList.js"></script>
