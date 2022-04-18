@@ -1,8 +1,6 @@
 ﻿# ProjectSaturn
 ###### ReadMe last edited by Kason Summers 4/13/2022
 
-***Please note that this is written in Markdown if reading the actual md file!***
-
 ### Goal of Project
 This project stems from the QResume project and its goal is to integrate most of the functionality to the NICCDC Website.
 
@@ -28,3 +26,13 @@ controllers, etc.
 
 ### Future TODO List
 Use ctrl + shift + f to find all instances of //TODO in order to find all of the open Todos.
+
+-Add Analyst User features
+	-Add analyst page
+	-Add a user table for analyst users
+		-A default admin user with large password
+	-Add analyst add feature for analysts to add new users
+
+-Finish the last few views
+
+-Add functionality to ensure users with same email are found and merged

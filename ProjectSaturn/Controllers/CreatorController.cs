@@ -15,6 +15,8 @@ namespace ProjectSaturn.Controllers
             _dal = dal;
         }
 
+        //TODO : Add a Welcome Page
+
         public IActionResult PersonalDetails()
         {         
             ViewData["Title"] = "Personal";
@@ -72,7 +74,7 @@ namespace ProjectSaturn.Controllers
             };
 
             Personal personal = JsonConvert.DeserializeObject<Personal>(jsonString, settings); // Recieve and Verify the data
-            if (personal.FirstName == "" || personal.LastName == "" || personal.Email == "" || personal.PhoneNumber == "" || personal.Address == "" || personal.Goal == "")
+            if (personal.FirstName == "" || personal.LastName == "" || personal.Email == "" || personal.PhoneNumber == "" || personal.Address == "")
             {
                 return Json("required");
             }
@@ -101,10 +103,11 @@ namespace ProjectSaturn.Controllers
             };
 
             Education education = JsonConvert.DeserializeObject<Education>(jsonString, settings); // Recieve and Verify the data
-            if (education.Name == "" || education.GPA == null || education.Location == "" || education.StartDate == null || education.EndDate == null || education.SkillsGained == null)
+            if (education.Name == "" || education.GPA == null || education.Location == "" || education.StartDate == null || education.EndDate == null)
             {
                 return Json("required");
             }
+
             Guid currentUser = new(HttpContext.Request.Cookies["user"]); // Get the current user
 
             if (education != null) // Store the Data
@@ -130,11 +133,11 @@ namespace ProjectSaturn.Controllers
             };
 
             GenericList TrainingList = JsonConvert.DeserializeObject<GenericList>(jsonString, settings); // Deserialize to a list of jsonstrings
-            int lengthTrainingList = TrainingList.strings.Count;
+            int lengthTrainingList = TrainingList.Strings.Count;
             int correctEntry = 0;
 
             List<Trainings> destraininglist = new();
-            foreach (string trainingString in TrainingList.strings)
+            foreach (string trainingString in TrainingList.Strings)
             {
                 Trainings training = JsonConvert.DeserializeObject<Trainings>(trainingString, settings); // Deserialize the jsonstrings within the list and add to a non-serialized list
                 destraininglist.Add(training);

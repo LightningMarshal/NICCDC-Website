@@ -38,6 +38,19 @@ $(document).ready(function () {
                 modelobj['Completed'] = value.value;
                 genericlist.push(JSON.stringify(modelobj));
                 modelobj = {};
+            } else if (value.name == "ADesc") { // Creates list of JSON Awards objects
+                type = "strings";
+                modelobj['Desc'] = value.value;
+            } else if (value.name == "ADate") {
+                type = "strings";
+                modelobj['Date'] == value.value;
+                genericlist.push(JSON.stringify(modelobj));
+                modelobj = {};
+            } else if (value.name == "KDesc") {
+                type = "strings";
+                modelobj['Desc'] = value.value;
+                genericlist.push(JSon.stringify(modelobj));
+                modelobj = {};
             } else {
                 generic[value.name] = value.value;
             }
@@ -56,7 +69,7 @@ $(document).ready(function () {
             } else if (msg == "false") {
                 alert("Error! Something went wrong! Please try resubmitting. As a last resort, reload the page.");
             } else if (msg == "required") {
-                alert("All inputs are required. Please resubmit with all inputs.");
+                alert("Required inputs (*) are missing. Please resubmit with all required (*) inputs.");
             }
 
         }).fail(function (err, textstatus, error) {

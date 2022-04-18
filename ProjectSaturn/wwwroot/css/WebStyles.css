@@ -32,14 +32,21 @@
     overflow: hidden;
 }
 
+.nav-button-padding { /*TODO : Configure so that the div is at the bottom of the page, but won't be stacked with 
+                          divs that are above it.
+                      */
+    padding-top: 15px;
+    padding-bottom: 30px;
+}
+
 .back-button{
-    position: absolute;
+    position: static;
     left: 5%;
     bottom: 5%;
 }
 
 .next-button{
-    position: absolute;
+    position: static;
     right: 5%;
     bottom: 5%;
 }

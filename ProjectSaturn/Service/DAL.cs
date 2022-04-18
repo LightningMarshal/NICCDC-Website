@@ -14,48 +14,22 @@ namespace ProjectSaturn.Service
 
     public class DAL
     {
-        private readonly string QReader = "";
+        private readonly string QReader = ""; 
         private readonly string QEditor = "";
 
-        public DAL(string ReaderConnectionStrings, string WriterConnectionStrings)
+        public DAL(string ReaderConnectionStrings, string WriterConnectionStrings) 
         {
-            QReader = ReaderConnectionStrings;
+            QReader = ReaderConnectionStrings; 
             QEditor = WriterConnectionStrings;
         }
 
         // -------------------------------------------Reader Calls-------------------------------------------------
 
-        public Personal GetDataPersonal(int itemID)
-        {
-            Personal personal = null;
-            using (SqlConnection con = new(QReader))
-            {
-                using SqlCommand cmd = new("GetDataPersonal", con);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("ItemID", itemID);
-                try
-                {
-                    cmd.Connection.Open();
-
-                    SqlDataReader dr = cmd.ExecuteReader();
-                    while (dr.Read())
-                    {
-                       personal = new Personal(dr);
-                    }
-
-                    cmd.Connection.Close();
-                }
-                catch (Exception e)
-                {
-                    ErrorLog.Msglist.Add(e.Message);
-                }
-            }
-            return personal;
-        }
+        //TODO : Analytic calls will be made here
 
         //-------------------------------------------Writer Calls-------------------------------------------------
 
-        public Guid AddTempUser()
+        public Guid AddTempUser() //TODO : Configure to force the user to enter their email to be assigned a UserID
         {
             var guid = new Guid();
             using (SqlConnection con = new(QEditor))
@@ -168,5 +142,11 @@ namespace ProjectSaturn.Service
             }
             return retID;
         }
+
+        //TODO : AddProfessional
+
+        //TODO : AddKnowledge
+
+        //TODO : AddAwards
     }
 }

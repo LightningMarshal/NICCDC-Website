@@ -7,31 +7,31 @@
     <div class="col-12 col-lg-8 form-group d-flex flex-wrap">
 
         <div class="form-padding col-12 col-md-4">
-            <label asp-for="Name">Name of School</label>
+            <label asp-for="Name">Name of School*</label>
             <input name="Name" asp-for="Name" class="form-control" placeholder="Idaho State University"/>
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
 
         <div class="form-padding col-12 col-md-4">
-            <label asp-for="GPA">GPA or Qualification</label>
+            <label asp-for="GPA">GPA or Qualification*</label>
             <input name="GPA" asp-for="GPA" class="form-control" placeholder="4.0 / Title"/>
             <span asp-validation-for="GPA" class="text-danger"></span>
         </div>
 
         <div class="form-padding col-12 col-md-4">
-            <label asp-for="Location">School Location</label>
+            <label asp-for="Location">School Location*</label>
             <input name="Location" asp-for="Location" class="form-control" placeholder="City, State"/>
             <span asp-validation-for="Location" class="text-danger"></span>
         </div>
 
         <div class="form-padding col-12 col-md-6">
-            <label asp-for="StartDate">Join Date</label>
+            <label asp-for="StartDate">Join Date*</label>
             <input name="StartDate" asp-for="StartDate" type="month"  class="form-control"/>
             <span asp-validation-for="StartDate" class="text-danger"></span>
         </div>
 
         <div class="form-padding col-12 col-md-6">
-            <label asp-for="EndDate">Graduation Date (or Predicted)</label>
+            <label asp-for="EndDate">Graduation Date (or Predicted)*</label>
             <input name="EndDate" asp-for="EndDate" type="month" class="form-control" />
             <span asp-validation-for="EndDate" class="text-danger"></span>
         </div>
@@ -49,19 +49,21 @@
 
         <div class="col-12 form-padding d-flex">
             <div class="col-1 ms-auto d-flex justify-content-end">
-                <button type="submit" value="PersonalDetails" class="betterbtn form_submit">Submit</button>
+                <button type="submit" value="EducationDetails" class="betterbtn form_submit">Submit</button>
             </div>
         </div>
     </div>
 </form>
 
-<div class="back-button">
-    <a asp-controller="Creator" asp-action="PersonalDetails" class="betterbtn">&lt;&lt;&lt; Personal</a>
-</div>
+<div class="nav-button-padding col-12 d-flex justify-content-between">
+    <div class="back-button">
+        <a asp-controller="Creator" asp-action="PersonalDetails" class="betterbtn">&lt;&lt;&lt; Personal</a>
+    </div>
 
-<div class="next-button">
-    <a asp-controller="Creator" asp-action="TrainingDetails" class="betterbtn">Trainings &gt;&gt;&gt;</a>
-</div>
+    <div class="next-button">
+        <a asp-controller="Creator" asp-action="TrainingDetails" class="betterbtn">Trainings &gt;&gt;&gt;</a>
+    </div>
+</div>  
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/js/DynamicTextAreaFields.js"></script>

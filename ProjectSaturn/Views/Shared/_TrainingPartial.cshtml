@@ -7,7 +7,7 @@
     <div class="col-12 col-lg-8 form-group d-flex flex-wrap">
 
         <div class="form-padding col-12 col-md-12">
-            <div class="training_fields_wrap">
+            <div class="training_fields_wrap d-flex flex-wrap">
                 @*Will be filled by add_field_button below*@
             </div>
             <div class="fields_button">
@@ -24,13 +24,15 @@
     </div>
 </form>
 
-<div class="back-button">
-    <a asp-controller="Creator" asp-action="EducationDetails" class="betterbtn">&lt;&lt;&lt; Education</a>
-</div>
+<div class="nav-button-padding col-12 d-flex justify-content-between">
+    <div class="back-button">
+        <a asp-controller="Creator" asp-action="EducationDetails" class="betterbtn">&lt;&lt;&lt; Education</a>
+    </div>
 
-<div class="next-button">
-    <a asp-controller="Creator" asp-action="ProfessionalDetails" class="betterbtn">Professional &gt;&gt;&gt;</a>
-</div>
+    <div class="next-button">
+        <a asp-controller="Creator" asp-action="ProfessionalDetails" class="betterbtn">Professional &gt;&gt;&gt;</a>
+    </div>
+</div>  
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/js/DynamicTextAreaFields.js"></script>
