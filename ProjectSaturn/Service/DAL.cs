@@ -143,10 +143,88 @@ namespace ProjectSaturn.Service
             return retID;
         }
 
-        //TODO : AddProfessional
+        public int AddProfessional(Professional profession, Guid userID, string SkillsList)
+        {
+            int retID = 0;
+            using (SqlConnection con = new(QEditor))
+            {
+                using SqlCommand cmd = new("DataAddProfessional", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("UserID", userID);
+                cmd.Parameters.AddWithValue("Name", profession.Name);
+                cmd.Parameters.AddWithValue("Position", profession.PositionAtComp);
+                cmd.Parameters.AddWithValue("Location", profession.Location);
+                cmd.Parameters.AddWithValue("DateStart", profession.StartDate);
+                cmd.Parameters.AddWithValue("DateEnd", profession.EndDate);
+                cmd.Parameters.AddWithValue("SkillList", SkillsList);
 
-        //TODO : AddKnowledge
+                try
+                {
+                    cmd.Connection.Open();
 
-        //TODO : AddAwards
+                    retID = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    cmd.Connection.Close();
+                }
+                catch (Exception e)
+                {
+                    ErrorLog.Msglist.Add(e.Message);
+                }
+            }
+            return retID;
+        }
+
+        public int AddKnowledge(Knowledge knowledge, Guid userId)
+        {
+            int retID = 0;
+            using (SqlConnection con = new(QEditor))
+            {
+                using SqlCommand cmd = new("DataAddKnowledge", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("UserID", userId);
+                cmd.Parameters.AddWithValue("Desc", knowledge.Desc);
+
+                try
+                {
+                    cmd.Connection.Open();
+
+                    retID = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    cmd.Connection.Close();
+                }
+                catch (Exception e)
+                {
+                    ErrorLog.Msglist.Add(e.Message);
+                }
+            }
+            return retID;
+        }
+
+        public int AddAwards(Awards award, Guid userID)
+        {
+            int retID = 0;
+            using (SqlConnection con = new(QEditor))
+            {
+                using SqlCommand cmd = new("DataAddAward", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("UserID", userID);
+                cmd.Parameters.AddWithValue("Desc", award.Desc);
+                cmd.Parameters.AddWithValue("Date", award.Date);
+
+                try
+                {
+                    cmd.Connection.Open();
+
+                    retID = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    cmd.Connection.Close();
+                }
+                catch (Exception e)
+                {
+                    ErrorLog.Msglist.Add(e.Message);
+                }
+            }
+            return retID;
+        }
     }
 }

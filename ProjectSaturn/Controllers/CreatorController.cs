@@ -72,14 +72,16 @@ namespace ProjectSaturn.Controllers
             {
                 NullValueHandling = NullValueHandling.Ignore,
             };
+            
+            Guid currentUser = new(HttpContext.Request.Cookies["user"]); // Get the current user
+
 
             Personal personal = JsonConvert.DeserializeObject<Personal>(jsonString, settings); // Recieve and Verify the data
-            if (personal.FirstName == "" || personal.LastName == "" || personal.Email == "" || personal.PhoneNumber == "" || personal.Address == "")
+            if (personal.FirstName == "" || personal.LastName == "" || personal.Email == "" || personal.PhoneNumber == "" || personal.Address == "") // Required Fields
             {
                 return Json("required");
             }
 
-            Guid currentUser = new(HttpContext.Request.Cookies["user"]); // Get the current user
 
             if (personal != null) // Store the Data
             {
@@ -90,7 +92,6 @@ namespace ProjectSaturn.Controllers
                 }
                 return Json("false");
             }
-            
             return Json("false");
         }
         
@@ -102,13 +103,15 @@ namespace ProjectSaturn.Controllers
                 NullValueHandling = NullValueHandling.Ignore,
             };
 
+            Guid currentUser = new(HttpContext.Request.Cookies["user"]); // Get the current user
+
+
             Education education = JsonConvert.DeserializeObject<Education>(jsonString, settings); // Recieve and Verify the data
-            if (education.Name == "" || education.GPA == null || education.Location == "" || education.StartDate == null || education.EndDate == null)
+            if (education.Name == "" || education.GPA == null || education.Location == "" || education.StartDate == null || education.EndDate == null) // Required Fields
             {
                 return Json("required");
             }
-
-            Guid currentUser = new(HttpContext.Request.Cookies["user"]); // Get the current user
+            
 
             if (education != null) // Store the Data
             {
@@ -120,7 +123,6 @@ namespace ProjectSaturn.Controllers
                 }
                 return Json("false");
             }
-
             return Json("false");
         }
 
@@ -132,32 +134,34 @@ namespace ProjectSaturn.Controllers
                 NullValueHandling = NullValueHandling.Ignore,
             };
 
-            GenericList TrainingList = JsonConvert.DeserializeObject<GenericList>(jsonString, settings); // Deserialize to a list of jsonstrings
-            int lengthTrainingList = TrainingList.Strings.Count;
-            int correctEntry = 0;
+            Guid currentUser = new(HttpContext.Request.Cookies["user"]); // Get the current user
+            List<Trainings> deSerTrainingList = new(); // Deserialized List
+            List<Trainings> toSubmitList = new(); // List of correct entries to submit
+            int successfullEntry = 0; // Verify successfull submission
 
-            List<Trainings> destraininglist = new();
+
+            GenericList TrainingList = JsonConvert.DeserializeObject<GenericList>(jsonString, settings); // Recieve and Verify the data
             foreach (string trainingString in TrainingList.Strings)
             {
-                Trainings training = JsonConvert.DeserializeObject<Trainings>(trainingString, settings); // Deserialize the jsonstrings within the list and add to a non-serialized list
-                destraininglist.Add(training);
+                Trainings training = JsonConvert.DeserializeObject<Trainings>(trainingString, settings); 
+                deSerTrainingList.Add(training);
             }
-
-            foreach (Trainings training in destraininglist) // Verify the data is correctly formatted
+            foreach (Trainings training in deSerTrainingList) // Verify the data is correctly formatted
             {
-                if (training.Desc == "" || training.Date == null)
+                if (training.Desc != "" && training.Date != null) // No null or empty
                 {
-                    return Json("required");
+                    toSubmitList.Add(training);
+                } 
+                else if (training.Desc != "" && training.Date == null) // No partial entry
+                {
+                    return Json("trequired");
                 }
-                correctEntry++;
             }
 
-            Guid currentUser = new(HttpContext.Request.Cookies["user"]); // Get the current user
 
-            int successfullEntry = 0;
-            if (lengthTrainingList == correctEntry && destraininglist[0] != null) // Store the data
+            if (toSubmitList.Count != 0) // Store the data
             {
-                foreach (Trainings training in destraininglist)
+                foreach (Trainings training in toSubmitList)
                 {
                     int id = _dal.AddTraining(training, currentUser);
                     if (id > 0)
@@ -165,35 +169,141 @@ namespace ProjectSaturn.Controllers
                         successfullEntry++;
                     }
                 }
-                if (successfullEntry == lengthTrainingList)
+                if (successfullEntry == deSerTrainingList.Count)
                 {
                     return Json("true");
                 }
                 return Json("false");
             }
-            //TODO : Make changes to the training details
             return Json("false");
         }
 
         [HttpPost]
         public IActionResult ProfessionalDetails(string jsonString)
         {
-            //TODO : Make changes to the professional details
-            return RedirectToAction("Creator", "Creator");
+            var settings = new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+            };
+
+            Guid currentUser = new(HttpContext.Request.Cookies["user"]);
+
+            Professional profession = JsonConvert.DeserializeObject<Professional>(jsonString, settings); // Recieve and verify the data
+            if (profession.Name == "" || profession.PositionAtComp == "" || profession.Location == "" || profession.StartDate == null || profession.EndDate == null) // Required Fields
+            {
+                return Json("required");
+            }
+
+
+            if (profession != null) // Store the Data
+            {
+                string SkillsList = JsonConvert.SerializeObject(profession.SkillsGained); //TODO : Deserialize in a reviewer view to read the list of skills (DeserializeObject<List<string>>)
+                int id = _dal.AddProfessional(profession, currentUser, SkillsList);
+                if (id > 0)
+                {
+                    return Json("true");
+                }
+                return Json("false");
+            }
+            return Json("false");
         }
 
         [HttpPost]
         public IActionResult KnowledgeDetails(string jsonString)
         {
-            //TODO : Make changes to the skills details
-            return RedirectToAction("Creator", "Creator");
+            var settings = new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+            };
+
+            Guid currentUser = new(HttpContext.Request.Cookies["user"]);
+            List<Knowledge> deSerKnowledgeList = new(); // Deserialized List
+            List<Knowledge> toSubmitList = new(); // List of correct entries to submit
+            int successfullEntry = 0; // Verify successfull submission
+
+            GenericList KnowledgeList = JsonConvert.DeserializeObject<GenericList>(jsonString, settings); // Recieve and Verify the data
+            foreach (string knowledgeString in KnowledgeList.Strings)
+            {
+                Knowledge knowledge = JsonConvert.DeserializeObject<Knowledge>(knowledgeString, settings);
+                deSerKnowledgeList.Add(knowledge);
+            }
+            foreach (Knowledge knowledge in deSerKnowledgeList) // Verify the data is correctly formatted
+            {
+                if (knowledge.Desc != "") // No null or empty
+                {
+                    toSubmitList.Add(knowledge);
+                }
+            }
+
+            if (toSubmitList.Count != 0) // Store the data
+            {
+                foreach (Knowledge knowledge in toSubmitList)
+                {
+                    int id = _dal.AddKnowledge(knowledge, currentUser);
+                    if (id > 0)
+                    {
+                        successfullEntry++;
+                    }
+                }
+                if (successfullEntry == deSerKnowledgeList.Count)
+                {
+                    return Json("true");
+                }
+                return Json("false");
+            }
+            return Json("false");
         }
         
         [HttpPost]
         public IActionResult AwardsDetails(string jsonString)
         {
-            //TODO : Make changes to the awards details
-            return RedirectToAction("Creator", "Creator");
+            var settings = new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+            };
+
+            Guid currentUser = new(HttpContext.Request.Cookies["user"]); // Get the current user
+            List<Awards> deSerAwardList = new(); // Deserialized List
+            List<Awards> toSubmitList = new(); // List of correct entries to submit
+            int successfullEntry = 0; // Verify successfull submission
+
+
+            GenericList AwardList = JsonConvert.DeserializeObject<GenericList>(jsonString, settings); // Recieve and Verify the data
+            foreach (string awardString in AwardList.Strings)
+            {
+                Awards award = JsonConvert.DeserializeObject<Awards>(awardString, settings);
+                deSerAwardList.Add(award);
+            }
+            foreach (Awards award in deSerAwardList) // Verify the data is correctly formatted
+            {
+                if (award.Desc != "" && award.Date != null) // No null or empty
+                {
+                    toSubmitList.Add(award);
+                }
+                else if (award.Desc != "" && award.Date == null) // No partial entry
+                {
+                    return Json("trequired");
+                }
+            }
+
+
+            if (toSubmitList.Count != 0) // Store the data
+            {
+                foreach (Awards award in toSubmitList)
+                {
+                    int id = _dal.AddAwards(award, currentUser);
+                    if (id > 0)
+                    {
+                        successfullEntry++;
+                    }
+                }
+                if (successfullEntry == deSerAwardList.Count)
+                {
+                    return Json("true");
+                }
+                return Json("false");
+            }
+            return Json("false");
         }
     }
 }

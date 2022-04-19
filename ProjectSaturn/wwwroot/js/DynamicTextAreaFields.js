@@ -42,15 +42,15 @@ $(document).ready(function () {
 			added_fields = // Adds Training Fields
 				'<div class="form-padding d-flex flex-wrap justify-content-between align-items-end">' +
 					'<div class="form-padding col-12 col-md-6">' + 
-						'<label asp-for= "Desc" > Certification/Training*</label >' +
+						'<label asp-for= "Desc" > Certification/Training</label >' +
 						'<textarea name="TDesc" asp-for="Desc" class="form-control form-text-area"></textarea>' +
 					'</div>' +
-					'<div class="form-padding col-12 col-md-4">' +
-						'<label asp-for="Date">Date Recieved/Predicted*</label>' +
+					'<div class="form-padding col-12 col-md-3">' +
+						'<label asp-for="Date">Date Recieved/Predicted</label>' +
 						'<input name="TDate" asp-for="Date" type="month" class="form-control" />' +
 					'</div>'+
-					'<div class="form-padding col-12 col-md-3">' +
-						'<label asp-for= "Completed"> Status*</label >' +
+					'<div class="form-padding col-12 col-md-2">' +
+						'<label asp-for= "Completed"> Status</label >' +
 						'<select name="TCompleted" asp-for="Completed" >' +
 							'<option value="true">Completed</option>' +
 							'<option value="false">In Progress</option>' +
@@ -63,13 +63,13 @@ $(document).ready(function () {
 		} else if (add_button.attr("data-type") == "Awards") {
 			max_fields = 10;
 			added_fields = // Adds Awards Fields
-				'<div class="form-padding d-flex flex-wrap justify-content-between align-items-end col-12 col-md-6">' +
+				'<div class="form-padding d-flex flex-wrap justify-content-between align-items-end">' +
 					'<div class="form-padding col-12 col-md-6">' + 
-						'<label asp-for= "Desc" > Award*</label >' +
+						'<label asp-for= "Desc" > Award</label >' +
 						'<textarea name="ADesc" asp-for="Desc" class="form-control form-text-area"></textarea>' +
 					'</div>' +
 					'<div class="form-padding col-12 col-md-4">' +
-						'<label asp-for="Date">Date Recieved*</label>' +
+						'<label asp-for="Date">Date Recieved</label>' +
 						'<input name="ADate" asp-for="Date" type="month" class="form-control" />' +
 					'</div>'+
 					'<div class="col-12 col-md-2">' +
@@ -81,7 +81,7 @@ $(document).ready(function () {
 			added_fields = // Adds Knowledge Fields
 				'<div class="form-padding d-flex flex-wrap justify-content-left align-items-end col-12 col-md-6 col-lg-4">' +
 					'<div class="form-padding col-12 col-md-8">' +
-						'<label asp-for="Desc" > Skill*</label >' +
+						'<label asp-for="Desc" > Skill</label >' +
 						'<textarea name="KDesc" asp-for="Desc" class="form-control form-text-area"></textarea>' +
 					'</div>' +
 					'<div class="form-padding col-12 col-md-4">' +

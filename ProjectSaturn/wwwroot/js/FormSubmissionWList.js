@@ -49,7 +49,7 @@ $(document).ready(function () {
             } else if (value.name == "KDesc") {
                 type = "strings";
                 modelobj['Desc'] = value.value;
-                genericlist.push(JSon.stringify(modelobj));
+                genericlist.push(JSON.stringify(modelobj));
                 modelobj = {};
             } else {
                 generic[value.name] = value.value;
@@ -70,6 +70,8 @@ $(document).ready(function () {
                 alert("Error! Something went wrong! Please try resubmitting. As a last resort, reload the page.");
             } else if (msg == "required") {
                 alert("Required inputs (*) are missing. Please resubmit with all required (*) inputs.");
+            } else if (msg == "trequired") {
+                alert("All certifications/trainings with an description needs a date recieved/predicted. Please correct and resubmit.");
             }
 
         }).fail(function (err, textstatus, error) {
