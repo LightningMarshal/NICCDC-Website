@@ -3,6 +3,7 @@ using ProjectSaturn.Models;
 using ProjectSaturn.Service;
 using ProjectSaturn.Extensions;
 using System.Diagnostics;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ProjectSaturn.Controllers
@@ -15,7 +16,11 @@ namespace ProjectSaturn.Controllers
             _dal = dal;
         }
 
-        //TODO : Add a Welcome Page
+        public IActionResult Home()
+        {
+            ViewData["Title"] = "Home";
+            return View();
+        }
 
         public IActionResult PersonalDetails()
         {         
@@ -62,7 +67,41 @@ namespace ProjectSaturn.Controllers
             return View("CreatorPages");
         }
 
+        [HttpPost]
+        public ActionResult Home([Bind("Email")] Personal person)
+        {
+            var option = new CookieOptions
+            {
+                Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
+            };
 
+            if (person.Email == null)
+            {
+                person.Email = "not null";
+            }
+
+            if (person.Email.ToLower().Contains('@')){
+                Guid guid = _dal.AddUser(person.Email);
+                string strguid = guid.ToString();
+                if (HttpContext.Request.Cookies["user"] == null)
+                {
+                    HttpContext.Response.Cookies.Append("user", strguid, option);
+                }
+                else
+                {
+                    HttpContext.Response.Cookies.Delete("user");
+                    HttpContext.Response.Cookies.Append("user", strguid, option);
+                }
+                
+            }
+            else
+            {
+                ViewData["Error"] = "Email is not valid.";
+                return View();
+            }
+
+            return RedirectToAction("PersonalDetails");
+        }
 
         // The following code adds or edits an entry of the user's data
         [HttpPost]
@@ -75,8 +114,8 @@ namespace ProjectSaturn.Controllers
             
             Guid currentUser = new(HttpContext.Request.Cookies["user"]); // Get the current user
 
-
             Personal personal = JsonConvert.DeserializeObject<Personal>(jsonString, settings); // Recieve and Verify the data
+            personal.Email = _dal.GetEmail(currentUser);
             if (personal.FirstName == "" || personal.LastName == "" || personal.Email == "" || personal.PhoneNumber == "" || personal.Address == "") // Required Fields
             {
                 return Json("required");
@@ -88,6 +127,11 @@ namespace ProjectSaturn.Controllers
                 int id = _dal.AddPersonal(personal, currentUser);
                 if (id > 0)
                 {
+                    return Json("true");
+                }
+                else if (id == -10)
+                {
+                    ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
                     return Json("true");
                 }
                 return Json("false");
@@ -119,6 +163,11 @@ namespace ProjectSaturn.Controllers
                 int id = _dal.AddEducation(education, currentUser, SkillsList);
                 if (id > 0)
                 {
+                    return Json("true");
+                }
+                else if (id == -10)
+                {
+                    ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
                     return Json("true");
                 }
                 return Json("false");
@@ -168,6 +217,12 @@ namespace ProjectSaturn.Controllers
                     {
                         successfullEntry++;
                     }
+                    else if (id == -10)
+                    {
+                        ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
+                        successfullEntry++;
+                    }
+
                 }
                 if (successfullEntry == deSerTrainingList.Count)
                 {
@@ -201,6 +256,11 @@ namespace ProjectSaturn.Controllers
                 int id = _dal.AddProfessional(profession, currentUser, SkillsList);
                 if (id > 0)
                 {
+                    return Json("true");
+                }
+                else if (id == -10)
+                {
+                    ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
                     return Json("true");
                 }
                 return Json("false");
@@ -242,6 +302,11 @@ namespace ProjectSaturn.Controllers
                     int id = _dal.AddKnowledge(knowledge, currentUser);
                     if (id > 0)
                     {
+                        successfullEntry++;
+                    }
+                    else if (id == -10)
+                    {
+                        ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
                         successfullEntry++;
                     }
                 }
@@ -294,6 +359,11 @@ namespace ProjectSaturn.Controllers
                     int id = _dal.AddAwards(award, currentUser);
                     if (id > 0)
                     {
+                        successfullEntry++;
+                    }
+                    else if (id == -10)
+                    {
+                        ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
                         successfullEntry++;
                     }
                 }

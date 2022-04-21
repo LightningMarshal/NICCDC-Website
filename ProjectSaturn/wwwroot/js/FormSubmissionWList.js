@@ -43,7 +43,7 @@ $(document).ready(function () {
                 modelobj['Desc'] = value.value;
             } else if (value.name == "ADate") {
                 type = "strings";
-                modelobj['Date'] == value.value;
+                modelobj['Date'] = value.value;
                 genericlist.push(JSON.stringify(modelobj));
                 modelobj = {};
             } else if (value.name == "KDesc") {

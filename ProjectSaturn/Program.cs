@@ -54,5 +54,9 @@ app.MapControllerRoute(
 
 // Custom Middleware:
 app.UseMiddleware<CookieMiddleware>();
+if (app.Environment.IsDevelopment())
+{
+    app.UseMiddleware<TestingMiddleware>();
+}
 
 app.Run();

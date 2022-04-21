@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using ProjectSaturn.Models;
 using ProjectSaturn.Service;
+using System.Diagnostics;
 
 namespace ProjectSaturn.Middlewares
 {
@@ -17,18 +19,17 @@ namespace ProjectSaturn.Middlewares
         {
             var user = httpContext.Request.Cookies["user"];
 
-            var option = new CookieOptions
+            var destination = httpContext.Request.Path.Value;
+            Debug.WriteLine("Destination: " + destination);
+
+            if (user == null || user == Guid.Empty.ToString())
             {
-                Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
-            };
-
-            if (user == null)
-            {
-                Guid guid = _dal.AddTempUser();// Make a temporary user in DAL
-
-                string strguid = guid.ToString();
-
-                httpContext.Response.Cookies.Append("user", strguid, option);
+                // Redirect if user does not have a User ID
+                if (destination == "/Creator/PersonalDetails" || destination == "/Creator/EducationDetails" || destination == "/Creator/TrainingDetails" || destination == "/Creator/ProfessionalDetails" || destination == "/Creator/KnowledgeDetails" || destination == "/Creator/AwardsDetails")
+                {
+                    ErrorLog.Msglist.Add("Redirected: " + destination + " - > " + "/Creator/Home");
+                    httpContext.Response.Redirect("/Creator/Home");
+                }
             }
 
             return _next(httpContext);

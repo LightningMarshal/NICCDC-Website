@@ -23,19 +23,48 @@ namespace ProjectSaturn.Service
             QEditor = WriterConnectionStrings;
         }
 
-        // -------------------------------------------Reader Calls-------------------------------------------------
-
         //TODO : Analytic calls will be made here
+
+        // -------------------------------------------Reader Calls-------------------------------------------------
+        
+        public string GetEmail(Guid guid)
+        {
+            string retStr = "";
+            using (SqlConnection con = new(QReader))
+            {
+                using SqlCommand cmd = new("GetEmail", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("UserID", guid);
+
+                try
+                {
+                    cmd.Connection.Open();
+
+                    retStr = (string)cmd.ExecuteScalar();
+
+                    cmd.Connection.Close();
+                }
+                catch (Exception e)
+                {
+                    ErrorLog.Msglist.Add(e.Message);
+                }
+            }
+            return retStr;
+        }
+
+
 
         //-------------------------------------------Writer Calls-------------------------------------------------
 
-        public Guid AddTempUser() //TODO : Configure to force the user to enter their email to be assigned a UserID
+        public Guid AddUser(string email) // Adds a new user
         {
             var guid = new Guid();
             using (SqlConnection con = new(QEditor))
             {
-                using SqlCommand cmd = new("AddTempUser", con);
+                using SqlCommand cmd = new("AddUser", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("Email", email);
+
                 try
                 {
                     cmd.Connection.Open();
@@ -53,7 +82,7 @@ namespace ProjectSaturn.Service
 
         }
 
-        public int AddPersonal(Personal personal, Guid userID) //  Adds an entry to DataPersonal
+        public int AddPersonal(Personal personal, Guid userID) // Adds an entry to DataPersonal
         {
             int retID = 0;
             using (SqlConnection con = new(QEditor))

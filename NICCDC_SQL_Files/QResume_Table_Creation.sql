@@ -6,6 +6,7 @@ CREATE TABLE dbo.Users(
 	ID UNIQUEIDENTIFIER DEFAULT(NEWID()) NOT NULL PRIMARY KEY,
 	Name nvarchar(100) NOT NULL,
 	Email nvarchar(100) NOT NULL,
+	DateCreated datetime2 DEFAULT(CURRENT_TIMESTAMP) NOT NULL,
 );
 
 CREATE TABLE dbo.DataPersonal(
@@ -17,6 +18,7 @@ CREATE TABLE dbo.DataPersonal(
 	PhoneNumber nvarchar(15) NOT NULL,
 	Address nvarchar(350) NOT NULL,
 	Goal nvarchar(500) NULL,
+	DateEntered datetime2 DEFAULT(CURRENT_TIMESTAMP) NOT NULL,
 );
 
 CREATE TABLE dbo.DataEducation(
@@ -28,6 +30,7 @@ CREATE TABLE dbo.DataEducation(
 	DateEnd datetime2 NOT NULL,
 	SkillList nvarchar(max) NULL,
 	GPA decimal (3,2) NOT NULL,
+	DateEntered datetime2 DEFAULT(CURRENT_TIMESTAMP) NOT NULL,
 );
 
 CREATE TABLE dbo.DataTrainings(
@@ -35,7 +38,9 @@ CREATE TABLE dbo.DataTrainings(
 	ID int IDENTITY(1,1) NOT NULL,
 	Training nvarchar(250) NOT NULL,
 	EarnDate datetime2 NOT NULL,
-	Completed bit NOT NULL
+	Completed bit NOT NULL,
+	DateEntered datetime2 DEFAULT(CURRENT_TIMESTAMP) NOT NULL,
+
 );
 
 CREATE TABLE dbo.DataProfessional(
@@ -47,6 +52,7 @@ CREATE TABLE dbo.DataProfessional(
 	DateEnd datetime2 NOT NULL,
 	SkillList nvarchar(max) NULL,
 	Position nvarchar(50) NOT NULL,
+	DateEntered datetime2 DEFAULT(CURRENT_TIMESTAMP) NOT NULL,
 );
 
 CREATE TABLE dbo.DataAwards(
@@ -54,13 +60,14 @@ CREATE TABLE dbo.DataAwards(
 	ID int IDENTITY(1,1) NOT NULL,
 	Award nvarchar(150) NOT NULL,
 	EarnDate datetime2 NOT NULL,
+	DateEntered datetime2 DEFAULT(CURRENT_TIMESTAMP) NOT NULL,
 );
 
 CREATE TABLE dbo.DataSkills(
 	UserID UNIQUEIDENTIFIER NOT NULL,
 	ID int IDENTITY(1,1) NOT NULL,
 	Skill nvarchar(500) NOT NULL,
-	Catagory nvarchar(50) NOT NULL,
+	DateEntered datetime2 DEFAULT(CURRENT_TIMESTAMP) NOT NULL,
 );
 
 
