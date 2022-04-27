@@ -22,7 +22,7 @@ $(document).ready(function () {
         var modelobj = {};
         var type = '';
 
-        // Determines if element needs to be in a list
+        // Determines if element needs to be in a list or model
         genericinfo.forEach((value) => {
             if (value.name == 'SkillsGained') { // Creates list of strings
                 type = 'SkillsGained';
@@ -65,9 +65,11 @@ $(document).ready(function () {
             data: { jsonString: JSON.stringify(generic) },
         }).done(function (msg) {
             if (msg == "true") {
-                alert("Success! Your response has been recorded. Either add another response or continue to the next page.");
+                alert("Success! Your response has been recorded. Please continue to the next section");
             } else if (msg == "false") {
                 alert("Error! Something went wrong! Please try resubmitting. As a last resort, reload the page.");
+            } else if (msg == "true another") {
+                alert("Success! Your response has been recorded. Please add another submission or continue to next section.")
             } else if (msg == "required") {
                 alert("Required inputs (*) are missing. Please resubmit with all required (*) inputs.");
             } else if (msg == "trequired") {

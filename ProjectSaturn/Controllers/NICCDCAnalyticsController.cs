@@ -2,9 +2,9 @@
 
 namespace ProjectSaturn.Controllers
 {
-    public class AnalyticsController : Controller
+    public class NICCDCAnalyticsController : Controller
     {
-        public IActionResult Analyze()
+        public IActionResult NICCDCAnalyzeLogIn()
         {
             // TODO : Add a view and code to give accurate applications
 

@@ -6,7 +6,7 @@
 
         public static List<Education> EducationalList { get; set; } //Education Experience
         
-        public static List<Trainings> TrainingsList { get; set; } //Completed Trainings
+        public static List<Certifications> TrainingsList { get; set; } //Completed Trainings
         
         public static List<Professional> ProfessionalList { get; set; } //Professional Experience
                 

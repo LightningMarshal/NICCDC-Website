@@ -1,39 +1,79 @@
 ﻿@model ProjectSaturn.Models.Personal
 
-@*The main personal data form that will be autofilled if userdata exsists*@
+@*The Personal data form portion*@
 <form asp-action="PersonalDetails" class="d-flex justify-content-around flex-wrap">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="col-12 col-lg-8 form-group d-flex flex-wrap">
-
-        <div class="form-padding col-12 col-md-6">
+        @*Name*@
+        <div class="form-padding col-12 col-md-4">
             <label asp-for="FirstName">First Name*</label>
-            <input name="FirstName" asp-for="FirstName" class="form-control" placeholder="John" />
+            <input name="FirstName" asp-for="FirstName" class="form-control" placeholder="John" maxlength="75"/>
             <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
 
-        <div class="form-padding col-12 col-md-6">
+        <div class="form-padding col-12 col-md-2">
+            <label asp-for="MiddleInit">Middle Initial</label>
+            <input name="MiddleInit" asp-for="MiddleInit" class="form-control" placeholder="D." maxlength="1"/>
+            <span asp-validation-for="MiddleInit" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-4">
             <label asp-for="LastName">Last Name*</label>
-            <input name="LastName" asp-for="LastName" class="form-control" placeholder="Doe" />
+            <input name="LastName" asp-for="LastName" class="form-control" placeholder="Doe" maxlength="75"/>
             <span asp-validation-for="LastName" class="text-danger"></span>
         </div>
-
-        <div class="form-padding col-12 col-md-12">
-            <label asp-for="PhoneNumber">Phone Number*</label>
-            <input name="PhoneNumber" asp-for="PhoneNumber" class="form-control" placeholder="xxx-xxx-xxxx" />
-            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        
+        <div class="form-padding col-12 col-md-2">
+            <label asp-for="IsUSCitizen">US Citizen*</label>
+            <select name="IsUSCitizen" asp-for="IsUSCitizen" class="form-control">
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+            </select>
         </div>
 
+        @*Contact Info*@
+        <div class="form-padding col-12 col-md-4" style="margin-bottom: 20px;">
+            <label asp-for="DayPhone">Day Number</label>
+            <input name="DayPhone" asp-for="DayPhone" class="form-control" placeholder="xxx-xxx-xxxx" maxlength="15"/>
+            <span asp-validation-for="DayPhone" class="text-danger"></span>
+        </div>
+        
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="EveningPhone">Evening Number</label>
+            <input name="EveningPhone" asp-for="EveningPhone" class="form-control" placeholder="xxx-xxx-xxxx" maxlength="15"/>
+            <span asp-validation-for="EveningPhone" class="text-danger"></span>
+        </div>
+        
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="MobilePhone">Mobile Number*</label>
+            <input name="MobilePhone" asp-for="MobilePhone" class="form-control" placeholder="xxx-xxx-xxxx" maxlength="15"/>
+            <span asp-validation-for="MobilePhone" class="text-danger"></span>
+        </div>
+
+        @*Address*@
         <div class="form-padding col-12">
-            <label asp-for="Address">Address*</label>
-            <textarea name="Address" asp-for="Address" class="form-control form-text-area" placeholder="Street, City, State, Area Code"></textarea>
+            <label asp-for="Address">Permanent Address*</label>
+            <textarea name="Address" asp-for="Address" class="form-control form-text-area" placeholder="Street" maxlength="150"></textarea>
             <span asp-validation-for="Address" class="text-danger"></span>
         </div>
-
-        <div class="form-padding col-12">
-            <label asp-for="Goal">Goal</label>
-            <textarea name="Goal" asp-for="Goal" class="form-control form-text-area" placeholder="My goal is to. . ."></textarea>
-            <span asp-validation-for="Goal" class="text-danger"></span>
+        
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="City">City*</label>
+            <textarea name="City" asp-for="City" class="form-control form-text-area" placeholder="City" maxlength="100"></textarea>
+            <span asp-validation-for="City" class="text-danger"></span>
+        </div>
+        
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="State">State*</label>
+            <textarea name="State" asp-for="State" class="form-control form-text-area" placeholder="State" maxlength="100"></textarea>
+            <span asp-validation-for="State" class="text-danger"></span>
+        </div>
+        
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="Zip">Zip*</label>
+            <textarea name="Zip" asp-for="Zip" class="form-control form-text-area" placeholder="Zip Code" maxlength="10"></textarea>
+            <span asp-validation-for="Zip" class="text-danger"></span>
         </div>
 
         <div class="col-12 form-padding d-flex">
@@ -46,7 +86,7 @@
 
 <div class="nav-button-padding col-12 d-flex justify-content-end">
     <div class="next-button">
-        <a asp-controller="Creator" asp-action="EducationDetails" class="betterbtn">Education &gt;&gt;&gt;</a>
+        <a asp-controller="Creator" asp-action="GeneralInfo" class="betterbtn">General &gt;&gt;&gt;</a>
     </div>
 </div>  
 

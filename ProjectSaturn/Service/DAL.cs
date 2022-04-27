@@ -52,6 +52,17 @@ namespace ProjectSaturn.Service
             return retStr;
         }
 
+        //TODO : Analytic calls that interface with the Models Interface
+            //cmd.Connection.Open();
+            //
+            //SqlDataReader dr = cmd.ExecuteReader();
+            //while (dr.Read())
+            //{
+            //  var exp = new Model(dr);
+            //}
+            //
+            //cmd.Connection.Close();
+
 
 
         //-------------------------------------------Writer Calls-------------------------------------------------
@@ -89,13 +100,24 @@ namespace ProjectSaturn.Service
             {
                 using SqlCommand cmd = new("DataAddPersonal", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("UserID", userID);
+                // Name
                 cmd.Parameters.AddWithValue("FirstName", personal.FirstName);
+                cmd.Parameters.AddWithValue("MiddleInit", personal.MiddleInit);
                 cmd.Parameters.AddWithValue("LastName", personal.LastName);
-                cmd.Parameters.AddWithValue("Email", personal.Email);
-                cmd.Parameters.AddWithValue("PhoneNumber", personal.PhoneNumber);
+                // Address
                 cmd.Parameters.AddWithValue("Address", personal.Address);
-                cmd.Parameters.AddWithValue("Goal", personal.Goal);
+                cmd.Parameters.AddWithValue("City", personal.City);
+                cmd.Parameters.AddWithValue("State", personal.State);
+                cmd.Parameters.AddWithValue("Zip", personal.Zip);
+                // Contact Info
+                cmd.Parameters.AddWithValue("Email", personal.Email);
+                cmd.Parameters.AddWithValue("DayPhone", personal.DayPhone);
+                cmd.Parameters.AddWithValue("EveningPhone", personal.EveningPhone);
+                cmd.Parameters.AddWithValue("MobilePhone", personal.MobilePhone);
+                // Is US Citizen
+                cmd.Parameters.AddWithValue("IsUSCitizen", personal.IsUSCitizen);
+                // Misc
+                cmd.Parameters.AddWithValue("UserID", userID);
 
                 try
                 {
@@ -113,20 +135,68 @@ namespace ProjectSaturn.Service
             return retID;
         }
 
-        public int AddEducation(Education education, Guid userID, string SkillsList) // Adds an entry to DataEducational
+        public int AddGeneral(GeneralInfo general, Guid userID) // Adds an entry to DataGeneral
+        {
+            int retID = 0;
+            using (SqlConnection con = new(QEditor))
+            {
+                using SqlCommand cmd = new("DataAddGeneral", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                // General
+                cmd.Parameters.AddWithValue("Degree", general.Degree);
+                cmd.Parameters.AddWithValue("DegreeStatus", general.DegreeStatus);
+                cmd.Parameters.AddWithValue("AntiGradDate", general.AntiGradDate);
+                // GPA
+                cmd.Parameters.AddWithValue("OverallGPA", general.OverallGPA);
+                cmd.Parameters.AddWithValue("MajorGPA", general.MajorGPA);
+                // SAT
+                cmd.Parameters.AddWithValue("SATV", general.SATV);
+                cmd.Parameters.AddWithValue("SATM", general.SATM);
+                // GRE
+                cmd.Parameters.AddWithValue("GREV", general.GREV);
+                cmd.Parameters.AddWithValue("GREQ", general.GREQ);
+                cmd.Parameters.AddWithValue("GREA", general.GREA);
+                // Misc
+                cmd.Parameters.AddWithValue("UserID", userID);
+
+                try
+                {
+                    cmd.Connection.Open();
+
+                    retID = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    cmd.Connection.Close();
+                }
+                catch (Exception e)
+                {
+                    ErrorLog.Msglist.Add(e.Message);
+                }
+            }
+            return retID;
+        }
+
+        public int AddEducation(Education education, Guid userID, string SkillsGained) // Adds an entry to DataEducational
         {
             int retID = 0;
             using (SqlConnection con = new(QEditor))
             {
                 using SqlCommand cmd = new("DataAddEducational", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("UserID", userID);
+                // General
                 cmd.Parameters.AddWithValue("Name", education.Name);
-                cmd.Parameters.AddWithValue("Location", education.Location);
-                cmd.Parameters.AddWithValue("DateStart", education.StartDate);
-                cmd.Parameters.AddWithValue("DateEnd", education.EndDate);
-                cmd.Parameters.AddWithValue("SkillList", SkillsList);
-                cmd.Parameters.AddWithValue("GPA", education.GPA);
+                cmd.Parameters.AddWithValue("Major", education.Major);
+                cmd.Parameters.AddWithValue("DegreeEarned", education.DegreeEarned);
+                cmd.Parameters.AddWithValue("DegreeDate", education.DegreeDate);
+                cmd.Parameters.AddWithValue("SkillsGained", SkillsGained);
+                // School Address
+                cmd.Parameters.AddWithValue("SchoolCity", education.SchoolCity);
+                cmd.Parameters.AddWithValue("SchoolState", education.SchoolState);
+                cmd.Parameters.AddWithValue("SchoolZip", education.SchoolZip);
+                // GPA
+                cmd.Parameters.AddWithValue("OverallGPA", education.OverallGPA);
+                cmd.Parameters.AddWithValue("MajorGPA", education.MajorGPA);
+                // Misc
+                cmd.Parameters.AddWithValue("UserID", userID);
 
                 try
                 {
@@ -144,7 +214,7 @@ namespace ProjectSaturn.Service
             return retID;
         }
 
-        public int AddTraining(Trainings training, Guid userID)
+        public int AddTraining(Certifications training, Guid userID) // Adds an entry to DataTraining
         {
             int retID = 0;
             using (SqlConnection con = new(QEditor))
@@ -172,7 +242,7 @@ namespace ProjectSaturn.Service
             return retID;
         }
 
-        public int AddProfessional(Professional profession, Guid userID, string SkillsList)
+        public int AddProfessional(Professional profession, Guid userID, string SkillsGained) // Add an entry to DataProfessional
         {
             int retID = 0;
             using (SqlConnection con = new(QEditor))
@@ -185,7 +255,7 @@ namespace ProjectSaturn.Service
                 cmd.Parameters.AddWithValue("Location", profession.Location);
                 cmd.Parameters.AddWithValue("DateStart", profession.StartDate);
                 cmd.Parameters.AddWithValue("DateEnd", profession.EndDate);
-                cmd.Parameters.AddWithValue("SkillList", SkillsList);
+                cmd.Parameters.AddWithValue("SkillsGained", SkillsGained);
 
                 try
                 {
@@ -203,7 +273,7 @@ namespace ProjectSaturn.Service
             return retID;
         }
 
-        public int AddKnowledge(Knowledge knowledge, Guid userId)
+        public int AddKnowledge(Knowledge knowledge, Guid userId) // Adds an entry to DataKnowledge
         {
             int retID = 0;
             using (SqlConnection con = new(QEditor))
@@ -229,7 +299,7 @@ namespace ProjectSaturn.Service
             return retID;
         }
 
-        public int AddAwards(Awards award, Guid userID)
+        public int AddAwards(Awards award, Guid userID) // Adds an entry to DataAwards
         {
             int retID = 0;
             using (SqlConnection con = new(QEditor))

@@ -7,25 +7,25 @@
     <div class="col-12 col-lg-8 form-group d-flex flex-wrap">
 
         <div class="form-padding col-12 col-md-4">
-            <label asp-for="Name">Name of Business*</label>
-            <input name="Name" asp-for="Name" class="form-control" />
+            <label asp-for="Name">Name of Organization*</label>
+            <input name="Name" asp-for="Name" class="form-control" placeholder="NAITEC"/>
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
 
         <div class="form-padding col-12 col-md-4">
             <label asp-for="PositionAtComp">Title or Position*</label>
-            <input name="PositionAtComp" asp-for="PositionAtComp" class="form-control" />
+            <input name="PositionAtComp" asp-for="PositionAtComp" class="form-control" placeholder="Intern"/>
             <span asp-validation-for="PositionAtComp" class="text-danger"></span>
         </div>
 
         <div class="form-padding col-12 col-md-4">
-            <label asp-for="Location">Company Location*</label>
+            <label asp-for="Location">Location*</label>
             <input name="Location" asp-for="Location" class="form-control" placeholder="City, State"/>
             <span asp-validation-for=Location class="text-danger"></span>
         </div>
 
         <div class="form-padding col-12 col-md-6">
-            <label asp-for="StartDate">Starting Date*</label>
+            <label asp-for="StartDate">Start Date*</label>
             <input name="StartDate" asp-for="StartDate" type="month" class="form-control" />
             <span asp-validation-for="StartDate" class="text-danger"></span>
         </div>
@@ -37,7 +37,7 @@
         </div>
 
         <div class="form-padding col-12 col-md-12">
-            <label asp-for="SkillsGained">What Skills Were Learned In This Position</label>
+            <label asp-for="SkillsGained">Description</label>
             <div class="prof_fields_wrap flex-wrap">
                 @*Will be filled by add_field_button below*@
             </div>
@@ -57,11 +57,11 @@
 
 <div class="nav-button-padding col-12 d-flex justify-content-between">
     <div class="back-button">
-        <a asp-controller="Creator" asp-action="TrainingDetails" class="betterbtn">&lt;&lt;&lt; Trainings</a>
+        <a asp-controller="Creator" asp-action="EducationDetails" class="betterbtn">&lt;&lt;&lt; Education</a>
     </div>
 
     <div class="next-button">
-        <a asp-controller="Creator" asp-action="KnowledgeDetails" class="betterbtn">Knowledge &gt;&gt;&gt;</a>
+        <a asp-controller="Creator" asp-action="TrainingDetails" class="betterbtn">Certifications &gt;&gt;&gt;</a>
     </div>
 </div>  
 

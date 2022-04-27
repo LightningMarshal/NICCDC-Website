@@ -1,43 +1,75 @@
 ﻿@model ProjectSaturn.Models.Education
 
-@*This is the main creation form that will create another education object*@
+<div class="justify-content-center">
+    <h5 class="text-center">For every submission, please email or fax a transcript to: niatec@niatec.isu.edu or 208-282-6054</h5>
+</div>
+
+@*This is the education form in the application form*@
 <form asp-action="EducationDetails" class="d-flex justify-content-around flex-wrap">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="col-12 col-lg-8 form-group d-flex flex-wrap">
-
-        <div class="form-padding col-12 col-md-4">
+        <div class="form-padding col-12 col-md-6">
             <label asp-for="Name">Name of School*</label>
             <input name="Name" asp-for="Name" class="form-control" placeholder="Idaho State University"/>
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
 
-        <div class="form-padding col-12 col-md-4">
-            <label asp-for="GPA">GPA or Qualification*</label>
-            <input name="GPA" asp-for="GPA" class="form-control" placeholder="4.0 / Title"/>
-            <span asp-validation-for="GPA" class="text-danger"></span>
-        </div>
-
-        <div class="form-padding col-12 col-md-4">
-            <label asp-for="Location">School Location*</label>
-            <input name="Location" asp-for="Location" class="form-control" placeholder="City, State"/>
-            <span asp-validation-for="Location" class="text-danger"></span>
-        </div>
-
         <div class="form-padding col-12 col-md-6">
-            <label asp-for="StartDate">Join Date*</label>
-            <input name="StartDate" asp-for="StartDate" type="month"  class="form-control"/>
-            <span asp-validation-for="StartDate" class="text-danger"></span>
+            <label asp-for="Major">Major*</label> 
+            <textarea name="Major" asp-for="Major" class="form-control form-text-area" placeholder="Computer Science" ></textarea>
+            <span asp-validation-for="Major" class="text-danger"></span>
         </div>
 
-        <div class="form-padding col-12 col-md-6">
-            <label asp-for="EndDate">Graduation Date (or Predicted)*</label>
-            <input name="EndDate" asp-for="EndDate" type="month" class="form-control" />
-            <span asp-validation-for="EndDate" class="text-danger"></span>
+        <div class="form-padding col-12 col-md-3">
+            <label asp-for="DegreeEarned">Degree Earned</label>
+            <select name="DegreeEarned" asp-for="DegreeEarned" class="form-control">
+                <option value=""></option>
+                <option value="Associate">Associate</option>
+                <option value="Bachelor">Bachelor</option>
+                <option value="Master">Master</option>
+                <option value="Doctoral">Doctoral</option>
+            </select>
+        </div>
+
+        <div class="form-padding col-12 col-md-3">
+            <label asp-for="DegreeDate">Degree Date</label>
+            <input name="DegreeDate" asp-for="DegreeDate" type="month" class="form-control"/>
+            <span asp-validation-for="DegreeDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-3">
+            <label asp-for="OverallGPA">Overall GPA*</label>
+            <input name="OverallGPA" asp-for="OverallGPA" class="form-control" placeholder="4.0 / Title"/>
+            <span asp-validation-for="OverallGPA" class="text-danger"></span>
+        </div>
+        
+        <div class="form-padding col-12 col-md-3">
+            <label asp-for="MajorGPA">Major GPA*</label>
+            <input name="MajorGPA" asp-for="MajorGPA" class="form-control" placeholder="4.0 / Title"/>
+            <span asp-validation-for="MajorGPA" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="SchoolCity">School City*</label>
+            <textarea name="SchoolCity" asp-for="SchoolCity" class="form-control form-text-area" placeholder="City" maxlength="100"></textarea>
+            <span asp-validation-for="SchoolCity" class="text-danger"></span>
+        </div>
+        
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="SchoolState">School State*</label>
+            <textarea name="SchoolState" asp-for="SchoolState" class="form-control form-text-area" placeholder="State" maxlength="100"></textarea>
+            <span asp-validation-for="SchoolState" class="text-danger"></span>
+        </div>
+        
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="SchoolZip">School Zip*</label>
+            <textarea name="SchoolZip" asp-for="SchoolZip" class="form-control form-text-area" placeholder="Zip Code" maxlength="10"></textarea>
+            <span asp-validation-for="SchoolZip" class="text-danger"></span>
         </div>
 
         <div class="form-padding col-12 col-md-12">
-            <label asp-for="SkillsGained">Skills Learned in School</label>
+            <label asp-for="SkillsGained">Description</label>
             <div class="edu_fields_wrap">
                 @*Will be filled by add_field_button below*@
             </div>
@@ -57,11 +89,11 @@
 
 <div class="nav-button-padding col-12 d-flex justify-content-between">
     <div class="back-button">
-        <a asp-controller="Creator" asp-action="PersonalDetails" class="betterbtn">&lt;&lt;&lt; Personal</a>
+        <a asp-controller="Creator" asp-action="GeneralInfo" class="betterbtn">&lt;&lt;&lt; General</a>
     </div>
 
     <div class="next-button">
-        <a asp-controller="Creator" asp-action="TrainingDetails" class="betterbtn">Trainings &gt;&gt;&gt;</a>
+        <a asp-controller="Creator" asp-action="ProfessionalDetails" class="betterbtn">Professional &gt;&gt;&gt;</a>
     </div>
 </div>  
 

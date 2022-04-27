@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
 using ProjectSaturn.Models;
 using ProjectSaturn.Service;
-using ProjectSaturn.Extensions;
-using System.Diagnostics;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ProjectSaturn.Controllers
@@ -30,6 +27,14 @@ namespace ProjectSaturn.Controllers
             return View("CreatorPages");
         }
 
+        public IActionResult GeneralInfo()
+        {
+            ViewData["Title"] = "General";
+            ViewData["CreatorPartial"] = "_GeneralInfoPartial";
+
+            return View("CreatorPages");
+        }
+
         public IActionResult EducationDetails()
         {
             ViewData["Title"] = "Education";
@@ -41,7 +46,7 @@ namespace ProjectSaturn.Controllers
 
         public IActionResult TrainingDetails()
         {
-            ViewData["Title"] = "Trainings";
+            ViewData["Title"] = "Certifications";
             ViewData["CreatorPartial"] = "_TrainingPartial";
             return View("CreatorPages");
         }
@@ -55,7 +60,7 @@ namespace ProjectSaturn.Controllers
 
         public IActionResult KnowledgeDetails()
         {
-            ViewData["Title"] = "Knowledge";
+            ViewData["Title"] = "Knowledge / Skills / Abilites";
             ViewData["CreatorPartial"] = "_KnowledgePartial";
             return View("CreatorPages");
         }
@@ -92,7 +97,6 @@ namespace ProjectSaturn.Controllers
                     HttpContext.Response.Cookies.Delete("user");
                     HttpContext.Response.Cookies.Append("user", strguid, option);
                 }
-                
             }
             else
             {
@@ -116,7 +120,7 @@ namespace ProjectSaturn.Controllers
 
             Personal personal = JsonConvert.DeserializeObject<Personal>(jsonString, settings); // Recieve and Verify the data
             personal.Email = _dal.GetEmail(currentUser);
-            if (personal.FirstName == "" || personal.LastName == "" || personal.Email == "" || personal.PhoneNumber == "" || personal.Address == "") // Required Fields
+            if (personal.FirstName == null || personal.LastName == null || personal.MobilePhone == null || personal.Address == null || personal.City == null || personal.State == null || personal.Zip == null) // Required Fields
             {
                 return Json("required");
             }
@@ -129,7 +133,7 @@ namespace ProjectSaturn.Controllers
                 {
                     return Json("true");
                 }
-                else if (id == -10)
+                else if (id == -10) // NOTE : Duplicate Detection has been turned off in the SQL Stored Procedures
                 {
                     ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
                     return Json("true");
@@ -138,7 +142,39 @@ namespace ProjectSaturn.Controllers
             }
             return Json("false");
         }
-        
+
+        [HttpPost]
+        public ActionResult GeneralInfo(string jsonString) // This takes in the data Between the Personal and Educational in the Application Form
+        {
+            var settings = new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+            };
+
+            Guid currentUser = new(HttpContext.Request.Cookies["user"]); // Get the current user
+
+            GeneralInfo general = JsonConvert.DeserializeObject<GeneralInfo>(jsonString, settings); // Recieve and Verify the data
+            if (general.Degree == null || general.DegreeStatus == null || general.AntiGradDate == null || general.OverallGPA == null || general.MajorGPA == null) // Required Fields
+            {
+                return Json("required");
+            }
+
+            if (general != null) // Store the Data
+            {
+                int id = _dal.AddGeneral(general, currentUser);
+                if (id > 0)
+                {
+                    return Json("true");
+                }
+                if (id == -10)
+                {
+                    ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
+                    return Json("true");
+                }
+            }
+            return Json("false");
+        }
+
         [HttpPost]
         public ActionResult EducationDetails(string jsonString) // This takes in the Education Data and stores it appropriately
         {
@@ -151,7 +187,7 @@ namespace ProjectSaturn.Controllers
 
 
             Education education = JsonConvert.DeserializeObject<Education>(jsonString, settings); // Recieve and Verify the data
-            if (education.Name == "" || education.GPA == null || education.Location == "" || education.StartDate == null || education.EndDate == null) // Required Fields
+            if (education.Name == "" || education.OverallGPA == null || education.SchoolState == "") // Required Fields
             {
                 return Json("required");
             }
@@ -163,12 +199,12 @@ namespace ProjectSaturn.Controllers
                 int id = _dal.AddEducation(education, currentUser, SkillsList);
                 if (id > 0)
                 {
-                    return Json("true");
+                    return Json("true another");
                 }
                 else if (id == -10)
                 {
                     ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
-                    return Json("true");
+                    return Json("true another");
                 }
                 return Json("false");
             }
@@ -184,18 +220,18 @@ namespace ProjectSaturn.Controllers
             };
 
             Guid currentUser = new(HttpContext.Request.Cookies["user"]); // Get the current user
-            List<Trainings> deSerTrainingList = new(); // Deserialized List
-            List<Trainings> toSubmitList = new(); // List of correct entries to submit
+            List<Certifications> deSerTrainingList = new(); // Deserialized List
+            List<Certifications> toSubmitList = new(); // List of correct entries to submit
             int successfullEntry = 0; // Verify successfull submission
 
 
             GenericList TrainingList = JsonConvert.DeserializeObject<GenericList>(jsonString, settings); // Recieve and Verify the data
             foreach (string trainingString in TrainingList.Strings)
             {
-                Trainings training = JsonConvert.DeserializeObject<Trainings>(trainingString, settings); 
+                Certifications training = JsonConvert.DeserializeObject<Certifications>(trainingString, settings); 
                 deSerTrainingList.Add(training);
             }
-            foreach (Trainings training in deSerTrainingList) // Verify the data is correctly formatted
+            foreach (Certifications training in deSerTrainingList) // Verify the data is correctly formatted
             {
                 if (training.Desc != "" && training.Date != null) // No null or empty
                 {
@@ -210,7 +246,7 @@ namespace ProjectSaturn.Controllers
 
             if (toSubmitList.Count != 0) // Store the data
             {
-                foreach (Trainings training in toSubmitList)
+                foreach (Certifications training in toSubmitList)
                 {
                     int id = _dal.AddTraining(training, currentUser);
                     if (id > 0)
@@ -222,7 +258,6 @@ namespace ProjectSaturn.Controllers
                         ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
                         successfullEntry++;
                     }
-
                 }
                 if (successfullEntry == deSerTrainingList.Count)
                 {
@@ -256,12 +291,12 @@ namespace ProjectSaturn.Controllers
                 int id = _dal.AddProfessional(profession, currentUser, SkillsList);
                 if (id > 0)
                 {
-                    return Json("true");
+                    return Json("true another");
                 }
                 else if (id == -10)
                 {
                     ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
-                    return Json("true");
+                    return Json("true another");
                 }
                 return Json("false");
             }

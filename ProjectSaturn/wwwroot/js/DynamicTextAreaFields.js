@@ -30,10 +30,10 @@ $(document).ready(function () {
 			max_fields = 5;
 			added_fields = // Adds Skill Fields (Education and Professional Skills Attribute)
 				'<div class="form-padding d-flex justify-content-between align-items-end">' +
-					'<div class="col-10">' +
+					'<div class="col-11">' +
 						'<textarea name="SkillsGained" asp-for="SkillsGained" data-type="SkillsGained" class= "form-control form-text-area" placeholder = "Write about something you learned..." ></textarea >' +
 					'</div >' +
-					'<div class="align-right col-2">' +
+					'<div class="align-right col-1">' +
 						'<button type=button href="#" value="' + wrapper + '" class="remove_field betterbtn betterbtnstatic">Remove</button>' +
 					'</div >' +
 				'</div >';
@@ -41,7 +41,7 @@ $(document).ready(function () {
 			max_fields = 10;
 			added_fields = // Adds Training Fields
 				'<div class="form-padding d-flex flex-wrap justify-content-between align-items-end">' +
-					'<div class="form-padding col-12 col-md-6">' + 
+					'<div class="form-padding col-12 col-md-5">' + 
 						'<label asp-for= "Desc" > Certification/Training</label >' +
 						'<textarea name="TDesc" asp-for="Desc" class="form-control form-text-area"></textarea>' +
 					'</div>' +
@@ -49,9 +49,9 @@ $(document).ready(function () {
 						'<label asp-for="Date">Date Recieved/Predicted</label>' +
 						'<input name="TDate" asp-for="Date" type="month" class="form-control" />' +
 					'</div>'+
-					'<div class="form-padding col-12 col-md-2">' +
+					'<div class="form-padding col-12 col-md-3">' +
 						'<label asp-for= "Completed"> Status</label >' +
-						'<select name="TCompleted" asp-for="Completed" >' +
+						'<select name="TCompleted" asp-for="Completed" class="form-control">' +
 							'<option value="true">Completed</option>' +
 							'<option value="false">In Progress</option>' +
 						'</select>' +
