@@ -3,7 +3,7 @@ using ProjectSaturn.Models;
 
 namespace ProjectSaturn.Middlewares
 {
-    public class TestingMiddleware
+    public class TestingMiddleware // Prints out any errors to the console for easier Error access
     {
         private readonly RequestDelegate _next;
 
@@ -22,6 +22,7 @@ namespace ProjectSaturn.Middlewares
             foreach (string msg in ErrorLog.Msglist)
             {
                 Debug.WriteLine("Error " + num + ":" + msg);
+                num++;
             }
 
             return _next(httpContext);

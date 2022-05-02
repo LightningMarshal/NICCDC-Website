@@ -2,18 +2,20 @@
 
 namespace ProjectSaturn.Models
 {
-    public class Certifications //Awards that the user has recieved
+    public class Certifications // Certifications that the user has recieved
     {
-        public string Desc { get; set; }
+        // Certification
+        public string Certification { get; set; }
         public DateTime? Date { get; set; }
         public bool Completed { get; set; }
 
 
-        //Awards Constructor
+        // Certifications Constructor
         [JsonConstructor]
-        public Certifications(string Desc, DateTime? Date, bool Completed)
+        public Certifications(string Certification, DateTime? Date, bool Completed)
         {
-            this.Desc = Desc;
+            // Certification
+            this.Certification = Certification;
             this.Date = Date;
             this.Completed = Completed;
         }

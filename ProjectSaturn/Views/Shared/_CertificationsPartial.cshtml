@@ -1,7 +1,7 @@
 ﻿@model ProjectSaturn.Models.Certifications;
 
 @*This contains all of the training forms*@
-<form asp-action="TrainingDetails" class="d-flex justify-content-around flex-wrap">
+<form asp-action="CertificationDetails" class="d-flex justify-content-around flex-wrap">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="col-12 col-lg-8 form-group d-flex flex-wrap">
@@ -17,7 +17,7 @@
 
         <div class="col-12 form-padding d-flex">
             <div class="col-1 ms-auto d-flex justify-content-end">
-                <button type="submit" value="TrainingDetails" class="betterbtn form_submit">Submit</button>
+                <button type="submit" value="CertificationDetails" class="betterbtn form_submit">Submit</button>
             </div>
         </div>
 
@@ -30,7 +30,7 @@
     </div>
 
     <div class="next-button">
-        <a asp-controller="Creator" asp-action="KnowledgeDetails" class="betterbtn">Knowledge &gt;&gt;&gt;</a>
+        <a asp-controller="Creator" asp-action="SkillsDetails" class="betterbtn">Skills &gt;&gt;&gt;</a>
     </div>
 </div>  
 

@@ -23,10 +23,8 @@ namespace ProjectSaturn.Service
             QEditor = WriterConnectionStrings;
         }
 
-        //TODO : Analytic calls will be made here
-
         // -------------------------------------------Reader Calls-------------------------------------------------
-        
+
         public string GetEmail(Guid guid)
         {
             string retStr = "";
@@ -52,7 +50,7 @@ namespace ProjectSaturn.Service
             return retStr;
         }
 
-        //TODO : Analytic calls that interface with the Models Interface
+        //TODO : Analytic calls that interface with the Models' SqlDataReader method
             //cmd.Connection.Open();
             //
             //SqlDataReader dr = cmd.ExecuteReader();
@@ -67,7 +65,7 @@ namespace ProjectSaturn.Service
 
         //-------------------------------------------Writer Calls-------------------------------------------------
 
-        public Guid AddUser(string email) // Adds a new user
+        public Guid AddUser(string email) // Adds a new user to the database
         {
             var guid = new Guid();
             using (SqlConnection con = new(QEditor))
@@ -135,7 +133,7 @@ namespace ProjectSaturn.Service
             return retID;
         }
 
-        public int AddGeneral(GeneralInfo general, Guid userID) // Adds an entry to DataGeneral
+        public int AddGeneral(General general, Guid userID) // Adds an entry to DataGeneral
         {
             int retID = 0;
             using (SqlConnection con = new(QEditor))
@@ -214,34 +212,6 @@ namespace ProjectSaturn.Service
             return retID;
         }
 
-        public int AddTraining(Certifications training, Guid userID) // Adds an entry to DataTraining
-        {
-            int retID = 0;
-            using (SqlConnection con = new(QEditor))
-            {
-                using SqlCommand cmd = new("DataAddTraining", con);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("UserID", userID);
-                cmd.Parameters.AddWithValue("Desc", training.Desc);
-                cmd.Parameters.AddWithValue("Date", training.Date);
-                cmd.Parameters.AddWithValue("Completed", training.Completed);
-
-                try
-                {
-                    cmd.Connection.Open();
-
-                    retID = Convert.ToInt32(cmd.ExecuteScalar());
-
-                    cmd.Connection.Close();
-                }
-                catch (Exception e)
-                {
-                    ErrorLog.Msglist.Add(e.Message);
-                }
-            }
-            return retID;
-        }
-
         public int AddProfessional(Professional profession, Guid userID, string SkillsGained) // Add an entry to DataProfessional
         {
             int retID = 0;
@@ -249,13 +219,16 @@ namespace ProjectSaturn.Service
             {
                 using SqlCommand cmd = new("DataAddProfessional", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("UserID", userID);
+                // Profession
                 cmd.Parameters.AddWithValue("Name", profession.Name);
-                cmd.Parameters.AddWithValue("Position", profession.PositionAtComp);
+                cmd.Parameters.AddWithValue("Position", profession.Position);
                 cmd.Parameters.AddWithValue("Location", profession.Location);
+                cmd.Parameters.AddWithValue("SkillsGained", SkillsGained);
+                // Date
                 cmd.Parameters.AddWithValue("DateStart", profession.StartDate);
                 cmd.Parameters.AddWithValue("DateEnd", profession.EndDate);
-                cmd.Parameters.AddWithValue("SkillsGained", SkillsGained);
+                // Misc
+                cmd.Parameters.AddWithValue("UserID", userID);
 
                 try
                 {
@@ -273,15 +246,47 @@ namespace ProjectSaturn.Service
             return retID;
         }
 
-        public int AddKnowledge(Knowledge knowledge, Guid userId) // Adds an entry to DataKnowledge
+        public int AddCertification(Certifications certification, Guid userID) // Adds an entry to DataTraining
         {
             int retID = 0;
             using (SqlConnection con = new(QEditor))
             {
-                using SqlCommand cmd = new("DataAddKnowledge", con);
+                using SqlCommand cmd = new("DataAddCertification", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                // Certification
+                cmd.Parameters.AddWithValue("Certification", certification.Certification);
+                cmd.Parameters.AddWithValue("Date", certification.Date);
+                cmd.Parameters.AddWithValue("Completed", certification.Completed);
+                // Misc
+                cmd.Parameters.AddWithValue("UserID", userID);
+
+                try
+                {
+                    cmd.Connection.Open();
+
+                    retID = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    cmd.Connection.Close();
+                }
+                catch (Exception e)
+                {
+                    ErrorLog.Msglist.Add(e.Message);
+                }
+            }
+            return retID;
+        }
+
+        public int AddSkills(Skills skill, Guid userId) // Adds an entry to DataKnowledge
+        {
+            int retID = 0;
+            using (SqlConnection con = new(QEditor))
+            {
+                using SqlCommand cmd = new("DataAddSkill", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                // Skill
+                cmd.Parameters.AddWithValue("Skill", skill.Skill);
+                // Misc
                 cmd.Parameters.AddWithValue("UserID", userId);
-                cmd.Parameters.AddWithValue("Desc", knowledge.Desc);
 
                 try
                 {
@@ -306,9 +311,11 @@ namespace ProjectSaturn.Service
             {
                 using SqlCommand cmd = new("DataAddAward", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                // Award
+                cmd.Parameters.AddWithValue("Award", award.Award);
+                cmd.Parameters.AddWithValue("EarnDate", award.EarnDate);
+                // Misc
                 cmd.Parameters.AddWithValue("UserID", userID);
-                cmd.Parameters.AddWithValue("Desc", award.Desc);
-                cmd.Parameters.AddWithValue("Date", award.Date);
 
                 try
                 {

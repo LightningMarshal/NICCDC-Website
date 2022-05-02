@@ -9,6 +9,7 @@ GO
 /***************************************Reader Calls*****************************************/
 CREATE PROCEDURE dbo.GetEmail
 
+/*User*/
 @UserID uniqueidentifier
 
 AS
@@ -23,17 +24,22 @@ GO
 /***************************************Writer Calls*****************************************/
 CREATE PROCEDURE dbo.AddUser /* This will add the user as a temporary user */
 
+/*User*/
 @Email nvarchar(100)
 
 AS
 BEGIN
 	SET NOCOUNT ON;
 
+	/*No duplicate users*/
 	IF ((SELECT COUNT(*) FROM Users WHERE Email = @Email) = 0)
+		
 		INSERT INTO dbo.Users(Name,Email)
 		Output inserted.ID
 		VALUES('Temp',@Email)
+
 	ELSE
+		
 		SELECT ID FROM Users WHERE Email = @Email
 
 
@@ -176,41 +182,18 @@ GO
 
 
 
-CREATE PROCEDURE dbo.DataAddTraining
-
-@UserID uniqueidentifier,
-@Desc nvarchar(250),
-@Date datetime2(7),
-@Completed bit
-
-AS
-BEGIN
-	SET NOCOUNT ON;
-
-	/*IF ((SELECT COUNT(*) FROM DataTrainings WHERE @UserID = UserID AND @Desc = Training AND @Date = EarnDate AND @Completed = Completed) = 0)
-		*/
-		INSERT INTO dbo.DataTrainings(UserID,Training,EarnDate,Completed)
-		OUTPUT inserted.ID
-		VALUES(@UserID, @Desc, @Date, @Completed)
-	/*
-	ELSE
-
-		SELECT(-10)
-	*/
-END
-GO
-
-
-
 CREATE PROCEDURE dbo.DataAddProfessional
 
-@UserID uniqueidentifier,
+/*Profession*/
 @Name nvarchar(250),
 @Position nvarchar(50),
 @Location nvarchar(350),
+@SkillsGained nvarchar(max),
+/*Date*/
 @DateStart datetime2,
 @DateEnd datetime2,
-@SkillsGained nvarchar(max)
+/*Misc*/
+@UserID uniqueidentifier
 
 AS
 BEGIN
@@ -218,9 +201,9 @@ BEGIN
 
 	/*IF ((SELECT COUNT(*) FROM DataProfessional WHERE @UserID = UserID AND @Name = Name AND @Position = Position AND @Location = Location AND @DateStart = DateStart AND @DateEnd = DateEnd AND @SkillList = SkillList) = 0)
 	*/
-		INSERT INTO dbo.DataProfessional(UserID,Name,Position,Location,DateStart,DateEnd,SkillsGained)
+		INSERT INTO dbo.DataProfessional(Name,Position,Location,SkillsGained,DateStart,DateEnd,UserID)
 		OUTPUT inserted.ID
-		VALUES(@UserID,@Name,@Position,@Location,@DateStart,@DateEnd,@SkillsGained)
+		VALUES(@Name,@Position,@Location,@SkillsGained,@DateStart,@DateEnd,@UserID)
 	/*
 	ELSE
 
@@ -231,10 +214,40 @@ GO
 
 
 
-CREATE PROCEDURE dbo.DataAddKnowledge
+CREATE PROCEDURE dbo.DataAddCertification
 
-@UserID uniqueidentifier,
-@Desc nvarchar(500)
+/*Certification*/
+@Certification nvarchar(250),
+@Date datetime2(7),
+@Completed bit,
+/*Misc*/
+@UserID uniqueidentifier
+
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	/*IF ((SELECT COUNT(*) FROM DataTrainings WHERE @UserID = UserID AND @Desc = Training AND @Date = EarnDate AND @Completed = Completed) = 0)
+		*/
+		INSERT INTO dbo.DataCertifications(Certification,Date,Completed,UserID)
+		OUTPUT inserted.ID
+		VALUES(@Certification,@Date,@Completed,@UserID)
+	/*
+	ELSE
+
+		SELECT(-10)
+	*/
+END
+GO
+
+
+
+CREATE PROCEDURE dbo.DataAddSkill
+
+/*Skill*/
+@Skill nvarchar(500),
+/*Misc*/
+@UserID uniqueidentifier
 
 AS
 BEGIN
@@ -242,9 +255,9 @@ BEGIN
 
 	/*IF ((SELECT COUNT(*) FROM DataSkills WHERE @UserID = UserID AND @Desc = Skill) = 0)
 	*/
-		INSERT INTO dbo.DataSkills(UserID,Skill)
+		INSERT INTO dbo.DataSkills(Skill, UserID)
 		OUTPUT inserted.ID
-		VALUES(@UserID, @Desc)
+		VALUES(@Skill, @UserID)
 	/*
 	ELSE
 
@@ -257,9 +270,11 @@ GO
 
 CREATE PROCEDURE dbo.DataAddAward
 
-@UserID uniqueidentifier,
-@Desc nvarchar(150),
-@Date datetime2
+/*Skill*/
+@Award nvarchar(150),
+@EarnDate datetime2,
+/*Misc*/
+@UserID uniqueidentifier
 
 AS
 BEGIN
@@ -267,9 +282,9 @@ BEGIN
 
 	/*IF ((SELECT COUNT(*) FROM DataAwards WHERE @UserID = UserID AND @Desc = Award AND @Date = EarnDate) = 0)
 	*/
-		INSERT INTO dbo.DataAwards(UserID,Award,EarnDate)
+		INSERT INTO dbo.DataAwards(Award,EarnDate,UserID)
 		OUTPUT inserted.ID
-		VALUES(@UserID, @Desc, @Date)
+		VALUES(@Award,@EarnDate,@UserID)
 	/*
 	ELSE
 

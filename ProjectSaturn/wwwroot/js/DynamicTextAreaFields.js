@@ -43,15 +43,15 @@ $(document).ready(function () {
 				'<div class="form-padding d-flex flex-wrap justify-content-between align-items-end">' +
 					'<div class="form-padding col-12 col-md-5">' + 
 						'<label asp-for= "Desc" > Certification/Training</label >' +
-						'<textarea name="TDesc" asp-for="Desc" class="form-control form-text-area"></textarea>' +
+						'<textarea name="CCertification" asp-for="Desc" class="form-control form-text-area"></textarea>' +
 					'</div>' +
 					'<div class="form-padding col-12 col-md-3">' +
 						'<label asp-for="Date">Date Recieved/Predicted</label>' +
-						'<input name="TDate" asp-for="Date" type="month" class="form-control" />' +
+						'<input name="CDate" asp-for="Date" type="month" class="form-control" />' +
 					'</div>'+
 					'<div class="form-padding col-12 col-md-3">' +
 						'<label asp-for= "Completed"> Status</label >' +
-						'<select name="TCompleted" asp-for="Completed" class="form-control">' +
+						'<select name="CCompleted" asp-for="Completed" class="form-control">' +
 							'<option value="true">Completed</option>' +
 							'<option value="false">In Progress</option>' +
 						'</select>' +
@@ -82,7 +82,7 @@ $(document).ready(function () {
 				'<div class="form-padding d-flex flex-wrap justify-content-left align-items-end col-12 col-md-6 col-lg-4">' +
 					'<div class="form-padding col-12 col-md-8">' +
 						'<label asp-for="Desc" > Skill</label >' +
-						'<textarea name="KDesc" asp-for="Desc" class="form-control form-text-area"></textarea>' +
+						'<textarea name="SDesc" asp-for="Desc" class="form-control form-text-area"></textarea>' +
 					'</div>' +
 					'<div class="form-padding col-12 col-md-4">' +
 						'<button type=button href="#" value=".awards_fields_wrap" class="remove_field betterbtn betterbtnstatic">Remove</button>' +

@@ -2,11 +2,11 @@
 
 namespace ProjectSaturn.Models
 {
-    public class GenericList //Awards that the user has recieved
+    public class GenericList // This is used to allow the Json Deserilalizer to get a list of Json strings
     {
         public List<string> Strings { get; set; }
 
-        //Awards Constructor
+        // Generic List Constructor
         [JsonConstructor]
         public GenericList(List<string> Strings)
         {

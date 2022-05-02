@@ -27,28 +27,28 @@ $(document).ready(function () {
             if (value.name == 'SkillsGained') { // Creates list of strings
                 type = 'SkillsGained';
                 genericlist.push(value.value);
-            } else if (value.name == 'TDesc') { // Creates list of JSON Training objects
+            } else if (value.name == 'CCertification') { // Creates list of JSON Training objects
                 type = 'strings';
-                modelobj['Desc'] = value.value;
-            } else if (value.name == 'TDate') {
+                modelobj['Certification'] = value.value;
+            } else if (value.name == 'CDate') {
                 type = 'strings';
                 modelobj['Date'] = value.value;
-            } else if (value.name == 'TCompleted') {
+            } else if (value.name == 'CCompleted') {
                 type = 'strings';
                 modelobj['Completed'] = value.value;
                 genericlist.push(JSON.stringify(modelobj));
                 modelobj = {};
             } else if (value.name == "ADesc") { // Creates list of JSON Awards objects
                 type = "strings";
-                modelobj['Desc'] = value.value;
+                modelobj['Award'] = value.value;
             } else if (value.name == "ADate") {
                 type = "strings";
                 modelobj['Date'] = value.value;
                 genericlist.push(JSON.stringify(modelobj));
                 modelobj = {};
-            } else if (value.name == "KDesc") {
+            } else if (value.name == "SDesc") {
                 type = "strings";
-                modelobj['Desc'] = value.value;
+                modelobj['Skill'] = value.value;
                 genericlist.push(JSON.stringify(modelobj));
                 modelobj = {};
             } else {
@@ -72,7 +72,7 @@ $(document).ready(function () {
                 alert("Success! Your response has been recorded. Please add another submission or continue to next section.")
             } else if (msg == "required") {
                 alert("Required inputs (*) are missing. Please resubmit with all required (*) inputs.");
-            } else if (msg == "trequired") {
+            } else if (msg == "crequired") {
                 alert("All certifications/trainings with an description needs a date recieved/predicted. Please correct and resubmit.");
             }
 

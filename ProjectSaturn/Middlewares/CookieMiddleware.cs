@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using ProjectSaturn.Models;
+﻿using ProjectSaturn.Models;
 using ProjectSaturn.Service;
 using System.Diagnostics;
 
 namespace ProjectSaturn.Middlewares
 {
-    public class CookieMiddleware
+    public class CookieMiddleware // Ensures that a user is present before allowing to Creator Pages
     {
         private readonly RequestDelegate _next;
 
@@ -20,12 +18,10 @@ namespace ProjectSaturn.Middlewares
             var user = httpContext.Request.Cookies["user"];
 
             var destination = httpContext.Request.Path.Value;
-            Debug.WriteLine("Destination: " + destination);
-
             if (user == null || user == Guid.Empty.ToString())
             {
                 // Redirect if user does not have a User ID
-                if (destination == "/Creator/PersonalDetails" || destination == "/Creator/EducationDetails" || destination == "/Creator/TrainingDetails" || destination == "/Creator/ProfessionalDetails" || destination == "/Creator/KnowledgeDetails" || destination == "/Creator/AwardsDetails")
+                if (destination == "/Creator/PersonalDetails" || destination == "/Creator/GeneralDetails" || destination == "/Creator/EducationDetails" || destination == "/Creator/ProfessionalDetails" || destination == "/Creator/CertificationDetails" || destination == "/Creator/SkillsDetails" || destination == "/Creator/AwardsDetails")
                 {
                     ErrorLog.Msglist.Add("Redirected: " + destination + " - > " + "/Creator/Home");
                     httpContext.Response.Redirect("/Creator/Home");

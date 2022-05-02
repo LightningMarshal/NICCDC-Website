@@ -4,6 +4,7 @@ GO
 /*************************Tables Dealing with Creator Data*******************************/
 
 CREATE TABLE dbo.Users( /*Created when the user enters the email on main page*/
+	/*User*/
 	ID UNIQUEIDENTIFIER DEFAULT(NEWID()) NOT NULL PRIMARY KEY,
 	Name nvarchar(100) NOT NULL, /*Filled when Personal Data is entered in DataPersonal*/
 	Email nvarchar(100) NOT NULL,
@@ -77,9 +78,25 @@ CREATE TABLE dbo.DataEducation(
 	DateEntered datetime2 DEFAULT(CURRENT_TIMESTAMP) NOT NULL,
 );
 
-CREATE TABLE dbo.DataTrainings(
-	Training nvarchar(250) NOT NULL,
-	EarnDate datetime2 NOT NULL,
+CREATE TABLE dbo.DataProfessional(
+	/*Profession*/
+	Name nvarchar(250) NOT NULL,
+	Position nvarchar(50) NOT NULL,
+	Location nvarchar(350) NOT NULL,
+	SkillsGained nvarchar(max) NULL,
+	/*Date*/
+	DateStart datetime2 NOT NULL,
+	DateEnd datetime2 NOT NULL,
+	/*Misc*/
+	UserID UNIQUEIDENTIFIER NOT NULL,
+	ID int IDENTITY(1,1) NOT NULL,
+	DateEntered datetime2 DEFAULT(CURRENT_TIMESTAMP) NOT NULL,
+);
+
+CREATE TABLE dbo.DataCertifications(
+	/*Certification*/
+	Certification nvarchar(250) NOT NULL,
+	Date datetime2 NOT NULL,
 	Completed bit NOT NULL,
 	/*Misc*/
 	UserID UNIQUEIDENTIFIER NOT NULL,
@@ -87,13 +104,9 @@ CREATE TABLE dbo.DataTrainings(
 	DateEntered datetime2 DEFAULT(CURRENT_TIMESTAMP) NOT NULL,
 );
 
-CREATE TABLE dbo.DataProfessional(
-	Name nvarchar(250) NOT NULL,
-	Location nvarchar(350) NOT NULL,
-	DateStart datetime2 NOT NULL,
-	DateEnd datetime2 NOT NULL,
-	SkillsGained nvarchar(max) NULL,
-	Position nvarchar(50) NOT NULL,
+CREATE TABLE dbo.DataSkills(
+	/*Skill*/
+	Skill nvarchar(500) NOT NULL,
 	/*Misc*/
 	UserID UNIQUEIDENTIFIER NOT NULL,
 	ID int IDENTITY(1,1) NOT NULL,
@@ -101,16 +114,9 @@ CREATE TABLE dbo.DataProfessional(
 );
 
 CREATE TABLE dbo.DataAwards(
+	/*Award*/
 	Award nvarchar(150) NOT NULL,
 	EarnDate datetime2 NOT NULL,
-	/*Misc*/
-	UserID UNIQUEIDENTIFIER NOT NULL,
-	ID int IDENTITY(1,1) NOT NULL,
-	DateEntered datetime2 DEFAULT(CURRENT_TIMESTAMP) NOT NULL,
-);
-
-CREATE TABLE dbo.DataSkills(
-	Skill nvarchar(500) NOT NULL,
 	/*Misc*/
 	UserID UNIQUEIDENTIFIER NOT NULL,
 	ID int IDENTITY(1,1) NOT NULL,
@@ -121,17 +127,20 @@ CREATE TABLE dbo.DataSkills(
 ALTER TABLE DataPersonal
 ADD FOREIGN KEY (UserID) REFERENCES Users(ID);
 
-ALTER TABLE DataEducation
+ALTER TABLE DataGeneral
 ADD FOREIGN KEY (UserID) REFERENCES Users(ID);
 
-ALTER TABLE DataTrainings
+ALTER TABLE DataEducation
 ADD FOREIGN KEY (UserID) REFERENCES Users(ID);
 
 ALTER TABLE DataProfessional
 ADD FOREIGN KEY (UserID) REFERENCES Users(ID);
 
-ALTER TABLE dbo.DataAwards
+ALTER TABLE DataCertifications
 ADD FOREIGN KEY (UserID) REFERENCES Users(ID);
 
 ALTER TABLE dbo.DataSkills
+ADD FOREIGN KEY (UserID) REFERENCES Users(ID);
+
+ALTER TABLE dbo.DataAwards
 ADD FOREIGN KEY (UserID) REFERENCES Users(ID);

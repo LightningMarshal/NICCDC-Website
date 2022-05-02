@@ -17,7 +17,7 @@ namespace ProjectSaturn.ViewModels
         public Certifications Training { get; set; } 
 
         // This is the Knowledge section
-        public Knowledge Knowledge { get; set; }
+        public Skills Knowledge { get; set; }
 
         // This is the Awards section
         public Awards Awards { get; set; }
