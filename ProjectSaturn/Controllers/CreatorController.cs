@@ -76,8 +76,8 @@ namespace ProjectSaturn.Controllers
 
         public IActionResult Finished() // Finished Page, This will congratulate the user for completing the application and informs them general information
         {
-            ViewData["Title"] = "Finished";
-            return View();
+            ViewData["CreatorPartial"] = "_FinishedPartial";
+            return View("CreatorPages");
         }
 
 
@@ -142,7 +142,7 @@ namespace ProjectSaturn.Controllers
 
             Personal personal = JsonConvert.DeserializeObject<Personal>(jsonString, settings); // Recieve data
             personal.Email = _dal.GetEmail(currentUser);
-            if (personal.FirstName == null || personal.LastName == null || personal.MobilePhone == null || personal.Address == null || personal.City == null || personal.State == null || personal.Zip == null) // Required Fields
+            if (personal.FirstName == "" || personal.LastName == "" || personal.MobilePhone == "" || personal.Address == "" || personal.City == "" || personal.State == "" || personal.Zip == "") // Required Fields
             {
                 return Json("required");
             }
@@ -293,36 +293,50 @@ namespace ProjectSaturn.Controllers
             }
             foreach (Certifications certification in DeserializedCertificationList) // Verify the data is correctly formatted
             {
-                if (certification.Certification != "" && certification.Date != null) // No null or empty
-                {
-                    CertificationsToSubmitList.Add(certification);
-                }
-                else if (certification.Certification != "" && certification.Date == null) // No partial entry
+                if (certification.Certification != "" && certification.Date == null) // No partial entry
                 {
                     return Json("crequired");
                 }
+                CertificationsToSubmitList.Add(certification);
+
             }
 
 
+            bool added = false;
             if (CertificationsToSubmitList.Count != 0) // Store the data
             {
                 foreach (Certifications certification in CertificationsToSubmitList)
                 {
-                    int id = _dal.AddCertification(certification, currentUser);
-                    if (id > 0)
+                    if (certification.Certification == "" && certification.Date == null) // Null fields not counted
                     {
                         successfullEntry++;
                     }
-                    // NOTE : Duplicate Detection has been turned off in the SQL Stored Procedures
-                    //else if (id == -10)
-                    //{
-                    //    ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
-                    //    successfullEntry++;
-                    //}
+                    else
+                    {
+                        int id = _dal.AddCertification(certification, currentUser);
+                        if (id > 0)
+                        {
+                            successfullEntry++;
+                            added = true;
+                        }
+                        // NOTE : Duplicate Detection has been turned off in the SQL Stored Procedures
+                        //else if (id == -10)
+                        //{
+                        //    ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
+                        //    successfullEntry++;
+                        //}
+                    }
                 }
                 if (successfullEntry == DeserializedCertificationList.Count)
                 {
-                    return Json("true");
+                    if (added == false)
+                    {
+                        return Json("blank");
+                    }
+                    else
+                    {
+                        return Json("true");
+                    }
                 }
             }
             return Json("false");
@@ -350,32 +364,45 @@ namespace ProjectSaturn.Controllers
             }
             foreach (Skills skill in DeserializedSkillsList) // Verify the data is correctly formatted
             {
-                if (skill.Skill != "") // No null or empty
-                {
-                    SkillsToSubmitList.Add(skill);
-                }
+                SkillsToSubmitList.Add(skill);
             }
 
 
+            bool added = false;
             if (SkillsToSubmitList.Count != 0) // Store the data
             {
                 foreach (Skills skill in SkillsToSubmitList)
                 {
-                    int id = _dal.AddSkills(skill, currentUser);
-                    if (id > 0)
+                    if (skill.Skill == "") // Null fields not counted
                     {
                         successfullEntry++;
                     }
-                    // NOTE : Duplicate Detection has been turned off in the SQL Stored Procedures
-                    //else if (id == -10)
-                    //{
-                    //    ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
-                    //    successfullEntry++;
-                    //}
+                    else 
+                    { 
+                        int id = _dal.AddSkills(skill, currentUser);
+                        if (id > 0)
+                        {
+                            successfullEntry++;
+                            added = true;
+                        }
+                        // NOTE : Duplicate Detection has been turned off in the SQL Stored Procedures
+                        //else if (id == -10)
+                        //{
+                        //    ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
+                        //    successfullEntry++;
+                        //}
+                    }
                 }
                 if (successfullEntry == DeserializedSkillsList.Count)
                 {
-                    return Json("true");
+                    if (added == false)
+                    {
+                        return Json("blank");
+                    }
+                    else
+                    {
+                        return Json("true");
+                    }
                 }
             }
             return Json("false");
@@ -403,36 +430,49 @@ namespace ProjectSaturn.Controllers
             }
             foreach (Awards award in DeserializedAwardsList) // Verify the data is correctly formatted
             {
-                if (award.Award != "" && award.EarnDate != null) // No null or empty
-                {
-                    AwardsToSubmitList.Add(award);
-                }
-                else if (award.Award != "" && award.EarnDate == null) // No partial entry
+                if (award.Award != "" && award.EarnDate == null) // No partial entry
                 {
                     return Json("crequired");
                 }
+                AwardsToSubmitList.Add(award);
             }
 
 
+            bool added = false;
             if (AwardsToSubmitList.Count != 0) // Store the data
             {
                 foreach (Awards award in AwardsToSubmitList)
                 {
-                    int id = _dal.AddAwards(award, currentUser);
-                    if (id > 0)
+                    if (award.Award == "" && award.EarnDate == null)
                     {
                         successfullEntry++;
                     }
-                    // NOTE : Duplicate Detection has been turned off in the SQL Stored Procedures
-                    //else if (id == -10)
-                    //{
-                    //    ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
-                    //    successfullEntry++;
-                    //}
+                    else
+                    {
+                        int id = _dal.AddAwards(award, currentUser);
+                        if (id > 0)
+                        {
+                            successfullEntry++;
+                            added = true;
+                        }
+                        // NOTE : Duplicate Detection has been turned off in the SQL Stored Procedures
+                        //else if (id == -10)
+                        //{
+                        //    ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
+                        //    successfullEntry++;
+                        //}
+                    }
                 }
                 if (successfullEntry == DeserializedAwardsList.Count)
                 {
-                    return Json("true");
+                    if (added == false)
+                    {
+                        return Json("blank");
+                    }
+                    else
+                    {
+                        return Json("true");
+                    }
                 }
             }
             return Json("false");

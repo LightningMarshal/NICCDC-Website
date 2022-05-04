@@ -1,3 +1,6 @@
+Use QResume_dev
+Go
+
 SELECT * FROM Users
 SELECT * FROM DataPersonal
 SELECT * FROM DataGeneral

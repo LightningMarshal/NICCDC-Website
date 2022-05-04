@@ -150,6 +150,9 @@ namespace ProjectSaturn.Service
                 // SAT
                 cmd.Parameters.AddWithValue("SATV", general.SATV);
                 cmd.Parameters.AddWithValue("SATM", general.SATM);
+                //ACT
+                cmd.Parameters.AddWithValue("ACTV", general.ACTV);
+                cmd.Parameters.AddWithValue("ACTM", general.ACTM);
                 // GRE
                 cmd.Parameters.AddWithValue("GREV", general.GREV);
                 cmd.Parameters.AddWithValue("GREQ", general.GREQ);

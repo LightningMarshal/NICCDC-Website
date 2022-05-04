@@ -74,6 +74,8 @@ $(document).ready(function () {
                 alert("Required inputs (*) are missing. Please resubmit with all required (*) inputs.");
             } else if (msg == "crequired") {
                 alert("All certifications/trainings with an description needs a date recieved/predicted. Please correct and resubmit.");
+            } else if (msg == "blank") {
+
             }
 
         }).fail(function (err, textstatus, error) {

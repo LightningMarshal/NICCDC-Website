@@ -21,7 +21,7 @@ namespace ProjectSaturn.Models
 
         // Education Constructor
         [JsonConstructor]
-        public Education(string Name, string Major, string DegreeEarned, DateTime? DegreeDate, List<string> SkillsGained, string SchoolState, string SchoolCity, string SchoolZip, decimal? OverallGPA, decimal MajorGPA)
+        public Education(string Name, string Major, string DegreeEarned, DateTime? DegreeDate, List<string> SkillsGained, string SchoolState, string SchoolCity, string SchoolZip, decimal? OverallGPA, decimal? MajorGPA)
         {
             // General
             this.Name = Name;
