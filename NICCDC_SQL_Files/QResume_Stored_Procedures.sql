@@ -187,8 +187,10 @@ CREATE PROCEDURE dbo.DataAddProfessional
 /*Profession*/
 @Name nvarchar(250),
 @Position nvarchar(50),
-@Location nvarchar(350),
 @SkillsGained nvarchar(max),
+/*Location*/
+@ProfessionCity nvarchar(100),
+@ProfessionState nvarchar(100),
 /*Date*/
 @DateStart datetime2,
 @DateEnd datetime2,
@@ -201,9 +203,9 @@ BEGIN
 
 	/*IF ((SELECT COUNT(*) FROM DataProfessional WHERE @UserID = UserID AND @Name = Name AND @Position = Position AND @Location = Location AND @DateStart = DateStart AND @DateEnd = DateEnd AND @SkillList = SkillList) = 0)
 	*/
-		INSERT INTO dbo.DataProfessional(Name,Position,Location,SkillsGained,DateStart,DateEnd,UserID)
+		INSERT INTO dbo.DataProfessional(Name,Position,SkillsGained,ProfessionCity,ProfessionState,DateStart,DateEnd,UserID)
 		OUTPUT inserted.ID
-		VALUES(@Name,@Position,@Location,@SkillsGained,@DateStart,@DateEnd,@UserID)
+		VALUES(@Name,@Position,@SkillsGained,@ProfessionCity,@ProfessionState,@DateStart,@DateEnd,@UserID)
 	/*
 	ELSE
 

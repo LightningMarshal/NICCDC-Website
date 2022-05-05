@@ -9,9 +9,9 @@
         <div class="form-padding col-12 col-md-4">
             <label asp-for="Degree">Degree This Will Be Used For*</label>
             <select name="Degree" asp-for="Degree" class="form-control">
-                <option value="Bachelor">Bachelor</option>
-                <option value="Master">Master</option>
-                <option value="Doctoral">Doctoral</option>
+                <option value="Bachelor">Bachelor's</option>
+                <option value="Master">Master's</option>
+                <option value="Doctoral">Doctorate</option>
             </select>
             <span asp-validation-for="Degree" class="text-danger"></span>
         </div>
@@ -35,55 +35,55 @@
 
         <div class="form-padding col-12 col-md-3">
             <label asp-for="OverallGPA">Overall GPA*</label>
-            <input name="OverallGPA" asp-for="OverallGPA"  class="form-control" placeholder="3.9"/>
+            <input name="OverallGPA" asp-for="OverallGPA" type="number" step="0.1" max="5.0" min="0.0" class="form-control" placeholder="3.9"/>
             <span asp-validation-for="OverallGPA" class="text-danger"></span>
         </div>
 
         <div class="form-padding col-12 col-md-3">
             <label asp-for="MajorGPA">Major GPA*</label>
-            <input name="MajorGPA" asp-for="MajorGPA"  class="form-control" placeholder="3.9"/>
+            <input name="MajorGPA" asp-for="MajorGPA" type="number" step="0.1" max="5.0" min="0.0" class="form-control" placeholder="3.9"/>
             <span asp-validation-for="MajorGPA" class="text-danger"></span>
         </div>
        
         <div class="form-padding col-12 col-md-3">
             <label asp-for="SATV">Reading SAT</label>
-            <input name="SATV" asp-for="SATV"  class="form-control" placeholder="200-800"/>
+            <input name="SATV" asp-for="SATV" type="number" max="800" min="200" class="form-control" placeholder="200-800"/>
             <span asp-validation-for="SATV" class="text-danger"></span>
         </div>
 
         <div class="form-padding col-12 col-md-3">
             <label asp-for="SATM">Math SAT</label>
-            <input name="SATM" asp-for="SATM"  class="form-control" placeholder="200-800"/>
+            <input name="SATM" asp-for="SATM" type="number" max="800" min="200" class="form-control" placeholder="200-800"/>
             <span asp-validation-for="SATM" class="text-danger"></span>
         </div>
         
         <div class="form-padding col-12 col-md-2">
             <label asp-for="ACTV">Reading ACT</label>
-            <input name="ACTV" asp-for="ACTV"  class="form-control" placeholder="0-36"/>
+            <input name="ACTV" asp-for="ACTV" type="number" max="36" min="0" class="form-control" placeholder="0-36"/>
             <span asp-validation-for="ACTV" class="text-danger"></span>
         </div>
 
         <div class="form-padding col-12 col-md-2">
             <label asp-for="ACTM">Math ACT</label>
-            <input name="ACTM" asp-for="ACTM"  class="form-control" placeholder="0-36"/>
+            <input name="ACTM" asp-for="ACTM" type="number" max="36" min="0" class="form-control" placeholder="0-36"/>
             <span asp-validation-for="ACTM" class="text-danger"></span>
         </div>
 
         <div class="form-padding col-12 col-md-2">
             <label asp-for="GREV">Verbal GRE</label>
-            <input name="GREV" asp-for="GREV"  class="form-control" placeholder="130-170"/>
+            <input name="GREV" asp-for="GREV" type="number" max="170" min="130" class="form-control" placeholder="130-170"/>
             <span asp-validation-for="GREV" class="text-danger"></span>
         </div>
 
         <div class="form-padding col-12 col-md-2">
             <label asp-for="GREQ">Quantitive GRE</label>
-            <input name="GREQ" asp-for="GREQ"  class="form-control" placeholder="130-170"/>
+            <input name="GREQ" asp-for="GREQ" type="number" max="170" min="130" class="form-control" placeholder="130-170"/>
             <span asp-validation-for="GREQ" class="text-danger"></span>
         </div>
 
         <div class="form-padding col-12 col-md-2">
             <label asp-for="GREA">Analytical GRE</label>
-            <input name="GREA" asp-for="GREA"  class="form-control" placeholder="0-6"/>
+            <input name="GREA" asp-for="GREA" type="number" max="6" min="0" class="form-control" placeholder="0-6"/>
             <span asp-validation-for="GREA" class="text-danger"></span>
         </div>
 

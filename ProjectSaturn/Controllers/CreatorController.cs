@@ -1,9 +1,7 @@
-﻿using System.IO;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using ProjectSaturn.Models;
 using ProjectSaturn.Service;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Hosting;
 
 namespace ProjectSaturn.Controllers
 {
@@ -79,7 +77,6 @@ namespace ProjectSaturn.Controllers
             ViewData["CreatorPartial"] = "_FinishedPartial";
             return View("CreatorPages");
         }
-
 
         public async Task<IActionResult> DownloadFile() // File Downloader, Currently Only supplies the References document
         {
@@ -209,7 +206,7 @@ namespace ProjectSaturn.Controllers
             Guid currentUser = new(HttpContext.Request.Cookies["user"]);
 
             Education education = JsonConvert.DeserializeObject<Education>(jsonString, settings); // Recieve data
-            if (education.Name == "" || education.OverallGPA == null || education.SchoolState == "") // Required Fields
+            if (education.Name == "" || education.Major == "" || education.OverallGPA == null || education.MajorGPA == null || education.SchoolCity == "" || education.SchoolState == "" || education.SchoolZip == "") // Required Fields
             {
                 return Json("required");
             }
@@ -244,7 +241,7 @@ namespace ProjectSaturn.Controllers
             Guid currentUser = new(HttpContext.Request.Cookies["user"]);
 
             Professional profession = JsonConvert.DeserializeObject<Professional>(jsonString, settings); // Recieve data
-            if (profession.Name == "" || profession.Position == "" || profession.Location == "" || profession.StartDate == null || profession.EndDate == null) // Required Fields
+            if (profession.Name == "" || profession.Position == "" || profession.ProfessionCity == "" || profession.ProfessionState == "" || profession.StartDate == null || profession.EndDate == null) // Required Fields
             {
                 return Json("required");
             }
@@ -286,28 +283,34 @@ namespace ProjectSaturn.Controllers
 
 
             GenericList CertificationList = JsonConvert.DeserializeObject<GenericList>(jsonString, settings); // Recieve and Verify the data
-            foreach (string certificationString in CertificationList.Strings)
+            try
             {
-                Certifications certification = JsonConvert.DeserializeObject<Certifications>(certificationString, settings);
-                DeserializedCertificationList.Add(certification);
-            }
-            foreach (Certifications certification in DeserializedCertificationList) // Verify the data is correctly formatted
-            {
-                if (certification.Certification != "" && certification.Date == null) // No partial entry
+                foreach (string certificationString in CertificationList.Strings)
                 {
-                    return Json("crequired");
+                    Certifications certification = JsonConvert.DeserializeObject<Certifications>(certificationString, settings);
+                    DeserializedCertificationList.Add(certification);
                 }
-                CertificationsToSubmitList.Add(certification);
+                foreach (Certifications certification in DeserializedCertificationList) // Verify the data is correctly formatted
+                {
+                    if (certification.Certification != "" && certification.Date == null) // No partial entry
+                    {
+                        return Json("crequired");
+                    }
+                    CertificationsToSubmitList.Add(certification);
 
+                }
             }
-
+            catch
+            {
+                return Json("nothing");
+            }
 
             bool added = false;
             if (CertificationsToSubmitList.Count != 0) // Store the data
             {
                 foreach (Certifications certification in CertificationsToSubmitList)
                 {
-                    if (certification.Certification == "" && certification.Date == null) // Null fields not counted
+                    if (certification.Certification == "") // Null fields not counted
                     {
                         successfullEntry++;
                     }
@@ -366,7 +369,7 @@ namespace ProjectSaturn.Controllers
             {
                 SkillsToSubmitList.Add(skill);
             }
-
+            
 
             bool added = false;
             if (SkillsToSubmitList.Count != 0) // Store the data
@@ -438,12 +441,13 @@ namespace ProjectSaturn.Controllers
             }
 
 
+
             bool added = false;
             if (AwardsToSubmitList.Count != 0) // Store the data
             {
                 foreach (Awards award in AwardsToSubmitList)
                 {
-                    if (award.Award == "" && award.EarnDate == null)
+                    if (award.Award == "")
                     {
                         successfullEntry++;
                     }

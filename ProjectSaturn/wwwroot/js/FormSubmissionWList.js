@@ -43,7 +43,7 @@ $(document).ready(function () {
                 modelobj['Award'] = value.value;
             } else if (value.name == "ADate") {
                 type = "strings";
-                modelobj['Date'] = value.value;
+                modelobj['EarnDate'] = value.value;
                 genericlist.push(JSON.stringify(modelobj));
                 modelobj = {};
             } else if (value.name == "SDesc") {
@@ -59,6 +59,8 @@ $(document).ready(function () {
         if (genericlist[0] != null) { generic[type] = genericlist; }
 
         var url = e.currentTarget.action;
+        var datalength = (JSON.stringify(generic)).datalength();
+        alert(datalength);
         $.ajax({
             method: "POST",
             url: url,

@@ -82,8 +82,10 @@ CREATE TABLE dbo.DataProfessional(
 	/*Profession*/
 	Name nvarchar(250) NOT NULL,
 	Position nvarchar(50) NOT NULL,
-	Location nvarchar(350) NOT NULL,
 	SkillsGained nvarchar(max) NULL,
+	/*Location*/
+	ProfessionCity nvarchar(100) NOT NULL,
+	ProfessionState nvarchar(100) NOT NULL,
 	/*Date*/
 	DateStart datetime2 NOT NULL,
 	DateEnd datetime2 NOT NULL,

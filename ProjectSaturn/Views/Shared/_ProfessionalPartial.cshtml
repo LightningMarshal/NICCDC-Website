@@ -19,18 +19,24 @@
         </div>
 
         <div class="form-padding col-12 col-md-4">
-            <label asp-for="Location">Location*</label>
-            <input name="Location" asp-for="Location" class="form-control" placeholder="City, State"/>
-            <span asp-validation-for=Location class="text-danger"></span>
+            <label asp-for="ProfessionCity">City*</label>
+            <input name="ProfessionCity" asp-for="ProfessionCity" class="form-control" placeholder="City"/>
+            <span asp-validation-for="ProfessionCity" class="text-danger"></span>
         </div>
 
-        <div class="form-padding col-12 col-md-6">
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="ProfessionState">State*</label>
+            <input name="ProfessionState" asp-for="ProfessionState" class="form-control" placeholder="State"/>
+            <span asp-validation-for="ProfessionState" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-4">
             <label asp-for="StartDate">Start Date*</label>
             <input name="StartDate" asp-for="StartDate" type="month" class="form-control" />
             <span asp-validation-for="StartDate" class="text-danger"></span>
         </div>
 
-        <div class="form-padding col-12 col-md-6">
+        <div class="form-padding col-12 col-md-4">
             <label asp-for="EndDate">End Date*</label>
             <input name="EndDate" asp-for="EndDate" type="month" class="form-control" />
             <span asp-validation-for="EndDate" class="text-danger"></span>

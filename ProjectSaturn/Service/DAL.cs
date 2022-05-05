@@ -225,8 +225,10 @@ namespace ProjectSaturn.Service
                 // Profession
                 cmd.Parameters.AddWithValue("Name", profession.Name);
                 cmd.Parameters.AddWithValue("Position", profession.Position);
-                cmd.Parameters.AddWithValue("Location", profession.Location);
                 cmd.Parameters.AddWithValue("SkillsGained", SkillsGained);
+                //Location
+                cmd.Parameters.AddWithValue("ProfessionCity", profession.ProfessionCity);
+                cmd.Parameters.AddWithValue("ProfessionState", profession.ProfessionState);
                 // Date
                 cmd.Parameters.AddWithValue("DateStart", profession.StartDate);
                 cmd.Parameters.AddWithValue("DateEnd", profession.EndDate);
