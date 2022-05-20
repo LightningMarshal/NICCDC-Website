@@ -11,11 +11,11 @@ This project stems from the QResume project and its goal is to integrate most of
 
 **~~Using the 3 files included:~~**
 
-	-Run the code within *QResume_Table_Creation*
+	~~Run the code within QResume_Table_Creation~~
 
-	-Run the code within *QResume_Stored_Procedures*
+	~~Run the code within QResume_Stored_Procedures~~
 
-	-Run the code within *QResume_Grant_Execute*
+	~~Run the code within QResume_Grant_Execute~~
 
 ### Project Code
 The current focus on the development side is to convert the main functionality over to user stored and add a submission feature, where the application is emailed.
