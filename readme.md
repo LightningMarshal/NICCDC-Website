@@ -10,11 +10,8 @@ This project stems from the QResume project and its goal is to integrate most of
 !!! ~~The three files in question are in the NICCDC_SQL_Files folder within this project~~
 
 **~~Using the 3 files included:~~**
-
 	~~Run the code within QResume_Table_Creation~~
-
 	~~Run the code within QResume_Stored_Procedures~~
-
 	~~Run the code within QResume_Grant_Execute~~
 
 ### Project Code
