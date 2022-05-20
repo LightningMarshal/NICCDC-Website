@@ -21,6 +21,7 @@ $(document).ready(function () {
         var genericlist = [];
         var modelobj = {};
         var type = '';
+        var requestToken = "";
 
         // Determines if element needs to be in a list or model
         genericinfo.forEach((value) => {
@@ -46,7 +47,7 @@ $(document).ready(function () {
                 genericlist.push(modelobj);
                 modelobj = {};
             } else if (value.name == "__RequestVerificationToken") {
-                var requestToken = value.value;
+                requestToken = value.value;
             } else {
                 generic[value.name] = value.value;
             }
@@ -59,7 +60,10 @@ $(document).ready(function () {
         $.ajax({
             method: "POST",
             url: url,
-            data: { jsonString: JSON.stringify(generic) },
+            data: {
+                __RequestVerificationToken: requestToken,
+                jsonString: JSON.stringify(generic)
+            },
         }).done(function (msg) {
             if (msg == "true") {
                 alert("Success! Your response has been recorded. Please continue to the next section");

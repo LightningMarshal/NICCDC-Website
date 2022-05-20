@@ -89,6 +89,7 @@ namespace ProjectSaturn.Controllers
                      
         // Home Submission, This will accept the user's email and either create a new user or sign in as the user.
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Home([Bind("Email")] Personal person)
         {
             var option = new CookieOptions
@@ -124,6 +125,7 @@ namespace ProjectSaturn.Controllers
 
         // Personal Submission, This takes in the Personal Data, verifies it for required fields, and stores it appropriately
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult PersonalDetails(string jsonString) 
         {
             var settings = new JsonSerializerSettings
@@ -151,6 +153,7 @@ namespace ProjectSaturn.Controllers
 
         // General Submission, This takes in the General data, verifies it for required fields, and stores it appropriately
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult GeneralDetails(string jsonString)
         {
             var settings = new JsonSerializerSettings
@@ -171,6 +174,7 @@ namespace ProjectSaturn.Controllers
 
         // Education Submission, This takes in the Education data, verifies it for required fields, and stores it appropriately
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EducationDetails(string jsonString)
         {
             var settings = new JsonSerializerSettings
@@ -190,6 +194,7 @@ namespace ProjectSaturn.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult ProfessionalDetails(string jsonString)
         {
             var settings = new JsonSerializerSettings
@@ -210,6 +215,7 @@ namespace ProjectSaturn.Controllers
 
         // Certification submit, This takes in the Certification data, verifies it, and stores it appropriately
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CertificationDetails(string jsonString)
         {
             var settings = new JsonSerializerSettings
@@ -239,6 +245,7 @@ namespace ProjectSaturn.Controllers
 
         // Skill submit, This takes in the Skills data, verifies it, and stores it appropriately
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult SkillsDetails(string jsonString)
         {
             var settings = new JsonSerializerSettings
@@ -263,6 +270,7 @@ namespace ProjectSaturn.Controllers
         }
         
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AwardsDetails(string jsonString)
         {
             var settings = new JsonSerializerSettings
@@ -293,7 +301,7 @@ namespace ProjectSaturn.Controllers
 
 
         // This will submit the data provided into a cookie based on data type.
-        string SetData<T>(T t)
+        private string SetData<T>(T t)
         {
             var settings = new JsonSerializerSettings
             {
@@ -351,7 +359,7 @@ namespace ProjectSaturn.Controllers
         }
 
         // This will submit the data provided into a cookie based on list data type
-        string SetData<T>(List<T> t)
+        private string SetData<T>(List<T> t)
         {
             var settings = new JsonSerializerSettings
             {
