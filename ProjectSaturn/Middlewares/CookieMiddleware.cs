@@ -1,5 +1,4 @@
 ﻿using ProjectSaturn.Models;
-using ProjectSaturn.Service;
 using System.Diagnostics;
 
 namespace ProjectSaturn.Middlewares
@@ -13,12 +12,12 @@ namespace ProjectSaturn.Middlewares
             _next = next;
         }
 
-        public Task Invoke(HttpContext httpContext, DAL _dal)
+        public Task Invoke(HttpContext httpContext)
         {
             var user = httpContext.Request.Cookies["user"];
 
             var destination = httpContext.Request.Path.Value;
-            if (user == null || user == Guid.Empty.ToString())
+            if (user == null)
             {
                 // Redirect if user does not have a User ID
                 if (destination == "/Creator/PersonalDetails" || destination == "/Creator/GeneralDetails" || destination == "/Creator/EducationDetails" || destination == "/Creator/ProfessionalDetails" || destination == "/Creator/CertificationDetails" || destination == "/Creator/SkillsDetails" || destination == "/Creator/AwardsDetails")

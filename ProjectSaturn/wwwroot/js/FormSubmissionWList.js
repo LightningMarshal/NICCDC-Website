@@ -28,39 +28,34 @@ $(document).ready(function () {
                 type = 'SkillsGained';
                 genericlist.push(value.value);
             } else if (value.name == 'CCertification') { // Creates list of JSON Training objects
-                type = 'strings';
                 modelobj['Certification'] = value.value;
             } else if (value.name == 'CDate') {
-                type = 'strings';
                 modelobj['Date'] = value.value;
             } else if (value.name == 'CCompleted') {
-                type = 'strings';
                 modelobj['Completed'] = value.value;
-                genericlist.push(JSON.stringify(modelobj));
+                genericlist.push(modelobj);
                 modelobj = {};
             } else if (value.name == "ADesc") { // Creates list of JSON Awards objects
-                type = "strings";
                 modelobj['Award'] = value.value;
             } else if (value.name == "ADate") {
-                type = "strings";
                 modelobj['EarnDate'] = value.value;
-                genericlist.push(JSON.stringify(modelobj));
+                genericlist.push(modelobj);
                 modelobj = {};
-            } else if (value.name == "SDesc") {
-                type = "strings";
+            } else if (value.name == "SDesc") { // Creates list of JSON Skills objects
                 modelobj['Skill'] = value.value;
-                genericlist.push(JSON.stringify(modelobj));
+                genericlist.push(modelobj);
                 modelobj = {};
+            } else if (value.name == "__RequestVerificationToken") {
+                var requestToken = value.value;
             } else {
                 generic[value.name] = value.value;
             }
         });
 
-        if (genericlist[0] != null) { generic[type] = genericlist; }
+        if (genericlist[0] != null && type != "") { generic[type] = genericlist; }
+        else if (genericlist[0] != null && type == "") { generic = genericlist }
 
-        var url = e.currentTarget.action;
-        var datalength = (JSON.stringify(generic)).datalength();
-        alert(datalength);
+        var url = e.currentTarget.action; 
         $.ajax({
             method: "POST",
             url: url,
@@ -74,10 +69,8 @@ $(document).ready(function () {
                 alert("Success! Your response has been recorded. Please add another submission or continue to next section.")
             } else if (msg == "required") {
                 alert("Required inputs (*) are missing. Please resubmit with all required (*) inputs.");
-            } else if (msg == "crequired") {
-                alert("All certifications/trainings with an description needs a date recieved/predicted. Please correct and resubmit.");
-            } else if (msg == "blank") {
-
+            } else if (msg == "drequired") {
+                alert("All items with an description needs a date. Please correct and resubmit.");
             }
 
         }).fail(function (err, textstatus, error) {

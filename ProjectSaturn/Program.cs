@@ -1,4 +1,3 @@
-using ProjectSaturn.Service;
 using ProjectSaturn.Middlewares;
 using Microsoft.Extensions.FileProviders;
 
@@ -18,11 +17,6 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-builder.Services.AddSingleton<DAL>((ctx) =>
-{
-    return new DAL(config.GetConnectionString("readerConnectionString"), config.GetConnectionString("writerConnectionString"));
-});
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -32,8 +26,9 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+app.UseStaticFiles(); // IMPORTANT DO NOT REMOVE - This allows all files under wwwRoot to be referenced.
 
 app.UseStaticFiles(new StaticFileOptions() // This allows the files in Regular Pages to be surved seperate from the views.
 {

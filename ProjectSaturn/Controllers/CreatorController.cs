@@ -1,19 +1,11 @@
 ﻿using Newtonsoft.Json;
 using ProjectSaturn.Models;
-using ProjectSaturn.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ProjectSaturn.Controllers
 {
     public class CreatorController : Controller
     {
-        private readonly DAL _dal;
-
-        public CreatorController (DAL dal)
-        {
-            _dal = dal;
-        }
-
         public IActionResult Home() // Home Page, This is where the user will enter their email
         {
             ViewData["Title"] = "Home";
@@ -51,6 +43,7 @@ namespace ProjectSaturn.Controllers
             ViewData["CreatorPartial"] = "_ProfessionalPartial";
             return View("CreatorPages");
         }
+
         public IActionResult CertificationDetails() // Certification Page, This is where the user will add any certifications they have completed or planning to complete
         {
             ViewData["Title"] = "Certifications";
@@ -78,6 +71,8 @@ namespace ProjectSaturn.Controllers
             return View("CreatorPages");
         }
 
+
+
         public async Task<IActionResult> DownloadFile() // File Downloader, Currently Only supplies the References document
         {
             var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/downloadables", "SFS Recommendation form.pdf");
@@ -91,9 +86,10 @@ namespace ProjectSaturn.Controllers
         }
 
 
-
+                     
+        // Home Submission, This will accept the user's email and either create a new user or sign in as the user.
         [HttpPost]
-        public ActionResult Home([Bind("Email")] Personal person) // Home Submission, This will accept the user's email and either create a new user or sign in as the user.
+        public ActionResult Home([Bind("Email")] Personal person)
         {
             var option = new CookieOptions
             {
@@ -106,16 +102,15 @@ namespace ProjectSaturn.Controllers
             }
 
             if (person.Email.ToLower().Contains('@')){
-                Guid guid = _dal.AddUser(person.Email);
-                string strguid = guid.ToString();
                 if (HttpContext.Request.Cookies["user"] == null)
                 {
-                    HttpContext.Response.Cookies.Append("user", strguid, option);
+                    HttpContext.Response.Cookies.Append("user", person.Email, option);
                 }
                 else
                 {
+                    //TODO : if other cookies are present, submit them then remove them.
                     HttpContext.Response.Cookies.Delete("user");
-                    HttpContext.Response.Cookies.Append("user", strguid, option);
+                    HttpContext.Response.Cookies.Append("user", person.Email, option);
                 }
             }
             else
@@ -127,50 +122,41 @@ namespace ProjectSaturn.Controllers
             return RedirectToAction("PersonalDetails");
         }
 
+        // Personal Submission, This takes in the Personal Data, verifies it for required fields, and stores it appropriately
         [HttpPost]
-        public ActionResult PersonalDetails(string jsonString) // Personal Submission, This takes in the Personal Data, verifies it for required fields, and stores it appropriately
+        public ActionResult PersonalDetails(string jsonString) 
         {
             var settings = new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore,
             };
-            
-            Guid currentUser = new(HttpContext.Request.Cookies["user"]);
+
+            string email = HttpContext.Request.Cookies["user"];
 
             Personal personal = JsonConvert.DeserializeObject<Personal>(jsonString, settings); // Recieve data
-            personal.Email = _dal.GetEmail(currentUser);
             if (personal.FirstName == "" || personal.LastName == "" || personal.MobilePhone == "" || personal.Address == "" || personal.City == "" || personal.State == "" || personal.Zip == "") // Required Fields
             {
                 return Json("required");
             }
 
-
-            if (personal != null) // Store the Data
+            if (personal != null)
             {
-                int id = _dal.AddPersonal(personal, currentUser);
-                if (id > 0)
-                {
-                    return Json("true");
-                }
-                // NOTE : Duplicate Detection has been turned off in the SQL Stored Procedures
-                //else if (id == -10) 
-                //{
-                //    ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
-                //    return Json("true");
-                //}
+                personal.Email = email;
             }
-            return Json("false");
+
+            string boolean = SetData<Personal>(personal); // Set Data (At bottom of page)
+
+            return Json(boolean);
         }
 
+        // General Submission, This takes in the General data, verifies it for required fields, and stores it appropriately
         [HttpPost]
-        public ActionResult GeneralDetails(string jsonString) // General Submission, This takes in the General data, verifies it for required fields, and stores it appropriately
+        public ActionResult GeneralDetails(string jsonString)
         {
             var settings = new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore,
             };
-
-            Guid currentUser = new(HttpContext.Request.Cookies["user"]); 
 
             General general = JsonConvert.DeserializeObject<General>(jsonString, settings); // Recieve data
             if (general.Degree == null || general.DegreeStatus == null || general.AntiGradDate == null || general.OverallGPA == null || general.MajorGPA == null) // Required Fields
@@ -178,56 +164,29 @@ namespace ProjectSaturn.Controllers
                 return Json("required");
             }
 
-            if (general != null) // Store the Data
-            {
-                int id = _dal.AddGeneral(general, currentUser);
-                if (id > 0)
-                {
-                    return Json("true");
-                }
-                // NOTE : Duplicate Detection has been turned off in the SQL Stored Procedures
-                //else if (id == -10)
-                //{
-                //    ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
-                //    return Json("true");
-                //}
-            }
-            return Json("false");
+            string boolean = SetData<General>(general); // Set Data (At bottom of page)
+
+            return Json(boolean);
         }
 
+        // Education Submission, This takes in the Education data, verifies it for required fields, and stores it appropriately
         [HttpPost]
-        public ActionResult EducationDetails(string jsonString) //Education Submission, This takes in the Education data, verifies it for required fields, and stores it appropriately
+        public ActionResult EducationDetails(string jsonString)
         {
             var settings = new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore,
             };
 
-            Guid currentUser = new(HttpContext.Request.Cookies["user"]);
-
             Education education = JsonConvert.DeserializeObject<Education>(jsonString, settings); // Recieve data
             if (education.Name == "" || education.Major == "" || education.OverallGPA == null || education.MajorGPA == null || education.SchoolCity == "" || education.SchoolState == "" || education.SchoolZip == "") // Required Fields
             {
                 return Json("required");
             }
-            
 
-            if (education != null) // Store the Data
-            {
-                string SkillsList = JsonConvert.SerializeObject(education.SkillsGained); 
-                int id = _dal.AddEducation(education, currentUser, SkillsList);
-                if (id > 0)
-                {
-                    return Json("true another");
-                }
-                // NOTE : Duplicate Detection has been turned off in the SQL Stored Procedures
-                //else if (id == -10)
-                //{
-                //    ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
-                //    return Json("true another");
-                //}
-            }
-            return Json("false");
+            string boolean = SetData<Education>(education);
+
+            return Json(boolean);
         }
 
         [HttpPost]
@@ -238,113 +197,47 @@ namespace ProjectSaturn.Controllers
                 NullValueHandling = NullValueHandling.Ignore,
             };
 
-            Guid currentUser = new(HttpContext.Request.Cookies["user"]);
-
             Professional profession = JsonConvert.DeserializeObject<Professional>(jsonString, settings); // Recieve data
             if (profession.Name == "" || profession.Position == "" || profession.ProfessionCity == "" || profession.ProfessionState == "" || profession.StartDate == null || profession.EndDate == null) // Required Fields
             {
                 return Json("required");
             }
 
+            string boolean = SetData<Professional>(profession);
 
-            if (profession != null) // Store the data
-            {
-                string SkillsList = JsonConvert.SerializeObject(profession.SkillsGained);
-                int id = _dal.AddProfessional(profession, currentUser, SkillsList);
-                if (id > 0)
-                {
-                    return Json("true another");
-                }
-                // NOTE : Duplicate Detection has been turned off in the SQL Stored Procedures
-                //else if (id == -10)
-                //{
-                //    ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
-                //    return Json("true another");
-                //}
-            }
-            return Json("false");
+            return Json(boolean);
         }
 
+        // Certification submit, This takes in the Certification data, verifies it, and stores it appropriately
         [HttpPost]
-        public ActionResult CertificationDetails(string jsonString) // Certification submit, This takes in the Certification data, verifies it, and stores it appropriately
-
-        //NOTE: Several certifications come back and are submitted separately in order to help prevent accidental loss.
-
+        public ActionResult CertificationDetails(string jsonString)
         {
             var settings = new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore,
             };
 
-            Guid currentUser = new(HttpContext.Request.Cookies["user"]);
-            List<Certifications> DeserializedCertificationList = new();
-            List<Certifications> CertificationsToSubmitList = new();
-            int successfullEntry = 0;
+            List<Certifications> tempList = JsonConvert.DeserializeObject<List<Certifications>>(jsonString, settings);
+            List<Certifications> certificationList = new();
 
-
-            GenericList CertificationList = JsonConvert.DeserializeObject<GenericList>(jsonString, settings); // Recieve and Verify the data
-            try
+            foreach (Certifications certification in tempList)
             {
-                foreach (string certificationString in CertificationList.Strings)
+                if (certification.Certification != "" && certification.Date == null) // No partial entry
                 {
-                    Certifications certification = JsonConvert.DeserializeObject<Certifications>(certificationString, settings);
-                    DeserializedCertificationList.Add(certification);
+                    return Json("drequired");
                 }
-                foreach (Certifications certification in DeserializedCertificationList) // Verify the data is correctly formatted
+                else if (certification.Certification != "") // No empty entries
                 {
-                    if (certification.Certification != "" && certification.Date == null) // No partial entry
-                    {
-                        return Json("crequired");
-                    }
-                    CertificationsToSubmitList.Add(certification);
-
+                    certificationList.Add(certification);
                 }
             }
-            catch
-            {
-                return Json("nothing");
-            }
 
-            bool added = false;
-            if (CertificationsToSubmitList.Count != 0) // Store the data
-            {
-                foreach (Certifications certification in CertificationsToSubmitList)
-                {
-                    if (certification.Certification == "") // Null fields not counted
-                    {
-                        successfullEntry++;
-                    }
-                    else
-                    {
-                        int id = _dal.AddCertification(certification, currentUser);
-                        if (id > 0)
-                        {
-                            successfullEntry++;
-                            added = true;
-                        }
-                        // NOTE : Duplicate Detection has been turned off in the SQL Stored Procedures
-                        //else if (id == -10)
-                        //{
-                        //    ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
-                        //    successfullEntry++;
-                        //}
-                    }
-                }
-                if (successfullEntry == DeserializedCertificationList.Count)
-                {
-                    if (added == false)
-                    {
-                        return Json("blank");
-                    }
-                    else
-                    {
-                        return Json("true");
-                    }
-                }
-            }
-            return Json("false");
+            string boolean = SetData<Certifications>(certificationList);
+
+            return Json(boolean);
         }
 
+        // Skill submit, This takes in the Skills data, verifies it, and stores it appropriately
         [HttpPost]
         public IActionResult SkillsDetails(string jsonString)
         {
@@ -353,62 +246,20 @@ namespace ProjectSaturn.Controllers
                 NullValueHandling = NullValueHandling.Ignore,
             };
 
-            Guid currentUser = new(HttpContext.Request.Cookies["user"]);
-            List<Skills> DeserializedSkillsList = new(); // Deserialized List
-            List<Skills> SkillsToSubmitList = new(); // List of correct entries to submit
-            int successfullEntry = 0; // Verify successfull submission
+            List<Skills> tempList = JsonConvert.DeserializeObject<List<Skills>>(jsonString, settings);
+            List<Skills> skillsList = new();
 
-
-            GenericList SkillsList = JsonConvert.DeserializeObject<GenericList>(jsonString, settings); // Recieve data
-            foreach (string skillString in SkillsList.Strings)
+            foreach (Skills skill in tempList)
             {
-                Skills skill = JsonConvert.DeserializeObject<Skills>(skillString, settings);
-                DeserializedSkillsList.Add(skill);
-            }
-            foreach (Skills skill in DeserializedSkillsList) // Verify the data is correctly formatted
-            {
-                SkillsToSubmitList.Add(skill);
-            }
-            
-
-            bool added = false;
-            if (SkillsToSubmitList.Count != 0) // Store the data
-            {
-                foreach (Skills skill in SkillsToSubmitList)
+                if (skill.Skill != "") // No empty entries
                 {
-                    if (skill.Skill == "") // Null fields not counted
-                    {
-                        successfullEntry++;
-                    }
-                    else 
-                    { 
-                        int id = _dal.AddSkills(skill, currentUser);
-                        if (id > 0)
-                        {
-                            successfullEntry++;
-                            added = true;
-                        }
-                        // NOTE : Duplicate Detection has been turned off in the SQL Stored Procedures
-                        //else if (id == -10)
-                        //{
-                        //    ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
-                        //    successfullEntry++;
-                        //}
-                    }
-                }
-                if (successfullEntry == DeserializedSkillsList.Count)
-                {
-                    if (added == false)
-                    {
-                        return Json("blank");
-                    }
-                    else
-                    {
-                        return Json("true");
-                    }
+                    skillsList.Add(skill);
                 }
             }
-            return Json("false");
+
+            string boolean = SetData<Skills>(skillsList);
+
+            return Json(boolean);
         }
         
         [HttpPost]
@@ -419,67 +270,135 @@ namespace ProjectSaturn.Controllers
                 NullValueHandling = NullValueHandling.Ignore,
             };
 
-            Guid currentUser = new(HttpContext.Request.Cookies["user"]); 
-            List<Awards> DeserializedAwardsList = new(); 
-            List<Awards> AwardsToSubmitList = new(); 
-            int successfullEntry = 0; 
+            List<Awards> tempList = JsonConvert.DeserializeObject<List<Awards>>(jsonString, settings);
+            List<Awards> awardsList = new();
 
-
-            GenericList AwardsList = JsonConvert.DeserializeObject<GenericList>(jsonString, settings); // Recieve data
-            foreach (string awardString in AwardsList.Strings)
+            foreach (Awards award in tempList)
             {
-                Awards award = JsonConvert.DeserializeObject<Awards>(awardString, settings);
-                DeserializedAwardsList.Add(award);
-            }
-            foreach (Awards award in DeserializedAwardsList) // Verify the data is correctly formatted
-            {
-                if (award.Award != "" && award.EarnDate == null) // No partial entry
+                if (award.Award != "" && award.EarnDate == null) // No partial entries
                 {
-                    return Json("crequired");
+                    return Json("drequired");
                 }
-                AwardsToSubmitList.Add(award);
-            }
-
-
-
-            bool added = false;
-            if (AwardsToSubmitList.Count != 0) // Store the data
-            {
-                foreach (Awards award in AwardsToSubmitList)
+                else if (award.Award != "") // No empty entries
                 {
-                    if (award.Award == "")
-                    {
-                        successfullEntry++;
-                    }
-                    else
-                    {
-                        int id = _dal.AddAwards(award, currentUser);
-                        if (id > 0)
-                        {
-                            successfullEntry++;
-                            added = true;
-                        }
-                        // NOTE : Duplicate Detection has been turned off in the SQL Stored Procedures
-                        //else if (id == -10)
-                        //{
-                        //    ErrorLog.Msglist.Add("Duplicate Entry Detected: Skipping");
-                        //    successfullEntry++;
-                        //}
-                    }
-                }
-                if (successfullEntry == DeserializedAwardsList.Count)
-                {
-                    if (added == false)
-                    {
-                        return Json("blank");
-                    }
-                    else
-                    {
-                        return Json("true");
-                    }
+                    awardsList.Add(award);
                 }
             }
-            return Json("false");
+
+            string boolean = SetData<Awards>(awardsList);
+
+            return Json(boolean);
+        }
+
+
+
+        // This will submit the data provided into a cookie based on data type.
+        string SetData<T>(T t)
+        {
+            var settings = new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+            };
+
+            var option = new CookieOptions
+            {
+                Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
+            };
+
+            if (t != null) // Store the Data
+            {
+                string cookie = "";
+                string retval = "";
+                if (t is Personal)
+                {
+                    cookie = "Personal";
+                    retval = "true";
+                }
+                else if (t is General){
+                    cookie = "General";
+                    retval = "true";
+                }
+                else if (t is Education)
+                {
+                    cookie = "Education";
+                    retval = "true another";
+                }
+                else if (t is Professional)
+                {
+                    cookie = "Professional";
+                    retval = "true another";
+                }
+
+                if (HttpContext.Request.Cookies[cookie] == null) // Ensures no exsisting cookie
+                {
+                    List<T> tList = new();
+                    tList.Add(t);
+                    string json = JsonConvert.SerializeObject(tList, settings);
+                    HttpContext.Response.Cookies.Append(cookie, json, option);
+                }
+                else
+                {
+                    string json = HttpContext.Request.Cookies[cookie];
+                    List<T> tList = JsonConvert.DeserializeObject<List<T>>(json, settings);
+                    tList.Add(t);
+                    json = JsonConvert.SerializeObject(tList, settings);
+                    HttpContext.Response.Cookies.Delete(cookie);
+                    HttpContext.Response.Cookies.Append(cookie, json, option);
+                }
+                return retval;
+            }
+            return "false";
+        }
+
+        // This will submit the data provided into a cookie based on list data type
+        string SetData<T>(List<T> t)
+        {
+            var settings = new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+            };
+
+            var option = new CookieOptions
+            {
+                Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
+            };
+
+            if (t.Count != 0) // Store the data
+            {
+                string cookie = "";
+                if (t[0] is Certifications)
+                {
+                    cookie = "Certification";
+                }
+                else if (t[0] is Skills)
+                {
+                    cookie = "Skill";
+                }
+                else if (t[0] is Awards)
+                {
+                    cookie = "Award";
+                }
+
+                if (HttpContext.Request.Cookies[cookie] == null)
+                {
+                    string json = JsonConvert.SerializeObject(t, settings);
+                    HttpContext.Response.Cookies.Append(cookie, json, option);
+                }
+                else
+                {
+                    string json = HttpContext.Request.Cookies[cookie];
+                    List<T> currentList = JsonConvert.DeserializeObject<List<T>>(json, settings);
+                    foreach (T singleT in t)
+                    {
+                        currentList.Add(singleT);
+                    }
+                    json = JsonConvert.SerializeObject(currentList, settings);
+                    HttpContext.Response.Cookies.Delete(cookie);
+                    HttpContext.Response.Cookies.Append(cookie, json, option);
+                }
+                return "true another";
+            }
+            return "";
         }
     }
 }

@@ -49,39 +49,5 @@ namespace ProjectSaturn.Models
             this.GREQ = GREQ;
             this.GREA = GREA;
         }
-
-
-        //TODO : The following is to read database entries in the DAL
-        // IF the Analysis will be taking place in this application, this will be 
-        // of great use!
-
-        // Uncomment to utilize
-
-        // Database Interaction
-        //public General(SqlDataReader dr)
-        //{
-        //    Fill(dr);
-        //}
-
-        //public void Fill(SqlDataReader dr)
-        //{
-        //    // General
-        //    this.Degree = (string)dr["Degree"];
-        //    this.DegreeStatus = (string)dr["DegreeStatus"];
-        //    this.AntiGradDate = (DateTime)dr["AntiGradDate"];
-        //    // GPA
-        //    this.OverallGPA = (decimal)dr["OverallGPA"];
-        //    this.MajorGPA = (decimal)dr["MajorGPA"];
-        //    // SAT
-        //    this.SATV = (Int16?)dr["SATV"];
-        //    this.SATM = (Int16?)dr["SATM"];
-        //    // ACT
-        //    this.ACTV = (Int16?)dr["ACTV"];
-        //    this.ACTM = (Int16?)dr["ACTM"];
-        //    // GRE
-        //    this.GREV = (Int16?)dr["GREV"];
-        //    this.GREQ = (Int16?)dr["GREQ"];
-        //    this.GREA = (Int16?)dr["GREA"];
-        //}
     }
 }
