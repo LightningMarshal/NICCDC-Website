@@ -2,11 +2,14 @@
 <link rel="stylesheet" href="~/css/WebStyles.css" />
 
 <main class="d-flex flex-wrap justify-content-center">
+    <div class="form-padding cookie_wrap d-flex flex-wrap">
+        @*This will have the cookie notification pop up.*@
+    </div>
     <h1 class="col-12 text-center">Welcome to Our Application Page!</h1> 
     <h3 class="col-12 text-center">To begin the application process, please enter your email below!</h3>
     <h5 class="col-12 text-center">*Please be sure that the email is correct, so that we can reach you.</h5>
 
-    <form asp-controller="Creator" asp-action="Home" class="completely-centered-options col-12 col-md-6 col-lg-4 d-flex flex-wrap">
+    <form asp-controller="Application" asp-action="Home" class="completely-centered-options col-12 col-md-6 col-lg-4 d-flex flex-wrap">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         @* Get the User's Email *@
@@ -23,3 +26,6 @@
         
     </form>
 </main>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/UserConsent.js"></script>

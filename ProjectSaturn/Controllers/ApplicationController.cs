@@ -1,10 +1,11 @@
 ﻿using Newtonsoft.Json;
 using ProjectSaturn.Models;
+using ProjectSaturn.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ProjectSaturn.Controllers
 {
-    public class CreatorController : Controller
+    public class ApplicationController : Controller
     {
         public IActionResult Home() // Home Page, This is where the user will enter their email
         {
@@ -15,60 +16,58 @@ namespace ProjectSaturn.Controllers
         public IActionResult PersonalDetails() // Personal Page, This is where the user will enter basic personal info
         {         
             ViewData["Title"] = "Personal";
-            ViewData["CreatorPartial"] = "_PersonalPartial";
+            ViewData["ApplicationPartial"] = "_PersonalPartial";
 
-            return View("CreatorPages");
+            return View("ApplicationPages");
         }
 
         public IActionResult GeneralDetails() // General Page, This is where the user will enter details important for the application
         {
             ViewData["Title"] = "General";
-            ViewData["CreatorPartial"] = "_GeneralPartial";
+            ViewData["ApplicationPartial"] = "_GeneralPartial";
 
-            return View("CreatorPages");
+            return View("ApplicationPages");
         }
 
         public IActionResult EducationDetails() // Education Page, This is where the user will enter details regarding previous education
         {
             ViewData["Title"] = "Education";
-            ViewData["CreatorPartial"] = "_EducationPartial";
-
+            ViewData["ApplicationPartial"] = "_EducationPartial";
             
-            return View("CreatorPages");
+            return View("ApplicationPages");
         }
 
         public IActionResult ProfessionalDetails() // Professional Page, This is where the user will enter details regarding previous employment
         {
             ViewData["Title"] = "Professional";
-            ViewData["CreatorPartial"] = "_ProfessionalPartial";
-            return View("CreatorPages");
+            ViewData["ApplicationPartial"] = "_ProfessionalPartial";
+            return View("ApplicationPages");
         }
 
         public IActionResult CertificationDetails() // Certification Page, This is where the user will add any certifications they have completed or planning to complete
         {
             ViewData["Title"] = "Certifications";
-            ViewData["CreatorPartial"] = "_CertificationsPartial";
-            return View("CreatorPages");
+            ViewData["ApplicationPartial"] = "_CertificationsPartial";
+            return View("ApplicationPages");
         }
 
         public IActionResult SkillsDetails() // Skills Page, This is where the user will add any applicable skills they possess.
         {
             ViewData["Title"] = "Knowledge / Skills / Abilites";
-            ViewData["CreatorPartial"] = "_SkillsPartial";
-            return View("CreatorPages");
+            ViewData["ApplicationPartial"] = "_SkillsPartial";
+            return View("ApplicationPages");
         }
 
         public IActionResult AwardsDetails() // Awards Page, This is where the user will add any awards they have won.
         {
             ViewData["Title"] = "Awards";
-            ViewData["CreatorPartial"] = "_AwardsPartial";
-            return View("CreatorPages");
+            ViewData["ApplicationPartial"] = "_AwardsPartial";
+            return View("ApplicationPages");
         }
 
         public IActionResult Finished() // Finished Page, This will congratulate the user for completing the application and informs them general information
         {
-            ViewData["CreatorPartial"] = "_FinishedPartial";
-            return View("CreatorPages");
+            return View("Finished");
         }
 
 

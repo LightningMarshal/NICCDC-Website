@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace ProjectSaturn.Middlewares
 {
-    public class CookieMiddleware // Ensures that a user is present before allowing to Creator Pages
+    public class CookieMiddleware // Ensures that a user is present before allowing to Application Pages
     {
         private readonly RequestDelegate _next;
 
@@ -20,10 +20,10 @@ namespace ProjectSaturn.Middlewares
             if (user == null)
             {
                 // Redirect if user does not have a User ID
-                if (destination == "/Creator/PersonalDetails" || destination == "/Creator/GeneralDetails" || destination == "/Creator/EducationDetails" || destination == "/Creator/ProfessionalDetails" || destination == "/Creator/CertificationDetails" || destination == "/Creator/SkillsDetails" || destination == "/Creator/AwardsDetails")
+                if (destination == "/Application/PersonalDetails" || destination == "/Application/GeneralDetails" || destination == "/Application/EducationDetails" || destination == "/Application/ProfessionalDetails" || destination == "/Application/CertificationDetails" || destination == "/Application/SkillsDetails" || destination == "/Application/AwardsDetails")
                 {
-                    ErrorLog.Msglist.Add("Redirected: " + destination + " - > " + "/Creator/Home");
-                    httpContext.Response.Redirect("/Creator/Home");
+                    ErrorLog.Msglist.Add("Redirected: " + destination + " - > " + "/Application/Home");
+                    httpContext.Response.Redirect("/Application/Home");
                 }
             }
 

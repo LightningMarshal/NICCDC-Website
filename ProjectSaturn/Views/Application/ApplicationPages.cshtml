@@ -1,5 +1,5 @@
 ﻿<link rel="stylesheet" href="~/css/WebStyles.css" />
-@* The creator page has been broken into two parts for simplifying the field views *@
+@* The application page has been broken into two parts for simplifying the field views *@
 
 <div class="row flex-xl-nowrap">
     @* TODO: find elegant way to display on mobile (rm d-none and d-md-block once found) *@
@@ -10,7 +10,7 @@
     <main class="col-md-10 col-xl-11" style="position: relative;">
         <h1 class="text-center">@ViewData["Title"]</h1>
         <span name="error" class="text-center text-danger">@ViewData["Error"]</span>
-        <partial name="@ViewData["CreatorPartial"]" />
+        <partial name="@ViewData["ApplicationPartial"]" />
     </main>
 </div>
 

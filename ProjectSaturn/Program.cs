@@ -45,7 +45,7 @@ app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Web}/{action=Index}/{id?}");
+    pattern: "{controller=NICCDC}/{action=Index}/{id?}");
 
 // Custom Middleware:
 app.UseMiddleware<CookieMiddleware>();
