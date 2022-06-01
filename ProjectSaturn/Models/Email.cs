@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace ProjectSaturn.Models
+﻿namespace ProjectSaturn.Models
 {
     public class Email
     {

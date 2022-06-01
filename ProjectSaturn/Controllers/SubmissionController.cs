@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 using ProjectSaturn.Models;
-using ProjectSaturn.Controllers;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Mail;
 
 namespace ProjectSaturn.Controllers
 {

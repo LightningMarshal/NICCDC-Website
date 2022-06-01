@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using ProjectSaturn.Models;
-using ProjectSaturn.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ProjectSaturn.Controllers
