@@ -20,12 +20,18 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/NICCDC/index.html">Home</a>
+                            <a class="nav-link text-dark" asp-controller="Application" asp-action="Home">Home</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav flex-grow-1 justify-content-end">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Application" asp-action="Classic">Classic Submission</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
+        <partial name="_CookieConsentPartial" />
     </header>
     <div class="container-fluid">
         <main role="main" class="">
@@ -35,7 +41,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - QResume - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - NICCDC - @*TODO: Change to perminant link*@<a href="Home">Privacy Policy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

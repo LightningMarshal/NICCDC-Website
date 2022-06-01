@@ -1,4 +1,5 @@
 using ProjectSaturn.Middlewares;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,12 @@ var config = builder.Configuration;
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDistributedMemoryCache();
+
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.CheckConsentNeeded = context => true;
+    options.MinimumSameSitePolicy = SameSiteMode.Strict;
+});
 
 builder.Services.AddSession(options =>
 {

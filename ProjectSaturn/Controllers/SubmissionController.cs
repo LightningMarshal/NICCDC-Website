@@ -3,12 +3,13 @@ using ProjectSaturn.Models;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mail;
+using System.Net;
 
 namespace ProjectSaturn.Controllers
 {
     public class SubmissionController : Controller
     {
-        public RedirectToActionResult Mail()
+        public dynamic Mail()
         {
             // Retrieve all of the user data
             List<Personal> PersonalList = new();
@@ -63,7 +64,44 @@ namespace ProjectSaturn.Controllers
             // Mail the message here
             Debug.WriteLine(message);
 
-            return RedirectToAction("Finished", "Application");
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    //TODO: Change to client email
+                    var senderEmail = new MailAddress("testing.env.kason.summers@gmail.com", "Kason");
+                    //TODO: Change to Kaye's email
+                    var receiverEmail = new MailAddress("kason.summers.pro@gmail.com", "Kason");
+                    //TODO: Change to client password
+                    var password = "ukjfscxaotlmfzfx";
+                    var sub = subject;
+                    var body = message;
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(senderEmail.Address, password)
+                    };
+                    using (var mess = new MailMessage(senderEmail, receiverEmail)
+                    {
+                        Subject = subject,
+                        Body = body
+                    })
+                    {
+                        smtp.Send(mess);
+                    }
+                    return RedirectToAction("Finished", "Application");
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+
+            return Json("error");
         }
 
         // This returns either a list of objects or null. It allows for the same value to be checked for null and used as a list.
@@ -178,7 +216,7 @@ namespace ProjectSaturn.Controllers
             {
                 // Profession
                 retval = retval + "Profession: " + profession.Name + "\t\t";
-                retval = retval + "Position: " + profession.Position + "n";
+                retval = retval + "Position: " + profession.Position + "\n";
                 // Date
                 retval = retval + "Start Date: " + profession.StartDate + "\t\t";
                 retval = retval + "End Date: " + profession.EndDate + "\t\t";

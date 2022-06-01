@@ -12,6 +12,11 @@ namespace ProjectSaturn.Controllers
             return View();
         }
 
+        public IActionResult Classic()
+        {
+            return View();
+        }
+
         public IActionResult PersonalDetails() // Personal Page, This is where the user will enter basic personal info
         {         
             ViewData["Title"] = "Personal";
@@ -71,9 +76,9 @@ namespace ProjectSaturn.Controllers
 
 
 
-        public async Task<IActionResult> DownloadFile() // File Downloader, Currently Only supplies the References document
+        public async Task<IActionResult> DownloadFile(string file) // File Downloader, Currently Only supplies the References document
         {
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/downloadables", "SFS Recommendation form.pdf");
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/downloadables", file);
             var memory = new MemoryStream();
             using (var stream = new FileStream(path, FileMode.Open))
             {
