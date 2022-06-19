@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using ProjectSaturn.Models;
+using ProjectSaturn.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ProjectSaturn.Controllers
@@ -113,6 +114,7 @@ namespace ProjectSaturn.Controllers
                 else
                 {
                     //TODO : if other cookies are present, submit them then remove them.
+                    RedirectToAction("Mail", "Submission");
                     HttpContext.Response.Cookies.Delete("user");
                     HttpContext.Response.Cookies.Append("user", person.Email, option);
                 }

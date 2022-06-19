@@ -36,9 +36,3 @@ Use ctrl + shift + f to find all instances of //TODO in order to find all of the
 		-A default admin user with large password
 	-Add analyst add feature for analysts to add new users
 ~~
-
--Re-enable RequestVerfication by getting the hidden tokens
--Add new controller to compose an email with the data submission
--Test the new solution
-
--Add functionality to ensure users with same email are found and merged

@@ -204,7 +204,7 @@ namespace ProjectSaturn.Controllers
                 }
             }
             // Space
-            retval = retval + "\n\n";
+            retval = retval + "\n";
             return retval;
         }
 
