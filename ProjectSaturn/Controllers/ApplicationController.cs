@@ -9,6 +9,17 @@ namespace ProjectSaturn.Controllers
     {
         public IActionResult Home() // Home Page, This is where the user will enter their email
         {
+            var settings = new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+            };
+
+            var option = new CookieOptions
+            {
+                Expires = new DateTimeOffset(DateTime.Now.AddDays(1)),
+                Secure = true
+            };       
+
             ViewData["Title"] = "Home";
             return View();
         }
@@ -98,7 +109,8 @@ namespace ProjectSaturn.Controllers
         {
             var option = new CookieOptions
             {
-                Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
+                Expires = new DateTimeOffset(DateTime.Now.AddDays(1)),
+                Secure = true
             };
 
             if (person.Email == null) 
@@ -208,7 +220,7 @@ namespace ProjectSaturn.Controllers
             };
 
             Professional profession = JsonConvert.DeserializeObject<Professional>(jsonString, settings); // Recieve data
-            if (profession.Name == "" || profession.Position == "" || profession.ProfessionCity == "" || profession.ProfessionState == "" || profession.StartDate == null || profession.EndDate == null) // Required Fields
+            if (profession.Name == "" || profession.Position == "" || profession.ProfessionCity == "" || profession.ProfessionState == "" || profession.StartDate == null) // Required Fields
             {
                 return Json("required");
             }
@@ -315,7 +327,8 @@ namespace ProjectSaturn.Controllers
 
             var option = new CookieOptions
             {
-                Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
+                Expires = new DateTimeOffset(DateTime.Now.AddDays(1)),
+                Secure = true
             };
 
             if (t != null) // Store the Data
@@ -341,7 +354,6 @@ namespace ProjectSaturn.Controllers
                     cookie = "Professional";
                     retval = "true another";
                 }
-
                 if (HttpContext.Request.Cookies[cookie] == null) // Ensures no exsisting cookie
                 {
                     List<T> tList = new();
@@ -358,6 +370,7 @@ namespace ProjectSaturn.Controllers
                     HttpContext.Response.Cookies.Delete(cookie);
                     HttpContext.Response.Cookies.Append(cookie, json, option);
                 }
+                
                 return retval;
             }
             return "false";
@@ -373,7 +386,8 @@ namespace ProjectSaturn.Controllers
 
             var option = new CookieOptions
             {
-                Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
+                Expires = new DateTimeOffset(DateTime.Now.AddDays(1)),
+                Secure = true
             };
 
             if (t.Count != 0) // Store the data

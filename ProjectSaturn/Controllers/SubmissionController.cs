@@ -4,6 +4,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mail;
 using System.Net;
+using System;
 
 namespace ProjectSaturn.Controllers
 {
@@ -27,55 +28,66 @@ namespace ProjectSaturn.Controllers
             List<Awards> AwardsList = new();
             dynamic awards = Checker("Award", AwardsList);
 
+            // Email of applicant
             string applicant = HttpContext.Request.Cookies["user"];
 
-            string subject = "SFS Applicant: " + applicant; // Subject of Email (user's email is added for easy identification)
-            string message = ""; // All of the application information
+            // Subject of Email (user's email is added for easy identification)
+            string subject = "SFS Applicant: " + applicant;
+
+            // All of the application information
+            string message = ""; 
+
             // Build the Message:
             if (personal != null)
             {
-                message = message + "Personal: \n" + GetPersonalMessage(personal) + "\n";
+                message = message + "-----------------------------------------------Personal--------------------------------------------------\n" + GetPersonalMessage(personal) + "\n";
             }
             if (general != null)
             {
-                message = message + "General: \n" + GetGeneralMessage(general) + "\n";
+                message = message + "------------------------------------------------General--------------------------------------------------\n" + GetGeneralMessage(general) + "\n";
             }
             if (education != null)
             {
-                message = message +  "Education: \n" + GetEducationMessage(education) + "\n";
+                message = message + "-----------------------------------------------Education-------------------------------------------------\n" + GetEducationMessage(education) + "\n";
             }
             if (professional != null)
             {
-                message = message + "Professional: \n" + GetProfessionMessage(professional) + "\n";
+                message = message + "-----------------------------------------------Profession------------------------------------------------\n" + GetProfessionMessage(professional) + "\n";
             }
             if (certification != null)
             {
-                message = message + "Certifications: \n" + GetCertificationMessage(certification) + "\n";
+                message = message + "---------------------------------------------Certifications----------------------------------------------\n" + GetCertificationMessage(certification) + "\n";
             }
             if (skills != null)
             {
-                message = message + "Skills: \n" + GetSkillsMessage(skills) + "\n";
+                message = message + "-------------------------------------------------Skills--------------------------------------------------\n" + GetSkillsMessage(skills) + "\n";
             }
             if (awards != null)
             {
-                message = message + "Awards: \n" + GetAwardsMessage(awards) + "\n";
+                message = message + "-------------------------------------------------Awards--------------------------------------------------\n" + GetAwardsMessage(awards) + "\n";
             }
             
-            // Mail the message here
+            // Mailing Functionality
             Debug.WriteLine(message);
-
+            /*
+             *      Mailing Credentials Below       Mailing Credentials Below       Mailing Credentials Below
+             *      Mailing Credentials Below       Mailing Credentials Below       Mailing Credentials Below
+             *      Mailing Credentials Below       Mailing Credentials Below       Mailing Credentials Below
+             */
             try
             {
                 if (ModelState.IsValid)
                 {
                     //TODO: Change to client email
-                    var senderEmail = new MailAddress("testing.env.kason.summers@gmail.com", "Kason");
-                    //TODO: Change to Kaye's email
-                    var receiverEmail = new MailAddress("kason.summers.pro@gmail.com", "Kason");
+                    var senderEmail = new MailAddress(/*change here*/"testing.env.kason.summers@gmail.com", "Application");
+
+                    //TODO: Change to Kay's email
+                    var receiverEmail = new MailAddress(/*change here*/"kason.summers.pro@gmail.com", "Kay");
+
                     //TODO: Change to client password
-                    var password = "ukjfscxaotlmfzfx";
+                    var password = /*change here*/"ukjfscxaotlmfzfx";
                     var sub = subject;
-                    var body = message;
+                    var body = "<pre>" + message + "</pre>";
                     var smtp = new SmtpClient
                     {
                         Host = "smtp.gmail.com",
@@ -87,12 +99,24 @@ namespace ProjectSaturn.Controllers
                     };
                     using (var mess = new MailMessage(senderEmail, receiverEmail)
                     {
+                        IsBodyHtml = true,
                         Subject = subject,
                         Body = body
                     })
                     {
                         smtp.Send(mess);
                     }
+
+                    // Delete Cookies
+                    HttpContext.Response.Cookies.Delete("user");
+                    HttpContext.Response.Cookies.Delete("Personal");
+                    HttpContext.Response.Cookies.Delete("General");
+                    HttpContext.Response.Cookies.Delete("Education");
+                    HttpContext.Response.Cookies.Delete("Professional");
+                    HttpContext.Response.Cookies.Delete("Certification");
+                    HttpContext.Response.Cookies.Delete("Skill");
+                    HttpContext.Response.Cookies.Delete("Award");
+
                     return RedirectToAction("Finished", "Application");
                 }
             }
@@ -126,25 +150,21 @@ namespace ProjectSaturn.Controllers
         {
             string retval = "";
             foreach (Personal person in PersonalList)
-            {
-                // Name
-                retval = retval + "First Name: " + person.FirstName + "\t\t";
-                retval = retval + "Middle Init: " + person.MiddleInit+ "\t\t";
-                retval = retval + "Last Name: " + person.LastName+ "\n";
-                // Contact Info
-                retval = retval + "Email: " + person.Email + "\t\t";
-                retval = retval + "Day Phone: " + person.DayPhone + "\t\t";
-                retval = retval + "EveningPhone: " + person.EveningPhone + "\t\t";
-                retval = retval + "MobilePhone: " + person.MobilePhone + "\n";
-                // Address
-                retval = retval + "Address: " + person.Address + "\t\t";
-                retval = retval + "City: " + person.City + "\t\t";
-                retval = retval + "State: " + person.State + "\t\t";
-                retval = retval + "Zip: " + person.Zip + "\n";
-                // Is US Citizen
-                retval = retval + "IsUSCitizen: " + person.IsUSCitizen + "\n";
+            {           
+                // Name and Email Address
+                retval += String.Format($"{"Name: " + person.FirstName + " " + person.MiddleInit + " " + person.LastName, -60} {"Email: " + person.Email, -60}\n");
+
+                // Day and Night Phones
+                retval += String.Format($"{"Day Phone: " + person.DayPhone,-60} {"Evening Phone: " + person.EveningPhone,-60}\n");
+
+                // Mobile Phone and US Citizen
+                retval += String.Format($"{"Mobile Phone: " + person.MobilePhone,-60} {"Is US Citizen: " + person.IsUSCitizen,-60}\n");
+
+                // Address, City, State, and Zip
+                retval += String.Format($"{"Address: " + person.Address}{", " + person.City}{", " + person.State}{" " + person.Zip}\n");
+                
                 // Space
-                retval = retval + "\n";
+                retval += "\n";
             }
             return retval;
         }
@@ -155,25 +175,26 @@ namespace ProjectSaturn.Controllers
             string retval = "";
             foreach (General general in GeneralList)
             {
-                // General
-                retval = retval + "Degree: " + general.Degree + "\t\t";
-                retval = retval + "DegreeStatus: " + general.DegreeStatus + "\t\t";
-                retval = retval + "Anticipated Graduation Date: " + general.AntiGradDate + "\n";
-                // GPA
-                retval = retval + "OverallGPA: " + general.OverallGPA + "\t\t";
-                retval = retval + "MajorGPA: " + general.MajorGPA + "\t\t";
-                // SAT
-                retval = retval + "SATV: " + general.SATV + "\t\t";
-                retval = retval + "SATM: " + general.SATM + "\n";
-                // ACT
-                retval = retval + "ACTV: " + general.ACTV + "\t\t";
-                retval = retval + "ACTM: " + general.ACTM + "\t\t";
-                // GRE
-                retval = retval + "GREV: " + general.GREV + "\t\t";
-                retval = retval + "GREQ: " + general.GREQ + "\t\t";
-                retval = retval + "GREA: " + general.GREA + "\n";
+                // Degree and Degree Status
+                retval += String.Format($"{"Degree: " + general.Degree,-60} {"Degree Status: " + general.DegreeStatus,-60}\n");
+
+                // Graduation Date and Overall GPA
+                retval += String.Format($"{"Graduation Date: " + general.AntiGradDate,-60} {"Overall GPA: " + general.OverallGPA,-60}\n");
+
+                // Major GPA and SAT Verbal
+                retval += String.Format($"{"Major GPA: " + general.MajorGPA,-60} {"SATV: " + general.SATV,-60}\n");
+
+                // ACT Verbal and SAT Mathematics
+                retval += String.Format($"{"ACTV: " + general.ACTV,-60} {"SATM: " + general.SATM,-60}\n");
+
+                // ACT Mathematics and GRE Verbal
+                retval += String.Format($"{"ACTM: " + general.ACTM,-60} {"GREV: " + general.GREV,-60}\n");
+
+                // GRE Quantative and GRE Analytical
+                retval += String.Format($"{"GREQ: " + general.GREQ,-60} {"GREA: " + general.GREA,-60}\n");
+                
                 // Space
-                retval = retval + "\n";
+                retval += "\n";
             }
             return retval;
         }
@@ -184,27 +205,33 @@ namespace ProjectSaturn.Controllers
             string retval = "";
             foreach (Education education in EducationList)
             {
-                // General
-                retval = retval + "Name: " + education.Name + "\t\t";
-                retval = retval + "Major: " + education.Major + "\t\t";
-                retval = retval + "DegreeEarned: " + education.DegreeEarned + "\t\t";
-                retval = retval + "DateEarned: " + education.DegreeDate + "\n";
-                // Location
-                retval = retval + "School City: " + education.SchoolCity + "\t\t";
-                retval = retval + "School State: " + education.SchoolState + "\t\t";
-                retval = retval + "School Zip: " + education.SchoolZip + "\n";
-                // GPA
-                retval = retval + "Overall GPA: " + education.OverallGPA + "\t\t";
-                retval = retval + "Major GPA: " + education.MajorGPA + "\n";
+                // School Name and Major
+                retval += String.Format($"{"Name: " + education.Name,-60} {"Major: " + education.Major,-60}\n");
+
+                // Degree Earned and Date Earned
+                retval += String.Format($"{"DegreeEarned: " + education.DegreeEarned,-60} {"DateEarned: " + education.DegreeDate,-60}\n");
+
+                // City and State
+                retval += String.Format($"{"School City: " + education.SchoolCity,-60} {"School State: " + education.SchoolState, -60}\n");
+
+                // Zip and Overall GPA
+                retval += String.Format($"{"School Zip: " + education.SchoolZip,-60} {"Overall GPA: " + education.OverallGPA,-60}\n");
+
+                // Major GPA
+                retval += String.Format($"{"Major GPA: " + education.MajorGPA,-60}\n");
+
                 // SkillsGained
-                retval = retval + "Skills Gained: \n";
+                retval += String.Format($"{"Skills Gained: "}\n");
+                
+                // Each Skill
                 foreach (string skill in education.SkillsGained)
                 {
-                    retval = retval + "\t" + skill + "\n";
+                    retval += String.Format($"\t-{skill,-60}\n");
                 }
+
+                // Space
+                retval += "\n";
             }
-            // Space
-            retval = retval + "\n";
             return retval;
         }
 
@@ -214,24 +241,38 @@ namespace ProjectSaturn.Controllers
             string retval = "";
             foreach (Professional profession in ProfessionList)
             {
-                // Profession
-                retval = retval + "Profession: " + profession.Name + "\t\t";
-                retval = retval + "Position: " + profession.Position + "\n";
-                // Date
-                retval = retval + "Start Date: " + profession.StartDate + "\t\t";
-                retval = retval + "End Date: " + profession.EndDate + "\t\t";
-                // Location
-                retval = retval + "City: " + profession.ProfessionCity + "\t\t";
-                retval = retval + "State: " + profession.ProfessionState + "\n";
+                // Profession Name and Position
+                retval += String.Format($"{"Profession: " + profession.Name, -60} {"Position: " + profession.Position, -60}\n");
+
+                // Format End Date
+                string EndDate = "";
+                if (profession.EndDate == null)
+                {
+                    EndDate = "Current";
+                }
+                else
+                {
+                    EndDate = profession.EndDate.ToString();
+                }
+
+                // Start and End Dates
+                retval = retval + String.Format($"{"Start Date: " + profession.StartDate,-60} {"End Date: " + EndDate,-60}\n");
+
+                // City and State
+                retval += String.Format($"{"City: " + profession.ProfessionCity, -60} {"State: " + profession.ProfessionState, -60}\n");
+
                 // SkillsGained
-                retval = retval + "Skills Gained: \n";
+                retval += String.Format($"{"Skills Gained: ",-60}\n");
+
+                // Each Skill
                 foreach (string skill in profession.SkillsGained)
                 {
-                    retval = retval + "\t" + skill + "\n";
+                    retval += String.Format($"\t-{skill,-60}\n");
                 }
+
+                // Space
+                retval += "\n";
             }
-            // Space
-            retval = retval + "\n";
             return retval;
         }
 
@@ -241,15 +282,16 @@ namespace ProjectSaturn.Controllers
             string retval = "";
             foreach (Certifications certification in CertificationList)
             {
-                // Certification
-                retval = retval + "\tCertification Name: " + certification.Certification;
-                retval = retval + "\tEarn Date: " + certification.Date;
-                retval = retval + "\tCompleted: " + certification.Completed;
-                // Next
-                retval = retval + "\n";
+                // Certification Name and Earn Date
+                retval += String.Format($"{"Certification Name: " + certification.Certification, -60} {"Earn Date: " + certification.Date,-60}\n");
+                
+                // Completed
+                retval += String.Format($"{"Completed: " + certification.Completed, -60}\n");
             }
+
             // Space
-            retval = retval + "\n";
+            retval += "\n";
+
             return retval;
         }
 
@@ -260,12 +302,12 @@ namespace ProjectSaturn.Controllers
             foreach (Skills skills in SkillsList)
             {
                 // Skill
-                retval = retval + "\t" + skills.Skill;
-                // Next
-                retval = retval + "\n";
+                retval += String.Format($"-{"" + skills.Skill, -60}\n");
             }
+
             // Space
-            retval = retval + "\n";
+            retval += "\n";
+
             return retval;
         }
 
@@ -276,13 +318,12 @@ namespace ProjectSaturn.Controllers
             foreach (Awards award in AwardList)
             {
                 // Awards
-                retval = retval + "\tAward: " + award.Award;
-                retval = retval + "\tDate: " + award.EarnDate;
-                // Next
-                retval = retval + "\n";
+                retval += String.Format($"-{"Award: " + award.Award, -60} {"Date: " + award.EarnDate, -60}\n");
             }
+
             // Space
-            retval = retval + "\n";
+            retval += "\n";
+
             return retval;
         }
     }

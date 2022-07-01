@@ -37,12 +37,12 @@
         </div>
 
         <div class="form-padding col-12 col-md-4">
-            <label asp-for="EndDate">End Date*</label>
+            <label asp-for="EndDate">End Date</label>
             <input name="EndDate" asp-for="EndDate" type="month" class="form-control" />
             <span asp-validation-for="EndDate" class="text-danger"></span>
         </div>
 
-        <div class="form-padding col-12 col-md-12">
+        <div class="form-padding col-11 col-md-12">
             <label asp-for="SkillsGained">Description</label>
             <div class="prof_fields_wrap flex-wrap">
                 @*Will be filled by add_field_button below*@

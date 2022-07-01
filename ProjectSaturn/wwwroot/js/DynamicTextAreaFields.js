@@ -18,7 +18,6 @@
 $(document).ready(function () {
 	var add_button = $(".add_field_button");
 	var field_count = 0;
-	var persistant_count = 0;
 	var max_fields = 0;
 	var min_fields = 1;
 	var added_fields = "";
@@ -110,14 +109,13 @@ $(document).ready(function () {
 
 	$(document).on("click", ".remove_field", function (e) {
 		e.preventDefault();
-		persistant_count = field_count;
 
-		if (persistant_count == 1 + field_count) { // Unhide button when max fields not reached
+		if (field_count == max_fields) { // Unhide button when max fields not reached
 			$(".add_field_button").show();
 		}
 
 
-		if (field_count != min_fields) {
+		if (field_count != min_fields) { // Remove desired field
 			field_count--;
 			$(this).parent('div').parent('div').remove();
 		}

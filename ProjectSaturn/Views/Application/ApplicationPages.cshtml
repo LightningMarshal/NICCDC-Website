@@ -9,6 +9,10 @@
 
     <main class="col-md-10 col-xl-11" style="position: relative;">
         <h1 class="text-center">@ViewData["Title"]</h1>
+        @*<h3 class="text-center">Max Submisssions: @ViewData["Max"]</h3>
+        //RFMC   
+        for more info on why this was removed, go to ApplicationController and search for the "Removal for Max Conditions" comment
+        *@
         <span name="error" class="text-center text-danger">@ViewData["Error"]</span>
         <partial name="@ViewData["ApplicationPartial"]" />
     </main>

@@ -67,10 +67,12 @@ $(document).ready(function () {
         }).done(function (msg) {
             if (msg == "true") {
                 alert("Success! Your response has been recorded. Please continue to the next section");
+                $('form').trigger("reset");
             } else if (msg == "false") {
                 alert("Error! Something went wrong! Please try resubmitting. As a last resort, reload the page.");
             } else if (msg == "true another") {
                 alert("Success! Your response has been recorded. Please add another submission or continue to next section.")
+                $('form').trigger("reset");
             } else if (msg == "required") {
                 alert("Required inputs (*) are missing. Please resubmit with all required (*) inputs.");
             } else if (msg == "drequired") {
