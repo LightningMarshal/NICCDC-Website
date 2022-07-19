@@ -1,0 +1,114 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <!--Uncommenting below will reenable non-nullable types-->
+    <!--<Nullable>enable</Nullable>-->
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="RegularPages\about_niatec\alumni.html" />
+    <Content Include="RegularPages\about_niatec\howtoapply.html" />
+    <Content Include="RegularPages\about_niatec\niatecprogram.html" />
+    <Content Include="RegularPages\about_niatec\requestaspeaker.html" />
+    <Content Include="RegularPages\assets\css\fontawesome-all.min.css" />
+    <Content Include="RegularPages\assets\css\images\bg.png" />
+    <Content Include="RegularPages\assets\css\main.css" />
+    <Content Include="RegularPages\assets\js\breakpoints.min.js" />
+    <Content Include="RegularPages\assets\js\browser.min.js" />
+    <Content Include="RegularPages\assets\js\jquery.dropotron.min.js" />
+    <Content Include="RegularPages\assets\js\jquery.min.js" />
+    <Content Include="RegularPages\assets\js\main.js" />
+    <Content Include="RegularPages\assets\js\util.js" />
+    <Content Include="RegularPages\assets\sass\libs\_breakpoints.scss" />
+    <Content Include="RegularPages\assets\sass\libs\_functions.scss" />
+    <Content Include="RegularPages\assets\sass\libs\_html-grid.scss" />
+    <Content Include="RegularPages\assets\sass\libs\_mixins.scss" />
+    <Content Include="RegularPages\assets\sass\libs\_vars.scss" />
+    <Content Include="RegularPages\assets\sass\libs\_vendor.scss" />
+    <Content Include="RegularPages\assets\sass\main.scss" />
+    <Content Include="RegularPages\assets\webfonts\fa-brands-400.eot" />
+    <Content Include="RegularPages\assets\webfonts\fa-brands-400.svg" />
+    <Content Include="RegularPages\assets\webfonts\fa-brands-400.ttf" />
+    <Content Include="RegularPages\assets\webfonts\fa-brands-400.woff" />
+    <Content Include="RegularPages\assets\webfonts\fa-brands-400.woff2" />
+    <Content Include="RegularPages\assets\webfonts\fa-regular-400.eot" />
+    <Content Include="RegularPages\assets\webfonts\fa-regular-400.svg" />
+    <Content Include="RegularPages\assets\webfonts\fa-regular-400.ttf" />
+    <Content Include="RegularPages\assets\webfonts\fa-regular-400.woff" />
+    <Content Include="RegularPages\assets\webfonts\fa-regular-400.woff2" />
+    <Content Include="RegularPages\assets\webfonts\fa-solid-900.eot" />
+    <Content Include="RegularPages\assets\webfonts\fa-solid-900.svg" />
+    <Content Include="RegularPages\assets\webfonts\fa-solid-900.ttf" />
+    <Content Include="RegularPages\assets\webfonts\fa-solid-900.woff" />
+    <Content Include="RegularPages\assets\webfonts\fa-solid-900.woff2" />
+    <Content Include="RegularPages\images\circuitboard.jpg" />
+    <Content Include="RegularPages\images\circuitboard2.jpg" />
+    <Content Include="RegularPages\images\circuitboard3.jpg" />
+    <Content Include="RegularPages\images\closeupcode1.jpg" />
+    <Content Include="RegularPages\images\closeupcode2.jpg" />
+    <Content Include="RegularPages\images\closeupcode3.jpg" />
+    <Content Include="RegularPages\images\codejam.jpg" />
+    <Content Include="RegularPages\images\lightbulb.jpg" />
+    <Content Include="RegularPages\images\mainframegreen.jpg" />
+    <Content Include="RegularPages\images\missioncontrol.jpg" />
+    <Content Include="RegularPages\images\physicalcybersecurity.jpg" />
+    <Content Include="RegularPages\images\pic01.jpg" />
+    <Content Include="RegularPages\images\pic02.jpg" />
+    <Content Include="RegularPages\images\pic03.jpg" />
+    <Content Include="RegularPages\images\pic04.jpg" />
+    <Content Include="RegularPages\images\pic05.jpg" />
+    <Content Include="RegularPages\images\pic06.jpg" />
+    <Content Include="RegularPages\images\pic07.jpg" />
+    <Content Include="RegularPages\images\pic08.jpg" />
+    <Content Include="RegularPages\images\pic09.jpg" />
+    <Content Include="RegularPages\images\pic10.jpg" />
+    <Content Include="RegularPages\images\PlaceHolder1.jpg" />
+    <Content Include="RegularPages\images\problemsolving.jpg" />
+    <Content Include="RegularPages\images\thisiscybersecuirty.jpg" />
+    <Content Include="RegularPages\images\thisisengineering.jpg" />
+    <Content Include="RegularPages\images\whiteboard.jpg" />
+    <Content Include="RegularPages\images\whiteboard2.jpg" />
+    <Content Include="RegularPages\images\whiteboardcloseup.jpg" />
+    <Content Include="RegularPages\images\workstation.jpg" />
+    <Content Include="RegularPages\index template.html" />
+    <Content Include="RegularPages\index.html" />
+    <Content Include="RegularPages\left-sidebar template.html" />
+    <Content Include="RegularPages\media.html" />
+    <Content Include="RegularPages\niatec.html" />
+    <Content Include="RegularPages\niccdc.html" />
+    <Content Include="RegularPages\niccdc\history.html" />
+    <Content Include="RegularPages\niccdc\mission.html" />
+    <Content Include="RegularPages\niccdc\past-winners.html" />
+    <Content Include="RegularPages\niccdc\standings.html" />
+    <Content Include="RegularPages\no-sidebar template.html" />
+    <Content Include="RegularPages\participants.html" />
+    <Content Include="RegularPages\participants\faq.html" />
+    <Content Include="RegularPages\participants\registration.html" />
+    <Content Include="RegularPages\participants\rules.html" />
+    <Content Include="RegularPages\participants\schedule.html" />
+    <Content Include="RegularPages\README.md" />
+    <Content Include="RegularPages\right-sidebar template.html" />
+    <Content Include="RegularPages\sponsors.html" />
+    <Content Include="RegularPages\sponsors\pastsponsors.html" />
+    <Content Include="RegularPages\stayconnected.html" />
+    <Content Include="RegularPages\volunteers.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="wwwroot\downloadables\SFS Recommendation form.pdf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="jQuery" Version="3.6.0" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+  </ItemGroup>
+
+</Project>

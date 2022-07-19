@@ -1,0 +1,109 @@
+﻿@model ProjectJanus.Models.General
+
+@*The General Info data form portion*@
+<form asp-action="GeneralDetails" class="d-flex justify-content-around flex-wrap">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="col-12 col-lg-8 form-group d-flex flex-wrap justify-content-between">
+
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="Degree">Degree This Will Be Used For*</label>
+            <select name="Degree" asp-for="Degree" class="form-control">
+                <option value="Bachelor">Bachelor's</option>
+                <option value="Master">Master's</option>
+                <option value="Doctoral">Doctorate</option>
+            </select>
+            <span asp-validation-for="Degree" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="DegreeStatus">Degree Status*</label>
+            <select name="DegreeStatus" asp-for="DegreeStatus" class="form-control">
+                <option value="Attending">Attending</option>
+                <option value="Accepted, Not Yet Attending">Accepted, Not Yet Attending</option>
+                <option value="Applied">Applied</option>
+                <option value="Have Not Applied">Have Not Applied</option>
+            </select>
+            <span asp-validation-for="DegreeStatus" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="AntiGradDate">Anticipated Graduation Date*</label>
+            <input name="AntiGradDate" asp-for="AntiGradDate" type="month" class="form-control" />
+            <span asp-validation-for="AntiGradDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-3">
+            <label asp-for="OverallGPA">Overall GPA*</label>
+            <input name="OverallGPA" asp-for="OverallGPA" type="number" step="0.1" max="5.0" min="0.0" class="form-control" placeholder="3.9"/>
+            <span asp-validation-for="OverallGPA" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-3">
+            <label asp-for="MajorGPA">Major GPA*</label>
+            <input name="MajorGPA" asp-for="MajorGPA" type="number" step="0.1" max="5.0" min="0.0" class="form-control" placeholder="3.9"/>
+            <span asp-validation-for="MajorGPA" class="text-danger"></span>
+        </div>
+       
+        <div class="form-padding col-12 col-md-3">
+            <label asp-for="SATV">Reading SAT</label>
+            <input name="SATV" asp-for="SATV" type="number" max="800" min="200" class="form-control" placeholder="200-800"/>
+            <span asp-validation-for="SATV" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-3">
+            <label asp-for="SATM">Math SAT</label>
+            <input name="SATM" asp-for="SATM" type="number" max="800" min="200" class="form-control" placeholder="200-800"/>
+            <span asp-validation-for="SATM" class="text-danger"></span>
+        </div>
+        
+        <div class="form-padding col-12 col-md-2">
+            <label asp-for="ACTV">Reading ACT</label>
+            <input name="ACTV" asp-for="ACTV" type="number" max="36" min="0" class="form-control" placeholder="0-36"/>
+            <span asp-validation-for="ACTV" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-2">
+            <label asp-for="ACTM">Math ACT</label>
+            <input name="ACTM" asp-for="ACTM" type="number" max="36" min="0" class="form-control" placeholder="0-36"/>
+            <span asp-validation-for="ACTM" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-2">
+            <label asp-for="GREV">Verbal GRE</label>
+            <input name="GREV" asp-for="GREV" type="number" max="170" min="130" class="form-control" placeholder="130-170"/>
+            <span asp-validation-for="GREV" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-2">
+            <label asp-for="GREQ">Quantitive GRE</label>
+            <input name="GREQ" asp-for="GREQ" type="number" max="170" min="130" class="form-control" placeholder="130-170"/>
+            <span asp-validation-for="GREQ" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-2">
+            <label asp-for="GREA">Analytical GRE</label>
+            <input name="GREA" asp-for="GREA" type="number" max="6" min="0" class="form-control" placeholder="0-6"/>
+            <span asp-validation-for="GREA" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 form-padding d-flex">
+            <div class="col-1 ms-auto d-flex justify-content-end">
+                <button type="submit" value="GeneralDetails" class="betterbtn form_submit">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="nav-button-padding col-12 d-flex justify-content-between">
+    <div class="back-button">
+        <a asp-controller="Application" asp-action="PersonalDetails" class="betterbtn">&lt;&lt;&lt; Personal</a>
+    </div>
+
+    <div class="next-button">
+        <a asp-controller="Application" asp-action="EducationDetails" class="betterbtn">Education &gt;&gt;&gt;</a>
+    </div>
+</div>  
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/InputTextArea.js"></script>

@@ -1,0 +1,31 @@
+﻿@model ProjectJanus.Models.Personal
+<link rel="stylesheet" href="~/css/WebStyles.css" />
+
+<main class="d-flex flex-wrap justify-content-center">
+    <div class="form-padding cookie_wrap d-flex flex-wrap">
+        @*This will have the cookie notification pop up.*@
+    </div>
+    <h1 class="col-12 text-center">Welcome to Our Application Page!</h1> 
+    <h4 class="col-12 text-center">To begin the application process, please enter your email below!</h4>
+    <h5 class="col-12 text-center">*Please be sure that the email is correct, so that we can reach you.</h5>
+
+    <form asp-controller="Application" asp-action="Home" class="completely-centered-options col-12 col-md-6 col-lg-4 d-flex flex-wrap">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        @* Get the User's Email *@
+        <div class="col-12">
+            <label asp-for="Email">Email:</label>
+            <input name="Email" asp-for="Email" class="form-control" placeholder="johndoe&#64;xyzsite.com" />
+            <span asp-validation-for="Email" class="text-danger">@ViewData["Error"]</span>
+        </div>
+        <div class="col-12 form-padding d-flex">
+            <div class="ms-auto d-flex justify-content-end">
+                <button type="submit" value="PersonalDetails" class="betterbtn form_submit" style="margin-right: 0px;">Submit</button>
+            </div>
+        </div>
+        
+    </form>
+</main>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/UserConsent.js"></script>

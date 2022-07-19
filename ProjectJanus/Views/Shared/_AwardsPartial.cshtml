@@ -1,0 +1,38 @@
+﻿@model ProjectJanus.Models.Awards
+
+@*This contains all of the awards forms*@
+<form asp-action="AwardsDetails" class="d-flex justify-content-around flex-wrap">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    
+    <div class="col-12 col-lg-8 form-group d-flex flex-wrap">
+
+        <div class="form-padding col-12">
+            <div class="form-padding awards_fields_wrap d-flex flex-wrap justify-content-between">
+                @*Will be filled by add_field_button below*@
+            </div>
+            <div class="fields_button">
+                <button class="add_field_button betterbtn betterbtndefault" value=".awards_fields_wrap" data-type="Awards">Add More Fields</button>
+            </div>
+        </div>
+    
+        <div class="col-12 form-padding d-flex">
+            <div class="col-1 ms-auto d-flex justify-content-end">
+                <button type="submit" value="AwardsDetails" class="betterbtn form_submit">Submit</button>
+            </div>
+        </div>
+
+    </div>
+</form>
+<div class="nav-button-padding col-12 d-flex justify-content-between">
+    <div class="back-button">
+        <a asp-controller="Application" asp-action="SkillsDetails" class="betterbtn">&lt;&lt;&lt; Skills</a>
+    </div>
+    <div class="next-button">
+        <a asp-controller="Submission" asp-action="Mail" class="betterbtn">Finished &gt;&gt;&gt;</a>
+    </div>
+</div>  
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/DynamicTextAreaFields.js"></script>
+<script src="~/js/InputTextArea.js"></script>

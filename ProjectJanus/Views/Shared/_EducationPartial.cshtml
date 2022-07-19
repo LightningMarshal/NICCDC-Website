@@ -1,0 +1,103 @@
+﻿@model ProjectJanus.Models.Education
+
+<div class="justify-content-center">
+    <h5 class="text-center">For every submission, please email or fax a transcript to:</h5>
+    <h5 class="text-center">niatec@niatec.isu.edu or 208-282-6054</h5>
+</div>
+
+@*This is the education form in the application form*@
+<form asp-action="EducationDetails" class="d-flex justify-content-around flex-wrap">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="col-12 col-lg-8 form-group d-flex flex-wrap">
+        <div class="form-padding col-12 col-md-6">
+            <label asp-for="Name">Name of School*</label>
+            <input name="Name" asp-for="Name" class="form-control" placeholder="Idaho State University"/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-6">
+            <label asp-for="Major">Major*</label> 
+            <textarea name="Major" asp-for="Major" class="form-control form-text-area" placeholder="Computer Science" ></textarea>
+            <span asp-validation-for="Major" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-3">
+            <label asp-for="DegreeEarned">Degree Earned</label>
+            <select name="DegreeEarned" asp-for="DegreeEarned" class="form-control">
+                <option value=""></option>
+                <option value="Associate">Associate</option>
+                <option value="Bachelor">Bachelor</option>
+                <option value="Master">Master</option>
+                <option value="Doctoral">Doctoral</option>
+            </select>
+        </div>
+
+        <div class="form-padding col-12 col-md-3">
+            <label asp-for="DegreeDate">Degree Date</label>
+            <input name="DegreeDate" asp-for="DegreeDate" type="month" class="form-control"/>
+            <span asp-validation-for="DegreeDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-3">
+            <label asp-for="OverallGPA">Overall GPA*</label>
+            <input name="OverallGPA" asp-for="OverallGPA" type="number" step="0.1" max="5.0" min="0.0" class="form-control" placeholder="3.9"/>
+            <span asp-validation-for="OverallGPA" class="text-danger"></span>
+        </div>
+        
+        <div class="form-padding col-12 col-md-3">
+            <label asp-for="MajorGPA">Major GPA*</label>
+            <input name="MajorGPA" asp-for="MajorGPA" type="number" step="0.1" max="5.0" min="0.0" class="form-control" placeholder="3.9"/>
+            <span asp-validation-for="MajorGPA" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="SchoolCity">School City*</label>
+            <textarea name="SchoolCity" asp-for="SchoolCity" class="form-control form-text-area" placeholder="City" maxlength="100"></textarea>
+            <span asp-validation-for="SchoolCity" class="text-danger"></span>
+        </div>
+        
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="SchoolState">School State*</label>
+            <textarea name="SchoolState" asp-for="SchoolState" class="form-control form-text-area" placeholder="State" maxlength="100"></textarea>
+            <span asp-validation-for="SchoolState" class="text-danger"></span>
+        </div>
+        
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="SchoolZip">School Zip*</label>
+            <textarea name="SchoolZip" asp-for="SchoolZip" class="form-control form-text-area" placeholder="Zip Code" maxlength="10"></textarea>
+            <span asp-validation-for="SchoolZip" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-11 col-md-12">
+            <label asp-for="SkillsGained">Description</label>
+            <div class="edu_fields_wrap">
+                @*Will be filled by add_field_button below*@
+            </div>
+            <div class="fields_button">
+                <button class="add_field_button betterbtn betterbtndefault" value=".edu_fields_wrap" data-type="SkillsGained">Add More Fields</button>
+            </div>
+            <span asp-validation-for="SkillsGained" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 form-padding d-flex">
+            <div class="col-1 ms-auto d-flex justify-content-end">
+                <button type="submit" value="EducationDetails" class="betterbtn form_submit">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="nav-button-padding col-12 d-flex justify-content-between">
+    <div class="back-button">
+        <a asp-controller="Application" asp-action="GeneralDetails" class="betterbtn">&lt;&lt;&lt; General</a>
+    </div>
+
+    <div class="next-button">
+        <a asp-controller="Application" asp-action="ProfessionalDetails" class="betterbtn">Professional &gt;&gt;&gt;</a>
+    </div>
+</div>  
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/DynamicTextAreaFields.js"></script>
+<script src="~/js/InputTextArea.js"></script>

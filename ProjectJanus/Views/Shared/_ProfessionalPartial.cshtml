@@ -1,0 +1,76 @@
+﻿@model ProjectJanus.Models.Professional;
+
+@*This is the main creation form to add more profession objects*@
+<form asp-action="ProfessionalDetails" class="d-flex justify-content-around flex-wrap">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="col-12 col-lg-8 form-group d-flex flex-wrap">
+
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="Name">Name of Organization*</label>
+            <input name="Name" asp-for="Name" class="form-control" placeholder="NAITEC"/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="Position">Title or Position*</label>
+            <input name="Position" asp-for="Position" class="form-control" placeholder="Intern"/>
+            <span asp-validation-for="Position" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="ProfessionCity">City*</label>
+            <input name="ProfessionCity" asp-for="ProfessionCity" class="form-control" placeholder="City"/>
+            <span asp-validation-for="ProfessionCity" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="ProfessionState">State*</label>
+            <input name="ProfessionState" asp-for="ProfessionState" class="form-control" placeholder="State"/>
+            <span asp-validation-for="ProfessionState" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="StartDate">Start Date*</label>
+            <input name="StartDate" asp-for="StartDate" type="month" class="form-control" />
+            <span asp-validation-for="StartDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-12 col-md-4">
+            <label asp-for="EndDate">End Date</label>
+            <input name="EndDate" asp-for="EndDate" type="month" class="form-control" />
+            <span asp-validation-for="EndDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-padding col-11 col-md-12">
+            <label asp-for="SkillsGained">Description</label>
+            <div class="prof_fields_wrap flex-wrap">
+                @*Will be filled by add_field_button below*@
+            </div>
+            <div class="fields_button">
+                <button class="add_field_button betterbtn betterbtndefault" value=".prof_fields_wrap" data-type="SkillsGained">Add More Fields</button>
+            </div>
+            <span asp-validation-for="SkillsGained" class="text-danger"></span>
+        </div>
+
+        <div class="col-12 form-padding d-flex">
+            <div class="col-1 ms-auto d-flex justify-content-end">
+                <button type="submit" value="ProfessionalDetails" class="betterbtn form_submit">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="nav-button-padding col-12 d-flex justify-content-between">
+    <div class="back-button">
+        <a asp-controller="Application" asp-action="EducationDetails" class="betterbtn">&lt;&lt;&lt; Education</a>
+    </div>
+
+    <div class="next-button">
+        <a asp-controller="Application" asp-action="CertificationDetails" class="betterbtn">Certifications &gt;&gt;&gt;</a>
+    </div>
+</div>  
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/DynamicTextAreaFields.js"></script>
+<script src="~/js/InputTextArea.js"></script>
