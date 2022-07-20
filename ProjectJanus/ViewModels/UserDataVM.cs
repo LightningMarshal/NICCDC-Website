@@ -1,5 +1,9 @@
 ﻿using ProjectJanus.Models;
 
+/*
+ * TODO: Possibly remove both this page and ViewModels as it appears they are not being used.
+ */
+
 namespace ProjectJanus.ViewModels
 {
     public class UserDataVM

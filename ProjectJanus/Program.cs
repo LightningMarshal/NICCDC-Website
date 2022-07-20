@@ -37,12 +37,6 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles(); // IMPORTANT DO NOT REMOVE - This allows all files under wwwRoot to be referenced.
 
-app.UseStaticFiles(new StaticFileOptions() // This allows the files in Regular Pages to be surved seperate from the views.
-{
-    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"RegularPages")),
-    RequestPath = new PathString("/NICCDC")
-});
-
 app.UseRouting();
 
 app.UseAuthorization();
@@ -52,7 +46,7 @@ app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=NICCDC}/{action=Index}/{id?}");
+    pattern: "{controller=NICCDC}/{action=Home}/{id?}");
 
 // Custom Middleware:
 app.UseMiddleware<CookieMiddleware>();

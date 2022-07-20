@@ -24,6 +24,7 @@ namespace ProjectJanus.Controllers
             return View();
         }
 
+        //TODO: Remove and link back to HowToApply
         public IActionResult Classic()
         {
             return View();

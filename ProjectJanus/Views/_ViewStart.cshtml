@@ -1,3 +1,20 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿<!--
+    This file is used to determine which layout should be used when a certain controller is being used.
+-->
+@{
+    var CurrentControllerName = ViewContext.RouteData.Values["controller"].ToString();
+    switch (CurrentControllerName)
+    {
+        case "Application":
+            Layout = "~/Views/Shared/_Layout.cshtml";
+            break;
+        case "NIATEC":
+            Layout = "~/Views/Shared/_NICCDCLayout.cshtml";
+            break;            
+        default:
+            Layout = "~/Views/Shared/_NICCDCLayout.cshtml";
+            break;
+
+    }
+    
 }

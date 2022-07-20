@@ -8,10 +8,53 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="RegularPages\about_niatec\alumni.html" />
-    <Content Include="RegularPages\about_niatec\howtoapply.html" />
-    <Content Include="RegularPages\about_niatec\niatecprogram.html" />
-    <Content Include="RegularPages\about_niatec\requestaspeaker.html" />
+    <Content Remove="wwwroot\images\1st.png" />
+    <Content Remove="wwwroot\images\2nd.png" />
+    <Content Remove="wwwroot\images\3rd.png" />
+    <Content Remove="wwwroot\images\array.jpg" />
+    <Content Remove="wwwroot\images\artificialintelligence.jpg" />
+    <Content Remove="wwwroot\images\award2.jpg" />
+    <Content Remove="wwwroot\images\chipexam.jpg" />
+    <Content Remove="wwwroot\images\codejam2.jpg" />
+    <Content Remove="wwwroot\images\cybersecurityfirst.jpg" />
+    <Content Remove="wwwroot\images\cybersecurityislife.jpg" />
+    <Content Remove="wwwroot\images\developer.jpg" />
+    <Content Remove="wwwroot\images\FAQ.jpg" />
+    <Content Remove="wwwroot\images\graphicscard.jpg" />
+    <Content Remove="wwwroot\images\Mentor_Sponsor.jpg" />
+    <Content Remove="wwwroot\images\metrics.jpg" />
+    <Content Remove="wwwroot\images\networking.jpg" />
+    <Content Remove="wwwroot\images\networking2.jpg" />
+    <Content Remove="wwwroot\images\newsstation.jpg" />
+    <Content Remove="wwwroot\images\NIATEC.png" />
+    <Content Remove="wwwroot\images\NIATEC_Computer.jpg" />
+    <Content Remove="wwwroot\images\NIATEC_Flag_01.png" />
+    <Content Remove="wwwroot\images\NIATEC_Flyer_2022.png" />
+    <Content Remove="wwwroot\images\niatec_mike_Pond.jpg" />
+    <Content Remove="wwwroot\images\niatec_NICCDC2021.jpg" />
+    <Content Remove="wwwroot\images\niatec_speaker.jpg" />
+    <Content Remove="wwwroot\images\niatec_thefutureofcyber.jpg" />
+    <Content Remove="wwwroot\images\NICCDC_Participants.jpg" />
+    <Content Remove="wwwroot\images\NICCDC_Rules.jpg" />
+    <Content Remove="wwwroot\images\NICCDC_Schedule.jpg" />
+    <Content Remove="wwwroot\images\NICCDC_Standings.jpg" />
+    <Content Remove="wwwroot\images\NICCDC_Themes.jpg" />
+    <Content Remove="wwwroot\images\NICCDC_Volunteers.jpg" />
+    <Content Remove="wwwroot\images\NSA-logo.png" />
+    <Content Remove="wwwroot\images\NSA.png" />
+    <Content Remove="wwwroot\images\NSF.png" />
+    <Content Remove="wwwroot\images\Past_Sponsors.jpg" />
+    <Content Remove="wwwroot\images\raspberrypiarduino.jpg" />
+    <Content Remove="wwwroot\images\sciencerules.jpg" />
+    <Content Remove="wwwroot\images\space.jpg" />
+    <Content Remove="wwwroot\images\Steven-Hernandez.jpg" />
+    <Content Remove="wwwroot\images\thisisengineering2.jpg" />
+    <Content Remove="wwwroot\images\Thumbs.db" />
+    <Content Remove="wwwroot\images\UCF_team.png" />
+    <Content Remove="wwwroot\images\virtualreality.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="RegularPages\assets\css\fontawesome-all.min.css" />
     <Content Include="RegularPages\assets\css\images\bg.png" />
     <Content Include="RegularPages\assets\css\main.css" />
@@ -72,28 +115,18 @@
     <Content Include="RegularPages\images\whiteboard2.jpg" />
     <Content Include="RegularPages\images\whiteboardcloseup.jpg" />
     <Content Include="RegularPages\images\workstation.jpg" />
-    <Content Include="RegularPages\index template.html" />
-    <Content Include="RegularPages\index.html" />
-    <Content Include="RegularPages\left-sidebar template.html" />
-    <Content Include="RegularPages\media.html" />
-    <Content Include="RegularPages\niatec.html" />
-    <Content Include="RegularPages\niccdc.html" />
+    <Content Include="RegularPages\templates\left-sidebar template.html" />
     <Content Include="RegularPages\niccdc\history.html" />
     <Content Include="RegularPages\niccdc\mission.html" />
     <Content Include="RegularPages\niccdc\past-winners.html" />
     <Content Include="RegularPages\niccdc\standings.html" />
-    <Content Include="RegularPages\no-sidebar template.html" />
-    <Content Include="RegularPages\participants.html" />
+    <Content Include="RegularPages\templates\no-sidebar template.html" />
     <Content Include="RegularPages\participants\faq.html" />
     <Content Include="RegularPages\participants\registration.html" />
     <Content Include="RegularPages\participants\rules.html" />
     <Content Include="RegularPages\participants\schedule.html" />
-    <Content Include="RegularPages\README.md" />
-    <Content Include="RegularPages\right-sidebar template.html" />
-    <Content Include="RegularPages\sponsors.html" />
+    <Content Include="RegularPages\templates\right-sidebar template.html" />
     <Content Include="RegularPages\sponsors\pastsponsors.html" />
-    <Content Include="RegularPages\stayconnected.html" />
-    <Content Include="RegularPages\volunteers.html" />
   </ItemGroup>
 
   <ItemGroup>
@@ -101,6 +134,50 @@
     <None Include="Views\Shared\_Layout.cshtml" />
     <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
     <None Include="wwwroot\downloadables\SFS Recommendation form.pdf" />
+    <None Include="wwwroot\images\1st.png" />
+    <None Include="wwwroot\images\2nd.png" />
+    <None Include="wwwroot\images\3rd.png" />
+    <None Include="wwwroot\images\array.jpg" />
+    <None Include="wwwroot\images\artificialintelligence.jpg" />
+    <None Include="wwwroot\images\award2.jpg" />
+    <None Include="wwwroot\images\chipexam.jpg" />
+    <None Include="wwwroot\images\codejam2.jpg" />
+    <None Include="wwwroot\images\cybersecurityfirst.jpg" />
+    <None Include="wwwroot\images\cybersecurityislife.jpg" />
+    <None Include="wwwroot\images\developer.jpg" />
+    <None Include="wwwroot\images\FAQ.jpg" />
+    <None Include="wwwroot\images\graphicscard.jpg" />
+    <None Include="wwwroot\images\Mentor_Sponsor.jpg" />
+    <None Include="wwwroot\images\metrics.jpg" />
+    <None Include="wwwroot\images\networking.jpg" />
+    <None Include="wwwroot\images\networking2.jpg" />
+    <None Include="wwwroot\images\newsstation.jpg" />
+    <None Include="wwwroot\images\NIATEC.png" />
+    <None Include="wwwroot\images\NIATEC_Computer.jpg" />
+    <None Include="wwwroot\images\NIATEC_Flag_01.png" />
+    <None Include="wwwroot\images\NIATEC_Flyer_2022.png" />
+    <None Include="wwwroot\images\niatec_mike_Pond.jpg" />
+    <None Include="wwwroot\images\niatec_NICCDC2021.jpg" />
+    <None Include="wwwroot\images\niatec_speaker.jpg" />
+    <None Include="wwwroot\images\niatec_thefutureofcyber.jpg" />
+    <None Include="wwwroot\images\NICCDC_Participants.jpg" />
+    <None Include="wwwroot\images\NICCDC_Rules.jpg" />
+    <None Include="wwwroot\images\NICCDC_Schedule.jpg" />
+    <None Include="wwwroot\images\NICCDC_Standings.jpg" />
+    <None Include="wwwroot\images\NICCDC_Themes.jpg" />
+    <None Include="wwwroot\images\NICCDC_Volunteers.jpg" />
+    <None Include="wwwroot\images\NSA-logo.png" />
+    <None Include="wwwroot\images\NSA.png" />
+    <None Include="wwwroot\images\NSF.png" />
+    <None Include="wwwroot\images\Past_Sponsors.jpg" />
+    <None Include="wwwroot\images\raspberrypiarduino.jpg" />
+    <None Include="wwwroot\images\sciencerules.jpg" />
+    <None Include="wwwroot\images\space.jpg" />
+    <None Include="wwwroot\images\Steven-Hernandez.jpg" />
+    <None Include="wwwroot\images\thisisengineering2.jpg" />
+    <None Include="wwwroot\images\Thumbs.db" />
+    <None Include="wwwroot\images\UCF_team.png" />
+    <None Include="wwwroot\images\virtualreality.jpg" />
   </ItemGroup>
 
   <ItemGroup>
