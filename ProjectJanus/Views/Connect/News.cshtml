@@ -1,55 +1,4 @@
-﻿<!-- Banner -->
-<section id="banner">
-	<header>
-		<h2>NIATEC Invitational Collegiate Cyber Defense Competition</h2>
-		<p>An Alternative Approach to Cyber Defense Competitions</p>
-	</header>
-</section>
-
-<!-- Intro -->
-<section id="intro" class="container">
-	<div class="row">
-		<div class="col-4 col-12-medium">
-			<section class="first">
-				<i class="icon solid featured fa-cog"></i>
-				<header>
-					<h2>Red Team</a></h2>
-				</header>
-				<p>Defend your network against the Red Team. Defend high value assets in order to gain
-					points. Experience incident response in a safe yet intense environment.
-				</p>
-			</section>
-		</div>
-		<div class="col-4 col-12-medium">
-			<section class="middle">
-				<i class="icon solid featured alt fa-bolt"></i>
-				<header>
-					<h2>Custom Scenario</h2>
-				</header>
-				<p>Challenge your skills in a unique scenario that will be entertaining as well as
-					educational. Immersive yourself in an environment to simulate the cybersecurity field.
-				</p>
-			</section>
-		</div>
-		<div class="col-4 col-12-medium">
-			<section class="last">
-				<i class="icon solid featured alt2 fa-star"></i>
-				<header>
-					<h2>Scoring Engine</h2>
-				</header>
-				<p>Compete with your team while our proprietary Scoring Engine tracks and scores your
-					progress in real time. Keep your critical systems online while your adversaries actively
-					attempt to thwart your efforts.</p>
-			</section>
-		</div>
-	</div>
-	<footer>
-		<ul class="actions">
-			<li><a asp-controller="Participants" asp-action="Register" class="button large">Get Started</a></li>
-			<li><a asp-controller="NICCDC" asp-action="NICCDC" class="button alt large">Learn More</a></li>
-		</ul>
-	</footer>
-</section>
+﻿@* Derived from news.html *@
 
 <!-- Main -->
 <section id="main">
@@ -60,73 +9,83 @@
 				<!-- Portfolio -->
 				<section>
 					<header class="major">
-						<h2>Find Out More</h2>
+						<h2>Current News</h2>
 					</header>
 					<div class="row">
 						<div class="col-4 col-6-medium col-12-small">
 							<section class="box">
-								<a asp-controller="NICCDC" asp-action="NICCDC" class="image featured"><img src="images/codejam.jpg"
+								<a href="https://www.isu.edu/news/2019-spring/idaho-state-universitys-corey-schou-inducted-into-2019-cyber-security-hall-of-fame.html" class="image featured"><img
+										src="https://www.isu.edu/media/publications/headlines/april-2019/schou-copy.jpg"
 										alt="" /></a>
 								<header>
-									<h3>Cyber Defense Competitions</h3>
+									<h3>NIATEC Director Inducted Into Cybersecurity Hall of Fame</h3>
 								</header>
-								<p>The NICCDC is designed to stimulate mission-oriented decision making through
-									unique and immersive scenarios that score
-									decision making over technical abilities alone.</p>
+								<p> The formal induction will be held
+									at an event on April 25, at the annual Hall of Fame Dinner at the Hotel at
+									Arundel Preserve in Hanover, Maryland.</p>
 								<footer>
 									<ul class="actions">
-										<li><a asp-controller="NICCDC" asp-action="NICCDC" class="button alt">Find Out More</a></li>
+										<li><a href="https://www.isu.edu/news/2019-spring/idaho-state-universitys-corey-schou-inducted-into-2019-cyber-security-hall-of-fame.html" class="button alt">Find out more</a></li>
 									</ul>
 								</footer>
 							</section>
 						</div>
 						<div class="col-4 col-6-medium col-12-small">
 							<section class="box">
-								<a asp-controller="NICCDC" asp-action="Volunteers" class="image featured"><img
-										src="images/thisisengineering2.jpg" alt="" /></a>
+								<a href="https://www.fiber.net/blog/uvu-wins-cyber-security-competition-next-big-thing/"
+									class="image featured"><img
+										src="https://www.uvu.edu/cybersecurity/images/cybersecurity_club.jpg"
+										alt="" /></a>
 								<header>
-									<h3>What to Help Out?</h3>
+									<h3>UVU Wins Cyber Security Competition, Are They the Next Big Thing?</h3>
 								</header>
-								<p>Every year we need volunteers and industry professionals to help pass on
-									their knowledge and skills to students in our program and in our
-									competitions. </p>
+								<p>Earlier this month their Cybersecurity
+									Club took first place in the NIATEC Invitational Collegiate Cyber Defense
+									Competition.</p>
 								<footer>
 									<ul class="actions">
-										<li><a asp-controller="NICCDC" asp-action="Volunteers" class="button alt">Find Out More</a></li>
+										<li><a href="https://www.fiber.net/blog/uvu-wins-cyber-security-competition-next-big-thing/"
+												class="button alt">Find out more</a></li>
 									</ul>
 								</footer>
 							</section>
 						</div>
 						<div class="col-4 col-6-medium col-12-small">
 							<section class="box">
-								<a asp-controller="NICCDC" asp-action="Connect" class="image featured"><img
-										src="images/sciencerules.jpg" alt="" /></a>
+								<a href="http://isubengal.com/students-get-cyber-savvy/"
+									class="image featured"><img src="~/images/NSA-logo.png" alt="" /></a>
 								<header>
-									<h3>Stay Connected with NIATEC</h3>
+									<h3>NSA Sponsors NICCDC</h3>
 								</header>
-								<p>Sign up for our newsletter to keep up to date with NIATEC news, competition
-									dates, application deadlines, volunteer opportunities and more. </p>
+								<p>Sponsored by the National Security Agency (NSA), six teams from the
+									surrounding area, ranging from high school to collegiate graduate students,
+									took part in the NICCDC. The NSA contributed $7,000 to distribute in the
+									form
+									of scholarships for those placing in the top three of the competition.</p>
 								<footer>
 									<ul class="actions">
-										<li><a asp-controller="NICCDC" asp-action="Connect" class="button alt">Find Out More</a>
-										</li>
+										<li><a href="http://isubengal.com/students-get-cyber-savvy/"
+												class="button alt">Find out more</a></li>
 									</ul>
 								</footer>
 							</section>
 						</div>
 						<div class="col-4 col-6-medium col-12-small">
 							<section class="box">
-								<a asp-controller="NIATEC" asp-action="Speaker" class="image featured"><img
-										src="images/niatec_speaker.jpg" alt="" /></a>
+								<a href="https://www.cs.ucf.edu/ucf-wins-niatec-invitational-collegiate-cyber-defense-competition/"
+									class="image featured"><img
+										src="https://www.cs.ucf.edu/wp-content/uploads/2021/04/NIATEC_team.png"
+										alt="" /></a>
 								<header>
-									<h3>Request a NIATEC Speaker</h3>
+									<h3>UCF Wins 2021 NICCDC</h3>
 								</header>
-								<p>Invite a NIATEC security professional to speak to your business or classroom
-									to speak about the latest cybersecurity best practices.</p>
+								<p>Congratulations to the UCF Collegiate Cybersecurity Competition Team and
+									coach Tom Nedorost for winning the 8th Annual NIATEC Invitational Collegiate
+									Cyber Defense Competition on Saturday, April 17th</p>
 								<footer>
 									<ul class="actions">
-										<li><a asp-controller="NIATEC" asp-action="Speaker" class="button alt">Find
-												Out More</a></li>
+										<li><a href="https://www.cs.ucf.edu/ucf-wins-niatec-invitational-collegiate-cyber-defense-competition/"
+												class="button alt">Find out more</a></li>
 									</ul>
 								</footer>
 							</section>
@@ -134,7 +93,8 @@
 						<div class="col-4 col-6-medium col-12-small">
 							<section class="box">
 								<a href="https://www.isu.edu/news/2017-fall/isu-college-of-business-mba-niatec-graduates-become-chief-information-security-officers-in-major-government-programs.html"
-									class="image featured"><img src="images/Steven-Hernandez.jpg" alt="" /></a>
+									class="image featured"><img src="~/images/Steven-Hernandez.jpg"
+										alt="" /></a>
 								<header>
 									<h3>Alumni Spotlight</h3>
 								</header>
@@ -145,25 +105,27 @@
 								<footer>
 									<ul class="actions">
 										<li><a href="https://www.isu.edu/news/2017-fall/isu-college-of-business-mba-niatec-graduates-become-chief-information-security-officers-in-major-government-programs.html"
-												class="button alt">Find Out More</a></li>
+												class="button alt">Find out more</a></li>
 									</ul>
 								</footer>
 							</section>
 						</div>
 						<div class="col-4 col-6-medium col-12-small">
 							<section class="box">
-								<a asp-controller="NICCDC" asp-action="NIATEC" class="image featured"><img
-										src="images/niatec_mike_Pond.jpg" alt="" /></a>
+								<a href="#" class="image featured"><img
+										src="https://lds-business-college.brightspotcdn.com/dims4/default/40f6a4e/2147483647/strip/true/crop/5312x2612+0+0/resize/1920x944!/quality/90/?url=http%3A%2F%2Flds-business-college-brightspot.s3.amazonaws.com%2F5f%2Fda%2F58b4adaabaa5e64467599c8991ca%2Fthe-whole-crew-at-niatec.jpg"
+										alt="" /></a>
 								<header>
-									<h3>Join the NIATEC Program</h3>
+									<h3>Ensign College Takes 2nd Place 2018</h3>
 								</header>
-								<p>
-									We're training the next generation of America's keyboard warriors.
-									Come find out why we're the best Scholarship for Service
-									program in the nation. </p>
+								<p>“The United States it is under attack, and we don’t have enough people
+									learning the skills needed to protect us,” said Spencer DeGraw, LDSBC
+									Information Technology Program Chair. “This is why [the NICCDC] and other IT
+									competitions are organized and promoted around the country.”</p>
 								<footer>
 									<ul class="actions">
-										<li><a asp-controller="NICCDC" asp-action="NIATEC" class="button alt">Find Out More</a></li>
+										<li><a href="https://www.ensign.edu/campus-news/cybersecurity-team-takes-2nd-place-at-regional-niatec-cyber-competition"
+												class="button alt">Find out more</a></li>
 									</ul>
 								</footer>
 							</section>
@@ -183,7 +145,7 @@
 						<div class="col-6 col-12-small">
 							<section class="box">
 								<a asp-controller="Connect" asp-action="Q1_2021_PressRelease"
-									class="image featured"><img src="images/award2.jpg" alt="" /></a>
+									class="image featured"><img src="~/images/award2.jpg" alt="" /></a>
 								<header>
 									<h3>NIATEC 2022 Q1 Press Release: NICCDC Results <br /> & Scholarship Awards
 									</h3>
@@ -207,7 +169,7 @@
 						<div class="col-6 col-12-small">
 							<section class="box">
 								<a asp-controller="Connect" asp-action="MikePond"
-									class="image featured"><img src="images/virtualreality.jpg" alt="" /></a>
+									class="image featured"><img src="~/images/virtualreality.jpg" alt="" /></a>
 								<header>
 									<h3>Cybersecurity Awareness Month: Cybersecurity First</h3>
 									<p>Posted 09-24-2021 By Mike Pond</p>

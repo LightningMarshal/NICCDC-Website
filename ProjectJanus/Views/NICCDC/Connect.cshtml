@@ -6,7 +6,7 @@
 
 				<!-- Content -->
 				<article class="box post">
-					<a href="#" class="image featured"><img src="images/Mentor_Sponsor.jpg" alt="" /></a>
+					<a href="#" class="image featured"><img src="~/images/Mentor_Sponsor.jpg" alt="" /></a>
 					<header>
 						<h2>Stay Connected With NIATEC</h2>
 					</header>
@@ -30,7 +30,7 @@
 
 				<!-- Sidebar -->
 				<section class="box">
-					<a href="#" class="image featured"><img src="images/award2.jpg" alt="" /></a>
+					<a href="#" class="image featured"><img src="~/images/award2.jpg" alt="" /></a>
 					<header>
 						<h3>NIATEC 2022 Q1 Press Release: NICCDC Results & Scholarship Awards</h3>
 					</header>
@@ -39,7 +39,7 @@
 						University’s Collegiate Cybersecurity Competition Team for a 1st place finish to win the
 						15th Annual NICCDC. </p>
 					<footer>
-						<a href="stay_connected/q1_2021_niatec_pressrelease.html" class="button alt">Continue
+						<a asp-controller="Connect" asp-action="Q1_2021_PressRelease" class="button alt">Continue
 							Reading</a>
 					</footer>
 				</section>
@@ -50,12 +50,12 @@
 					<p>We're training the next generation of America's keyboard warriors. Come find out why
 						we're the best Scholarship for Service program in the nation.</p>
 					<ul class="divided">
-						<li><a href="about_niatec/howtoapply.html">How to Apply</a></li>
-						<li><a href="about_niatec/alumni.html">NIATEC Alumni</a></li>
-						<li><a href="about_niatec/requestaspeaker.html">Request a Speaker</a></li>
+						<li><a asp-controller="NIATEC" asp-action="Apply">How to Apply</a></li>
+						<li><a asp-controller="NIATEC" asp-action="Alumni">NIATEC Alumni</a></li>
+						<li><a asp-controller="NIATEC" asp-action="Speaker">Request a Speaker</a></li>
 					</ul>
 					<footer>
-						<a href="./niatec.html" class="button alt">About NIATEC</a>
+						<a asp-controller="NICCDC" asp-action="NIATEC" class="button alt">About NIATEC</a>
 					</footer>
 				</section>
 

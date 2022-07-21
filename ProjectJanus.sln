@@ -7,27 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectJanus", "ProjectJanu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{364D293F-850A-4FC5-8EB5-DF1AB1609A7A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Completed Conversion", "Completed Conversion", "{45333257-D9D3-4363-B3B6-29892166C582}"
-	ProjectSection(SolutionItems) = preProject
-		ProjectJanus\RegularPages\index.html = ProjectJanus\RegularPages\index.html
-		ProjectJanus\RegularPages\media.html = ProjectJanus\RegularPages\media.html
-		ProjectJanus\RegularPages\niatec.html = ProjectJanus\RegularPages\niatec.html
-		ProjectJanus\RegularPages\niccdc.html = ProjectJanus\RegularPages\niccdc.html
-		ProjectJanus\RegularPages\participants.html = ProjectJanus\RegularPages\participants.html
-		ProjectJanus\RegularPages\README.md = ProjectJanus\RegularPages\README.md
-		ProjectJanus\RegularPages\sponsors.html = ProjectJanus\RegularPages\sponsors.html
-		ProjectJanus\RegularPages\stayconnected.html = ProjectJanus\RegularPages\stayconnected.html
-		ProjectJanus\RegularPages\volunteers.html = ProjectJanus\RegularPages\volunteers.html
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "about_niatec", "about_niatec", "{8886833D-4200-4BE8-9494-3DFC092905F7}"
-	ProjectSection(SolutionItems) = preProject
-		ProjectJanus\RegularPages\about_niatec\alumni.html = ProjectJanus\RegularPages\about_niatec\alumni.html
-		ProjectJanus\RegularPages\about_niatec\howtoapply.html = ProjectJanus\RegularPages\about_niatec\howtoapply.html
-		ProjectJanus\RegularPages\about_niatec\niatecprogram.html = ProjectJanus\RegularPages\about_niatec\niatecprogram.html
-		ProjectJanus\RegularPages\about_niatec\requestaspeaker.html = ProjectJanus\RegularPages\about_niatec\requestaspeaker.html
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,9 +20,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{8886833D-4200-4BE8-9494-3DFC092905F7} = {45333257-D9D3-4363-B3B6-29892166C582}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {57A523FE-BE1F-4EE1-AAC6-B5F94CC6E9CE}

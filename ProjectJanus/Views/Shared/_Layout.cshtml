@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/NICCDC/index.html">NICCDC</a>
+                <a asp-controller="NICCDC" asp-action="NICCDC" class="navbar-brand">NICCDC</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -61,25 +61,25 @@
 							</li>
 							<li>
 								<span class="date">May <strong>31</strong></span>
-								<h3><a href="about_niatec/howtoapply.html">NIATEC Program Applicant Submission
+								<h3><a asp-controller="NIATEC" asp-action="Apply">NIATEC Program Applicant Submission
 										Deadline</a></h3>
 								<p>For Fall semester enrollment, priority deadline is May 31st with rolling
 									admission.</p>
 							</li>
 							<li>
 								<span class="date">Sept <strong>29</strong></span>
-								<h3><a href="volunteers.html">NICCDC Volunteer Application Deadline</a></h3>
+								<h3><a asp-controller="NICCDC" asp-action="Volunteer">NICCDC Volunteer Application Deadline</a></h3>
 								<p>For Fall 2022 NICCDC, volunteer application deadline with rolling admission.</p>
 							</li>
 							<li>
 								<span class="date">Oct <strong>31</strong></span>
-								<h3><a href="participants/registration.html">Fall 2022 NICCDC Registration
+								<h3><a asp-controller="Participants" asp-action="Register">Fall 2022 NICCDC Registration
 										Deadline</a></h3>
 								<p>Team registration deadline for the 2022 NICCDC.</p>
 							</li>
 							<li>
 								<span class="date">Nov <strong>19</strong></span>
-								<h3><a href="niccdc.html">Fall 2022 NICCDC</a></h3>
+								<h3><a asp-controller="NICCDC" asp-action="NICCDC">Fall 2022 NICCDC</a></h3>
 								<p>Competition day for the NIATEC Invitational Collegiate Cyber Defense Competition.
 								</p>
 							</li>
@@ -91,7 +91,7 @@
 						<header>
 							<h2>Who are we?</h2>
 						</header>
-						<a class="image featured"><img src="images/NIATEC_Flag_01.png" alt="" /></a>
+						<a class="image featured"><img src="~/images/NIATEC_Flag_01.png" alt="" /></a>
 						<p>
 							We are <a href="https://security.iri.isu.edu"><strong>NIATEC</strong></a>, the National
 							Information Assurance Training and Education Center.
@@ -101,7 +101,7 @@
 						</p>
 						<footer>
 							<ul class="actions">
-								<li><a href="niatec.html" class="button">Find Out more</a></li>
+								<li><a asp-controller="NICCDC" asp-action="NIATEC">Find Out more</a></li>
 							</ul>
 						</footer>
 					</section>
@@ -112,12 +112,12 @@
 							<h2>Site Map</h2>
 						</header>
 						<ul class="divided">
-							<li><a href="niccdc.html">NICCDC</a></li>
-							<li><a href="participants/registration.html">NICCDC Registration</a></li>
-							<li><a href="participants/rules.html">NICCDC Rules</a></li>
-							<li><a href="niccdc/past-winners.html">NICCDC Past Winners</a></li>
-							<li><a href="sponsors.html">Sponsors</a></li>
-							<li><a href="volunteers.html">Volunteers</a></li>
+							<li><a asp-controller="NICCDC" asp-action="NICCDC">NICCDC</a></li>
+							<li><a asp-controller="Participants" asp-action="Register">NICCDC Registration</a></li>
+							<li><a asp-controller="Participants" asp-action="Rules">NICCDC Rules</a></li>
+							<li><a asp-controller="Competition" asp-action="Winners">NICCDC Past Winners</a></li>
+							<li><a asp-controller="NICCDC" asp-action="Sponsors">Sponsors</a></li>
+							<li><a asp-controller="NICCDC" asp-action="Volunteers">Volunteers</a></li>
 						</ul>
 					</section>
 				</div>
@@ -127,12 +127,13 @@
 							<h2> <br> </h2>
 						</header>
 						<ul class="divided">
-							<li><a href="niatec.html">About the NIATEC Program</a></li>
-							<li><a href="about_niatec/howtoapply.html">How to Apply to NIATEC</a></li>
+							<li><a asp-controller="NICCDC" asp-action="NIATEC">About the NIATEC Program</a></li>
+							<li><a asp-controller="NIATEC" asp-action="Apply">How to Apply to NIATEC</a></li>
+							@*TODO: Figure out what the Alumni Portal Points to.*@
 							<li><a href= "#">Alumni Portal</a></li>
-							<li><a href="about_niatec/requestaspeaker.html">Request a Speaker</a></li>
-							<li><a href="stayconnected.html">NIATEC News</a></li>
-							<li><a href="media.html">Media</a></li>
+							<li><a asp-controller="NIATEC" asp-action="Speaker">Request a Speaker</a></li>
+							<li><a asp-controller="NICCDC" asp-action="Connect">NIATEC News</a></li>
+							<li><a asp-controller="NICCDC" asp-action="Media">Media</a></li>
 						</ul>
 					</section>
 				</div>
@@ -177,15 +178,13 @@
 				<div class="col-12">
 
 					<!-- Logos -->
-					</script>
 					<center>
 						<a target="_blank" href="http://www.nsf.gov/">
-							<img src="./images/nsf.png" style="margin:7px;" /></a>
-						</a>
+							<img src="~/images/nsf.png" style="margin:7px;" /></a>
 						<a target="_blank" href="https://sfs.niatec.iri.isu.edu/">
-							<img src="./images/NIATEC.png" style="margin:7px;" /></a>
+							<img src="~/images/NIATEC.png" style="margin:7px;" /></a>
 						<a target="_blank" href="http://www.nsa.gov/">
-							<img src="./images/NSA.png" style="margin:7px;" /></a>
+							<img src="~/images/NSA.png" style="margin:7px;" /></a>
 					</center>
 					<hr />
 
@@ -202,6 +201,13 @@
 			</div>
 		</div>
 	</section>
+	<!-- Scripts for Layout -->
+	<script src="~/assets/js/jquery.min.js"></script>
+	<script src="~/assets/js/jquery.dropotron.min.js"></script>
+	<script src="~/assets/js/browser.min.js"></script>
+	<script src="~/assets/js/breakpoints.min.js"></script>
+	<script src="~/assets/js/util.js"></script>
+	<script src="~/assets/js/main.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -9,10 +9,10 @@ namespace ProjectJanus.Controllers
     public class NIATECController : Controller
     {
         //TODO: Disabled until the Alumni page is opperational
-        //public IActionResult Alumni()
-        //{
-        //    return View();
-        //}
+        public IActionResult Alumni()
+        {
+            return View();
+        }
 
         public IActionResult Apply()
         {

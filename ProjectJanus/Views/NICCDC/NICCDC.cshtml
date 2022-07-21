@@ -27,13 +27,13 @@
 						competition. Some years more than one competition will be held. Check back often for
 						updates on NICCDC news.</p>
 					<ul class="divided">
-						<li><a href="participants/registration.html">Registration</a></li>
-						<li><a href="participants/rules.html">Competition Rules</a></li>
-						<li><a href="participants/schedule.html">Competition Schedule</a></li>
-						<li><a href="participants/faq.html">Frequently Asked Questions</a></li>
+						<li><a asp-controller="Participants" asp-action="Register">Registration</a></li>
+						<li><a asp-controller="Participants" asp-action="Rules">Competition Rules</a></li>
+						<li><a asp-controller="Participants" asp-action="Schedule">Competition Schedule</a></li>
+						<li><a asp-controller="Participants" asp-action="FAQ">Frequently Asked Questions</a></li>
 					</ul>
 					<footer>
-						<a href="participants.html" class="button alt">Participants Page</a>
+						<a asp-controller="NICCDC" asp-action="Participants" class="button alt">Participants Page</a>
 					</footer>
 				</section>
 
@@ -73,7 +73,7 @@
 					encouraged to register as soon as possible in order to solidify the team’s spot in
 					the competition. Any teams turned away due to space restrictions, will receive a
 					full refund for paid registration fees. Please visit our <a
-						href="participants.html">Participants Page</a> for more
+						asp-controller="NICCDC" asp-action="Participants">Participants Page</a> for more
 					information on rules and registration. For any additional questions, comments, or concerns
 					please do not hesitate to contact us.</p>
 			</div>

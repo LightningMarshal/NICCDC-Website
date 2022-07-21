@@ -6,7 +6,7 @@
 
 				<!-- Content -->
 				<article class="box post">
-					<a href="#" class="image featured"><img src="images/niatec_thefutureofcyber.jpg"
+					<a href="#" class="image featured"><img src="~/images/niatec_thefutureofcyber.jpg"
 							alt="" /></a>
 					<header>
 						<h2>The National Information Assurance Training and Education Center</h2>
@@ -52,7 +52,6 @@
 						Support at Idaho State University. The words and definitions contained in the glossary
 						are taken from numerous sources.
 					</p>
-					<section>
 				</article>
 
 			</div>
@@ -60,14 +59,14 @@
 
 				<!-- Sidebar -->
 				<section class="box">
-					<a href="./niccdc.html" class="image featured"><img src="images/codejam.jpg" alt="" /></a>
+					<a asp-controller="NICCDC" asp-action="NICCDC" class="image featured"><img src="images/codejam.jpg" alt="" /></a>
 					<header>
 						<h3>Cyber Defense Competitions</h3>
 					</header>
 					<p>The NICCDC is designed to stimulate mission oriented decision making through unique and
 						immersive scenarios that score decision making over technical abilities alone</p>
 					<footer>
-						<a href="./niccdc.html" class="button alt">Find Out More</a>
+						<a asp-controller="NICCDC" asp-action="NICCDC" class="button alt">Find Out More</a>
 					</footer>
 				</section>
 				<section class="box">
@@ -77,9 +76,9 @@
 					<p>NICCDC sponsors keep the lights on and the network traffic flowing and we are always in
 						need of volunteers. Help out today!</p>
 					<ul class="divided">
-						<li><a href="volunteers.html">Volunteer Opportunities</a></li>
-						<li><a href="sponsors.html">Sponsorship Opportunities</a></li>
-						<li><a href="sponsors/pastsponsors.html">Past Sponsorship</a></li>
+						<li><a asp-controller="NICCDC" asp-action="Volunteer">Volunteer Opportunities</a></li>
+						<li><a asp-controller="NICCDC" asp-action="Sponsors">Sponsorship Opportunities</a></li>
+						<li><a asp-controller="Sponsor" asp-action="Previous">Past Sponsorship</a></li>
 					</ul>
 					<footer>
 						<a href="https://docs.google.com/forms/d/e/1FAIpQLSeNenGjpyMLOOly5pUZxQfRMzbIp-e3ZV2JNXRvkmhbXEA3rg/viewform?usp=sf_link"

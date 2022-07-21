@@ -43,11 +43,33 @@ NICCDC Controller
 	-Stay Connected
 	-Volunteers
 
-NIATEC Controller * This controller is having layout issues
+NIATEC Controller
 	-Alumni * This page is currently under construction
 	-Apply
 	-Program * This page is currently under construction
 	-Speakers
+
+Competition Controller
+	-History * This page is currently under construction
+	-Mission
+	-Winners
+	-Standings
+
+Participants Controller
+	-FAQ
+	-Register
+	-Rules
+	-Schedule
+
+Sponsor Controller
+	-Previous
+
+Connect Controller
+	-MikePond
+	-News
+	-Q1_2021_PressRelease
+
+
 
 ##### Header and Footers
 With the transition to MVC, we have gained the functionality of Layouts. These are files that we can use to maintain

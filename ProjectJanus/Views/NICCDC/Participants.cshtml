@@ -6,7 +6,7 @@
 
 				<!-- Sidebar -->
 				<section class="box">
-					<a href="#" class="image featured"><img src="images/Steven-Hernandez.jpg" alt="" /></a>
+					<a href="#" class="image featured"><img src="~/images/Steven-Hernandez.jpg" alt="" /></a>
 					<header>
 						<h3>NIATEC Alumni Spotlight</h3>
 					</header>
@@ -27,12 +27,12 @@
 						environment. Check back often for
 						updates on NICCDC news.</p>
 					<ul class="divided">
-						<li><a href="niccdc/mission.html">NICCDC Mission</a></li>
-						<li><a href="niccdc/standings.html">Standings</a></li>
-						<li><a href="niccdc/past-winners.html">Past Winners</a></li>
+						<li><a asp-controller="Competition" asp-action="Mission">NICCDC Mission</a></li>
+						<li><a asp-controller="Competition" asp-action="Standings">Standings</a></li>
+						<li><a asp-controller="Competition" asp-action="Winners">Past Winners</a></li>
 					</ul>
 					<footer>
-						<a href="niccdc.html" class="button alt">NICCDC INFO Page</a>
+						<a asp-controller="NICCDC" asp-action="NICCDC" class="button alt">NICCDC INFO Page</a>
 					</footer>
 				</section>
 
@@ -41,7 +41,7 @@
 
 				<!-- Content -->
 				<article class="box post">
-					<a href="#" class="image featured"><img src="images/codejam.jpg" alt="" /></a>
+					<a href="#" class="image featured"><img src="~/images/codejam.jpg" alt="" /></a>
 					<header>
 						<h2>Compete in the NICCDC</h2>
 						<p>An Alternative Approach to Cyber Defense Competitions</p>
@@ -68,7 +68,7 @@
 						place well.
 					</p>
 					<p>
-						Want to participate? Head over to our <a href="participants/registration.html">registration page</a>.
+						Want to participate? Head over to our <a asp-controller="Participants" asp-action="Register">registration page</a>.
 					</p>
 				</article>
 
