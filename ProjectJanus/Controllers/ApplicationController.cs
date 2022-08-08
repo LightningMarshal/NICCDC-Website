@@ -24,10 +24,18 @@ namespace ProjectJanus.Controllers
             return View();
         }
 
-        //TODO: Remove and link back to HowToApply
-        public IActionResult Classic()
+        public IActionResult Restart() // Will return the user to the Home Page and delete all current data
         {
-            return View();
+            HttpContext.Response.Cookies.Delete("user");
+            HttpContext.Response.Cookies.Delete("Personal");
+            HttpContext.Response.Cookies.Delete("General");
+            HttpContext.Response.Cookies.Delete("Education");
+            HttpContext.Response.Cookies.Delete("Professional");
+            HttpContext.Response.Cookies.Delete("Certification");
+            HttpContext.Response.Cookies.Delete("Skill");
+            HttpContext.Response.Cookies.Delete("Award");
+            ViewData["Title"] = "Home";
+            return View("Home");
         }
 
         public IActionResult PersonalDetails() // Personal Page, This is where the user will enter basic personal info

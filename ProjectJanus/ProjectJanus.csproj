@@ -5,9 +5,11 @@
     <!--Uncommenting below will reenable non-nullable types-->
     <!--<Nullable>enable</Nullable>-->
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dc91b17a-631b-421a-b420-6a112ac18974</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="templates\index template.cshtml" />
     <Content Remove="wwwroot\images\1st.png" />
     <Content Remove="wwwroot\images\2nd.png" />
     <Content Remove="wwwroot\images\3rd.png" />
@@ -61,6 +63,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="templates\index template.cshtml" />
     <None Include="Views\Shared\Error.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />

@@ -27,8 +27,8 @@
 					<li>
 						<a asp-controller="NICCDC" asp-action="NICCDC">NICCDC</a>
 						<ul>
-							<!--TODO: Possibly add NICCDC History Page-->
-							<!--<li><a asp-controller="Competition" asp-action="History">History</a></li>-->
+							@*TODO: Possibly add NICCDC History Page*@
+							@*<li><a asp-controller="Competition" asp-action="History">History</a></li>*@
 							<li><a asp-controller="Competition" asp-action="Mission">Mission</a></li>
 							<li><a asp-controller="Competition" asp-action="Standings">Standings</a></li>
 							<li><a asp-controller="Competition" asp-action="Winners">Past Winners</a></li>
@@ -59,10 +59,10 @@
 						<ul>
 							<li><a asp-controller="NIATEC" asp-action="Apply">How to Apply</a></li>
 							<li><a href="https://www.isu.edu/news/2017-fall/isu-college-of-business-mba-niatec-graduates-become-chief-information-security-officers-in-major-government-programs.html">Alumni</a></li>
-							<!--TODO: Remove above link and replace with below (just uncomment)-->
-							<!--<li><a asp-controller="NIATEC" asp-action="Alumni">Alumni</a></li>-->
-							<!--TODO: Possibly add a Niatec Program Page-->
-							<!--<li><a asp-controller="NIATEC" asp-action="Program">The NIATEC Program</a></li>-->
+							@*TODO: Remove above link and replace with below (just uncomment)*@
+							@*<li><a asp-controller="NIATEC" asp-action="Alumni">Alumni</a></li>*@
+							@*TODO: Possibly add a Niatec Program Page*@
+							@*<li><a asp-controller="NIATEC" asp-action="Program">The NIATEC Program</a></li>*@
 							<li><a asp-controller="NIATEC" asp-action="Speaker">Request a Speaker</a></li>
 						</ul>
 					</li>
@@ -70,7 +70,7 @@
 			</nav>
 
 			<div class="container-fluid">
-				<main role="main" class="">
+				<main role="main" style="text-align:start;">
 					@RenderBody()
 				</main>
 			</div>
@@ -125,7 +125,7 @@
 							<header>
 								<h2>Who are we?</h2>
 							</header>
-							<a class="image featured"><img src="images/NIATEC_Flag_01.png" alt="" /></a>
+							<a class="image featured"><img src="~/images/NIATEC_Flag_01.png" alt="" /></a>
 							<p>
 								We are <a href="https://security.iri.isu.edu"><strong>NIATEC</strong></a>, the National
 								Information Assurance Training and Education Center.

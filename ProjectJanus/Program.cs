@@ -1,12 +1,13 @@
 using ProjectJanus.Middlewares;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.FileProviders;
+using ProjectJanus.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.Configure<Security>(config.GetSection("Security")); // Allows for secrets to be set
 
 builder.Services.AddDistributedMemoryCache();
 

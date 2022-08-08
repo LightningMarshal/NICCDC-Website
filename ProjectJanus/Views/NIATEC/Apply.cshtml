@@ -143,14 +143,15 @@
 						APPLICATION:</p>
 				</header>
 				<p>
+					
 				<ul>
-					<li>Fill out the application form: <a
-							href="https://sfs.niatec.iri.isu.edu/sfs/ISU%20SFS%20Application%20Form.docx">Application
-							Form</a> or <a asp-controller="Application" asp-action="Home">Virtual Form</a></li>
-					<li>Prepare your personal statement (See intrucitons on page 2 of the application)</li>
-					<li>Receive two letters of recommendation: <a
-							href="https://sfs.niatec.iri.isu.edu/sfs/SFS%20Recommendation%20form.docx">Recommendation
-							Form</a></li>
+					<li>Fill out the application form: 
+						@Html.ActionLink("Application Form", "DownloadFile", "Application", new {file = "ISU SFS Application Form.docx"}) or 
+						<a asp-controller="Application" asp-action="Home">Virtual Form</a></li>
+					<li>Prepare your personal statement (See intructions on page 2 of the application)</li>
+					<li>Receive two letters of recommendation: 
+						@Html.ActionLink("Recommendation Form", "DownloadFile", "Application", new {file = "SFS Recommendation form.pdf"})
+					</li>
 					<li>Prepare academic transcripts</li>
 					<li>Send applicaiton material to niatec@niatec.isu.edu and flowkay@niatec.isu.edu</li>
 					<li>Mail offical academic transcripts and letters of recommendation to:</li>

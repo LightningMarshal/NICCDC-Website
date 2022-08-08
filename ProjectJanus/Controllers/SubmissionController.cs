@@ -2,14 +2,20 @@
 using ProjectJanus.Models;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System.Net.Mail;
 using System.Net;
-using System;
 
 namespace ProjectJanus.Controllers
 {
     public class SubmissionController : Controller
     {
+        private readonly IOptions<Security> _config;
+        public SubmissionController(IOptions<Security> config)
+        {
+            _config = config;
+        }
+
         public dynamic Mail()
         {
             // Retrieve all of the user data
@@ -69,33 +75,26 @@ namespace ProjectJanus.Controllers
             
             // Mailing Functionality
             Debug.WriteLine(message);
-            /*
-             *      Mailing Credentials Below       Mailing Credentials Below       Mailing Credentials Below
-             *      Mailing Credentials Below       Mailing Credentials Below       Mailing Credentials Below
-             *      Mailing Credentials Below       Mailing Credentials Below       Mailing Credentials Below
-             */
+
+            var security = _config.Value;
+
             try
             {
                 if (ModelState.IsValid)
                 {
-                    //TODO: Change to client email
-                    var senderEmail = new MailAddress(/*change here*/"testing.env.kason.summers@gmail.com", "Application");
-
-                    //TODO: Change to Kay's email
-                    var receiverEmail = new MailAddress(/*change here*/"kason.summers.pro@gmail.com", "Kay");
-
-                    //TODO: Change to client password
-                    var password = /*change here*/"ukjfscxaotlmfzfx";
+                    // To change the credentials, please input credentials into secrets.json as provided by your supervisor.
+                    var senderEmail = new MailAddress(security.senderEmail, "Application");
+                    var receiverEmail = new MailAddress(security.recieverEmail, security.recieverName);
                     var sub = subject;
                     var body = "<pre>" + message + "</pre>";
                     var smtp = new SmtpClient
                     {
-                        Host = "smtp.gmail.com",
-                        Port = 587,
+                        Host = security.smtpHost,
+                        Port = security.smtpPort,
                         EnableSsl = true,
                         DeliveryMethod = SmtpDeliveryMethod.Network,
                         UseDefaultCredentials = false,
-                        Credentials = new NetworkCredential(senderEmail.Address, password)
+                        Credentials = new NetworkCredential(senderEmail.Address, security.senderPassword)
                     };
                     using (var mess = new MailMessage(senderEmail, receiverEmail)
                     {
