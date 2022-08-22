@@ -1,5 +1,5 @@
 # NICCDC-Website
-This is a workspace for the NIATEC NICCDC Website. Right now we have our production schedule set to have this go live at the end of July 2022. We still have a lot of tasks to complete, content to populate, and a few bugs to fix.
+This is a workspace for the NIATEC NICCDC Website. The scheduled end of life for this website is 2027. We have branches that are ready for .NET core implementation and merging. 
 
 Not sure where to start? Go ahead and take a look at the open issues tab and see if there is something you can help out with. Assign yourself the issue and document your work!
 
