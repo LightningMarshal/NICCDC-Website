@@ -1,5 +1,7 @@
 # NICCDC-Website
-This is a workspace for the NIATEC NICCDC Website. The scheduled end of life for this website is 2027. We have branches that are ready for .NET core implementation and merging. 
+This is a workspace for the NIATEC NICCDC Website. The scheduled end of life for this website is 2027. We have branches that are ready for .NET core implementation and merging.
+
+Please refer to ProjectJanus and ProjectSaturn branches for .Net core implementation information and for resume intake functionality.
 
 Not sure where to start? Go ahead and take a look at the open issues tab and see if there is something you can help out with. Assign yourself the issue and document your work!
 
